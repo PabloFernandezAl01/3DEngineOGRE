@@ -1,28 +1,32 @@
 #pragma once
 
-namespace Physics {
+namespace Physics 
+{
 	class PhysicsManager;
 }
 
-namespace Renderer {
+namespace Renderer 
+{
 	class RendererManager;
 }
 
-namespace Input {
+namespace Input 
+{
 	class InputManager;
 }
 
-namespace ECS {
-	class RenderManager;
+namespace ECS 
+{
 	class SceneManager;
-	class PrefabManager;
 }
 
-namespace Resources {
+namespace Resources 
+{
 	class ResourcesManager;
 }
 
-namespace Utilities {
+namespace Core 
+{
 	class ETime;
 }
 
@@ -42,9 +46,8 @@ private:
 	Renderer::RendererManager* rendererManager{};
 	Physics::PhysicsManager* physicsManager{};
 	Input::InputManager* inputManager{};
-	ECS::RenderManager* renderManager{};
 	ECS::SceneManager* sceneManager{};
-	Utilities::ETime* engineTime{};
+	Core::ETime* engineTime{};
 
 };
 

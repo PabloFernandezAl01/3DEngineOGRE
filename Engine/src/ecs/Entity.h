@@ -11,10 +11,6 @@ namespace ECS {
 
 	class Component;
 	class Scene;
-	class ContactListener;
-	class RenderManager;
-	class PhysicBody;
-	class Script;
 
 	// This is a way to ensure that T is a Component
 	template <typename T>
@@ -24,9 +20,6 @@ namespace ECS {
 
 		friend Scene;
 		friend Component;
-		friend ContactListener;
-		friend RenderManager;
-		friend PhysicBody;
 
 	public:
 

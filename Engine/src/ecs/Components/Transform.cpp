@@ -5,7 +5,7 @@
 
 namespace ECS {
 
-	Transform::Transform(CRefVector2 position, CRefVector2 scale, float rotation) :
+	Transform::Transform(CRefVector2D position, CRefVector2D scale, float rotation) :
 		localPosition(position), localScale(scale), localRotation(rotation) {}
 
 	void Transform::OnDestroy()
@@ -14,24 +14,24 @@ namespace ECS {
 			parent->RemoveChildren(this);
 	}
 
-	Utilities::Vector2D Transform::GetWorldPosition()
+	Vector2D Transform::GetWorldPosition()
 	{
 		if (parent != nullptr)
 		{
-			Utilities::Vector2D rotatedPosition = GetLocalPosition().Rotate(parent->GetWorldRotation());
-			Utilities::Vector2D parentWorldPos = parent->GetWorldPosition();
+			Vector2D rotatedPosition = GetLocalPosition().Rotate(parent->GetWorldRotation());
+			Vector2D parentWorldPos = parent->GetWorldPosition();
 
-			return Utilities::Vector2D{ parentWorldPos.GetX() + rotatedPosition.GetX(), parentWorldPos.GetY() + rotatedPosition.GetY() };
+			return Vector2D{ parentWorldPos.GetX() + rotatedPosition.GetX(), parentWorldPos.GetY() + rotatedPosition.GetY() };
 		}
 
 		return localPosition;
 	}
 
-	void Transform::SetWorldPosition(CRefVector2 position)
+	void Transform::SetWorldPosition(CRefVector2D position)
 	{
 		if (parent != nullptr)
 		{
-			Utilities::Vector2D newPos = { position - parent->GetWorldPosition() };
+			Vector2D newPos = { position - parent->GetWorldPosition() };
 			newPos = newPos.Rotate(-parent->GetWorldRotation());
 
 			this->localPosition = newPos;
@@ -42,7 +42,7 @@ namespace ECS {
 		this->localPosition = position;
 	}
 
-	Utilities::Vector2D Transform::GetWorldScale()
+	Vector2D Transform::GetWorldScale()
 	{
 		if (parent != nullptr)
 			return localScale.Mult(parent->GetWorldScale());
@@ -50,7 +50,7 @@ namespace ECS {
 		return localScale;
 	}
 
-	void Transform::SetWorldScale(CRefVector2 scale)
+	void Transform::SetWorldScale(CRefVector2D scale)
 	{
 		if (parent != nullptr) {
 
@@ -82,9 +82,9 @@ namespace ECS {
 		this->localRotation = rotation;
 	}
 
-	void Transform::RotateTowards(CRefVector2 position)
+	void Transform::RotateTowards(CRefVector2D position)
 	{
-		Utilities::Vector2D dif = position - this->GetWorldPosition();
+		Vector2D dif = position - this->GetWorldPosition();
 
 		if (dif.x_ == 0 && dif.y_ == 0) {
 
@@ -118,8 +118,8 @@ namespace ECS {
 
 	void Transform::SetTransformRelativeToNewParent()
 	{
-		Utilities::Vector2D parentPos = parent->GetWorldPosition();
-		Utilities::Vector2D newPos = { GetLocalPosition().GetX() - parentPos.GetX(), GetLocalPosition().GetY() - parentPos.GetY() };
+		Vector2D parentPos = parent->GetWorldPosition();
+		Vector2D newPos = { GetLocalPosition().GetX() - parentPos.GetX(), GetLocalPosition().GetY() - parentPos.GetY() };
 
 		//Tiene sentido
 		newPos = newPos.Rotate(-parent->GetWorldRotation());
@@ -131,8 +131,8 @@ namespace ECS {
 
 		SetLocalRotation(newRot);
 
-		Utilities::Vector2D parentScale = parent->GetWorldScale();
-		Utilities::Vector2D newScale = { GetLocalScale().GetX() / parentScale.GetX(), GetLocalScale().GetY() / parentScale.GetY() };
+		Vector2D parentScale = parent->GetWorldScale();
+		Vector2D newScale = { GetLocalScale().GetX() / parentScale.GetX(), GetLocalScale().GetY() / parentScale.GetY() };
 
 		SetLocalScale(newScale);
 	}

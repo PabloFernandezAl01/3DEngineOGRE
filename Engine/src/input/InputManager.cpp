@@ -1,7 +1,5 @@
 #include "InputManager.h"
-
 #include <Log.h>
-#include <RendererManager.h>
 
 #define MAX_STICK_VALUE 32767
 #define STICK_DEADZONE 3276
@@ -152,10 +150,10 @@ namespace Input {
 		int mouse_x, mouse_y;
 		SDL_GetMouseState(&mouse_x, &mouse_y);
 
-		auto* renderer = Renderer::RendererManager::Instance();
+		/*auto* renderer = Renderer::RendererManager::Instance();
 
 		mousePos_.SetX(mouse_x - renderer->GetWidth() / 2.f);
-		mousePos_.SetY(-(mouse_y - renderer->GetHeight() / 2.f));
+		mousePos_.SetY(-(mouse_y - renderer->GetHeight() / 2.f));*/
 	}
 
 	// --------- KB ------------
@@ -416,7 +414,7 @@ namespace Input {
 
 	Core::Vector2D InputManager::GetMousePositionRelativeToCamera()
 	{
-		auto* renderer = Renderer::RendererManager::Instance();
+		/*auto* renderer = Renderer::RendererManager::Instance();
 
 		Core::Vector2D position = mousePos_;
 
@@ -425,7 +423,9 @@ namespace Input {
 		position.SetX(position.GetX() + renderer->GetCameraPosition().GetX());
 		position.SetY(position.GetY() + renderer->GetCameraPosition().GetY());
 
-		return position;
+		return position;*/
+
+		return mousePos_;
 	}
 
 	int InputManager::GetMouseWheelScroll() 

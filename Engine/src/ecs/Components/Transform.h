@@ -11,19 +11,19 @@ namespace ECS {
 	public:
 
 		Transform() {};
-		Transform(CRefVector2 position, CRefVector2 scale, float rotation);
+		Transform(CRefVector2D position, CRefVector2D scale, float rotation);
 
 		void OnDestroy() override;
 
 		// Local position
-		inline CRefVector2 GetLocalPosition() { return localPosition; }
-		inline void SetLocalPosition(CRefVector2 position) { this->localPosition = position; }
+		inline CRefVector2D GetLocalPosition() { return localPosition; }
+		inline void SetLocalPosition(CRefVector2D position) { this->localPosition = position; }
 		inline void SetLocalPositionX(float x) { this->localPosition.Set(x, localPosition.GetY()); }
 		inline void SetLocalPositionY(float y) { this->localPosition.Set(localPosition.GetX(), y); }
 
 		// Local scale
-		inline CRefVector2 GetLocalScale() { return localScale; }
-		inline void SetLocalScale(CRefVector2 scale) { this->localScale = scale; }
+		inline CRefVector2D GetLocalScale() { return localScale; }
+		inline void SetLocalScale(CRefVector2D scale) { this->localScale = scale; }
 		inline void SetScaleX(float x) { this->localScale.Set(x, localScale.GetY()); }
 		inline void SetScaleY(float y) { this->localScale.Set(y, localScale.GetX()); }
 
@@ -33,12 +33,12 @@ namespace ECS {
 
 		
 		// World position
-		Utilities::Vector2D GetWorldPosition();
-		void SetWorldPosition(CRefVector2 position);
+		Core::Vector2D GetWorldPosition();
+		void SetWorldPosition(CRefVector2D position);
 
 		// World scale
-		Utilities::Vector2D GetWorldScale();
-		void SetWorldScale(CRefVector2 scale);
+		Core::Vector2D GetWorldScale();
+		void SetWorldScale(CRefVector2D scale);
 
 		// World rotation
 		float GetWorldRotation();
@@ -46,11 +46,11 @@ namespace ECS {
 
 
 		// Modifiers
-		inline void Translate(CRefVector2 distance) { this->localPosition += distance; }
+		inline void Translate(CRefVector2D distance) { this->localPosition += distance; }
 		inline void TranslateX(float distanceX) { this->localPosition.Set(this->localPosition.GetX() + distanceX, this->localPosition.GetY()); }
 		inline void TranslateY(float distanceY) { this->localPosition.Set(this->localPosition.GetX(), this->localPosition.GetY() + distanceY); }
 
-		void RotateTowards(CRefVector2 position);
+		void RotateTowards(CRefVector2D position);
 		inline void Rotate(float rotation) { this->localRotation += rotation; }
 
 		inline void Scale(float scale) { this->localScale.x_ += scale; this->localScale.y_ += scale; }
@@ -65,8 +65,8 @@ namespace ECS {
 
 	private:
 
-		Utilities::Vector2D localPosition{};
-		Utilities::Vector2D localScale{ 1, 1 };
+		Core::Vector2D localPosition{};
+		Core::Vector2D localScale{ 1, 1 };
 		double localRotation{};
 
 		Transform* parent{};

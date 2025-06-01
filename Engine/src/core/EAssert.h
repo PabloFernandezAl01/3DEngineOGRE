@@ -2,9 +2,9 @@
 
 #include "ETypes.h"
 
-namespace Utilities
+namespace Core
 {
-	class Assert
+	class EAssert
 	{
 	public:
 

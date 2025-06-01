@@ -18,12 +18,6 @@
     <Filter Include="Archivos de encabezado\Components">
       <UniqueIdentifier>{f7345a41-4fed-4f53-9766-c15a3f9995f4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de encabezado\Prefabs">
-      <UniqueIdentifier>{517f03b3-5cbe-450b-8eb7-cca10ff108ca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de origen\Prefabs">
-      <UniqueIdentifier>{089450da-8219-470e-b41f-d7517242b6c9}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\ecs\Entity.cpp">
@@ -38,61 +32,7 @@
     <ClCompile Include="..\..\src\ecs\SceneManager.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\ecs\Components\Image.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\ecs\Components\Transform.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\ecs\ContactListener.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\ecs\Components\BoxBody.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\ecs\Components\EdgeBody.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\ecs\Components\CircleBody.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\ecs\Components\Animation.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\ecs\Components\SoundEmitter.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\ecs\Components\MusicEmitter.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\ecs\Particle.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\ecs\Components\ParticleSystem.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\ecs\Components\TopDownController.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\ecs\Components\PlatformController.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\ecs\Components\AtlasImage.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\ecs\Components\PhysicBody.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\ecs\Components\Breakable.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\ecs\Components\CustomBody.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\ecs\Prefabs\BreakSlice.cpp">
-      <Filter>Archivos de origen\Prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\ecs\Components\CustomImage.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -100,16 +40,7 @@
     <ClInclude Include="..\..\src\ecs\Component.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\ecs\ContactListener.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\ecs\Entity.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ecs\Components\PhysicBody.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ecs\Particle.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\ecs\Scene.h">
@@ -118,52 +49,7 @@
     <ClInclude Include="..\..\src\ecs\SceneManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\ecs\Components\CircleBody.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ecs\Components\EdgeBody.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ecs\Components\Image.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ecs\Components\MusicEmitter.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ecs\Components\ParticleSystem.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ecs\Components\PlatformController.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ecs\Components\SoundEmitter.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ecs\Components\TopDownController.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\ecs\Components\Transform.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ecs\Components\Animation.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ecs\Components\BoxBody.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ecs\Components\AtlasImage.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ecs\Components\CustomBody.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ecs\Components\Breakable.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ecs\Prefabs\BreakSlice.h">
-      <Filter>Archivos de encabezado\Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ecs\Components\CustomImage.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>

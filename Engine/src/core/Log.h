@@ -11,6 +11,9 @@ namespace Core
 
 	public:
 
+		Log() = default;
+		~Log() = default;
+
 		static void Print(CRefString info, CRefString message);
 
 		static void PrintError(CRefString info, CRefString message);

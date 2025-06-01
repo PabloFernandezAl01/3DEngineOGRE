@@ -34,13 +34,6 @@
       <Project>{53446c51-c540-4001-ac09-bbd92cc74904}</Project>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Main.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\..\Build\Assets\Images\shyIconSmall.ico" />
-    <Image Include="icon.ico" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -91,7 +84,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)dependencies\SDL2_image\include;$(SolutionDir)dependencies\Box2D\include;$(SolutionDir)dependencies\Box2D\src;$(SolutionDir)dependencies\SDL2_mixer\include;$(SolutionDir)src\sound;$(SolutionDir)src\physics;$(SolutionDir)src\renderer;$(SolutionDir)src\input;$(SolutionDir)src\utilities;$(SolutionDir)src\ecs;$(SolutionDir)src\console;$(SolutionDir)src\Resources;$(SolutionDir)game\src;$(SolutionDir)dependencies\json-develop\include;$(SolutionDir)dependencies\tileson-1.4.0;$(SolutionDir)dependencies\voronoi-0.9.0\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)src\sound;$(SolutionDir)src\physics;$(SolutionDir)src\renderer;$(SolutionDir)src\input;$(SolutionDir)src\core;$(SolutionDir)src\ecs;$(SolutionDir)src\resources;$(SolutionDir)dependencies\json-develop\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -111,7 +104,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)dependencies\SDL2_image\include;$(SolutionDir)dependencies\Box2D\include;$(SolutionDir)dependencies\Box2D\src;$(SolutionDir)dependencies\SDL2_mixer\include;$(SolutionDir)src\sound;$(SolutionDir)src\physics;$(SolutionDir)src\renderer;$(SolutionDir)src\input;$(SolutionDir)src\utilities;$(SolutionDir)src\ecs;$(SolutionDir)src\console;$(SolutionDir)src\Resources;$(SolutionDir)game\src;$(SolutionDir)dependencies\json-develop\include;$(SolutionDir)dependencies\tileson-1.4.0;$(SolutionDir)dependencies\voronoi-0.9.0\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)src\sound;$(SolutionDir)src\physics;$(SolutionDir)src\renderer;$(SolutionDir)src\input;$(SolutionDir)src\core;$(SolutionDir)src\ecs;$(SolutionDir)src\resources;$(SolutionDir)dependencies\json-develop\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

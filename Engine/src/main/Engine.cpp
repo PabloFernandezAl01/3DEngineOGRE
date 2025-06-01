@@ -2,10 +2,8 @@
 
 #include <ConfigManager.h>
 #include <ResourcesManager.h>
-#include <ContactListener.h>
 #include <RendererManager.h>
 #include <PhysicsManager.h>
-#include <ConsoleManager.h>
 #include <SoundManager.h>
 #include <InputManager.h>
 #include <SceneManager.h>
@@ -13,6 +11,7 @@
 #include <Scene.h>
 #include <ETime.h>
 #include <chrono>
+#include <Log.h>
 
 using namespace std::chrono;
 
@@ -24,7 +23,7 @@ bool Engine::Init()
 
 	if (!ConfigManager::Init("config")->Valid())
 	{
-		Console::Output::PrintError("CRITICAL ERROR", "The engine couldn't load the configuration file <config.json>");
+		Log::PrintError("CRITICAL ERROR", "The engine couldn't load the configuration file <config.json>");
 		return false;
 	}
 
@@ -42,21 +41,13 @@ bool Engine::Init()
 
 	if (!Sound::SoundManager::Init(ConfigManager::Instance()->GetData())->Valid()) return false;
 
-	engineTime = Utilities::ETime::Init();
+	engineTime = Core::ETime::Init();
 
 	resourcesManager = Resources::ResourcesManager::Init();
 
 	// Engine Assets Path
 	resourcesManager->SetResourcesPath("assets\\");
 
-	ECS::ContactListener::Init();
-
-
-	// ------- Data configuration ---------
-
-	rendererManager->SetWindowIcon(ConfigManager::Instance()->GetData().resourcesPath + ConfigManager::Instance()->GetData().windowIcon);
-
-	physicsManager->EnableDebugDraw(ConfigManager::Instance()->GetData().debugPhysics);
 
 	return true;
 }
@@ -97,7 +88,6 @@ void Engine::Update()
 		// Render
 		rendererManager->ClearRenderer();
 		scene->Render();
-		physicsManager->debugDraw();
 		rendererManager->PresentRenderer();
 
 		// OnDestroy

@@ -1,1 +1,5 @@
 Tasks
+
+InputManager:
+  Arreglar cosas comentadas (GetMousePositionRelativeToCamera y coordenadas centradas del mouse al final del update)
+ 

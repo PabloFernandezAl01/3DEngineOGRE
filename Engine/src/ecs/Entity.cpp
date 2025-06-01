@@ -1,7 +1,6 @@
 #include "Entity.h"
 #include "Component.h"
 #include "Scene.h"
-#include "ConsoleManager.h"
 
 namespace ECS {
 

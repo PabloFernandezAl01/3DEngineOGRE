@@ -27,17 +27,4 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Main.rc">
-      <Filter>Archivos de recursos</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="icon.ico">
-      <Filter>Archivos de recursos</Filter>
-    </Image>
-    <Image Include="..\..\..\Build\Assets\Images\shyIconSmall.ico">
-      <Filter>Archivos de recursos</Filter>
-    </Image>
-  </ItemGroup>
 </Project>

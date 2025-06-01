@@ -113,15 +113,17 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)dependencies\SDL2_image\include;$(SolutionDir)src\console;$(SolutionDir)src\utilities</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\core</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2main.lib;SDL2_ttf.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\SDL2\lib;$(SolutionDir)dependencies\SDL2_ttf\lib;$(SolutionDir)dependencies\SDL2_image\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -133,7 +135,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)dependencies\SDL2_image\include;$(SolutionDir)src\console;$(SolutionDir)src\utilities</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\core</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,30 +144,21 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2main.lib;SDL2_ttf.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\SDL2\lib;$(SolutionDir)dependencies\SDL2_ttf\lib;$(SolutionDir)dependencies\SDL2_image\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\renderer\DrawUtils.h" />
-    <ClInclude Include="..\..\src\renderer\Font.h" />
     <ClInclude Include="..\..\src\renderer\RendererManager.h" />
-    <ClInclude Include="..\..\src\renderer\TargetTexture.h" />
-    <ClInclude Include="..\..\src\renderer\Texture.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\renderer\DrawUtils.cpp" />
-    <ClCompile Include="..\..\src\renderer\Font.cpp" />
     <ClCompile Include="..\..\src\renderer\RendererManager.cpp" />
-    <ClCompile Include="..\..\src\renderer\TargetTexture.cpp" />
-    <ClCompile Include="..\..\src\renderer\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\console\Console.vcxproj">
-      <Project>{7ebc9344-46cc-4cc9-a03a-857e87343869}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Utilities\Utilities.vcxproj">
-      <Project>{713f8aae-1815-4c40-a648-a7a5a664ad9c}</Project>
+    <ProjectReference Include="..\core\Core\Core.vcxproj">
+      <Project>{fa7aaa47-0886-47d8-8e22-1763e178549d}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

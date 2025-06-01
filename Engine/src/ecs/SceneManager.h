@@ -3,7 +3,7 @@
 #include <ETypes.h>
 #include <stack>
 
-#include "Singleton.h"
+#include <Singleton.h>
 
 /*
 * 
@@ -19,13 +19,11 @@
 * 
 */
 
-using namespace ETypes;
-
 namespace ECS {
 
 	class Scene;
 
-	class SceneManager : public Utilities::Singleton<SceneManager> {
+	class SceneManager : public Core::Singleton<SceneManager> {
 
 	public:
 

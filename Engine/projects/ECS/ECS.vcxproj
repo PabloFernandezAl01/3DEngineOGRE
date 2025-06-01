@@ -113,7 +113,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\ecs;$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)dependencies\SDL2_image\include;$(SolutionDir)dependencies\Box2D\include;$(SolutionDir)src\input;$(SolutionDir)src\renderer;$(SolutionDir)src\utilities;$(SolutionDir)src\physics;$(SolutionDir)src\ecs\scripting;$(SolutionDir)src\console;$(SolutionDir)src\resources;$(SolutionDir)src\sound;$(SolutionDir)dependencies\SDL2_mixer\include;$(SolutionDir)dependencies\voronoi-0.9.0\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\ecs;$(SolutionDir)src\input;$(SolutionDir)src\renderer;$(SolutionDir)src\core;$(SolutionDir)src\physics;$(SolutionDir)src\resources;$(SolutionDir)src\sound</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,7 +136,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\ecs;$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)dependencies\SDL2_image\include;$(SolutionDir)dependencies\Box2D\include;$(SolutionDir)src\input;$(SolutionDir)src\renderer;$(SolutionDir)src\utilities;$(SolutionDir)src\physics;$(SolutionDir)src\ecs\scripting;$(SolutionDir)src\console;$(SolutionDir)src\resources;$(SolutionDir)src\sound;$(SolutionDir)dependencies\SDL2_mixer\include;$(SolutionDir)dependencies\voronoi-0.9.0\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\ecs;$(SolutionDir)src\input;$(SolutionDir)src\renderer;$(SolutionDir)src\core;$(SolutionDir)src\physics;$(SolutionDir)src\resources;$(SolutionDir)src\sound</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -154,32 +154,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\ecs\Component.cpp" />
-    <ClCompile Include="..\..\src\ecs\Components\Animation.cpp" />
-    <ClCompile Include="..\..\src\ecs\Components\AtlasImage.cpp" />
-    <ClCompile Include="..\..\src\ecs\Components\BoxBody.cpp" />
-    <ClCompile Include="..\..\src\ecs\Components\Breakable.cpp" />
-    <ClCompile Include="..\..\src\ecs\Components\CircleBody.cpp" />
-    <ClCompile Include="..\..\src\ecs\Components\CustomBody.cpp" />
-    <ClCompile Include="..\..\src\ecs\Components\CustomImage.cpp" />
-    <ClCompile Include="..\..\src\ecs\Components\TopDownController.cpp" />
-    <ClCompile Include="..\..\src\ecs\Components\MusicEmitter.cpp" />
-    <ClCompile Include="..\..\src\ecs\Components\ParticleSystem.cpp" />
-    <ClCompile Include="..\..\src\ecs\Components\PhysicBody.cpp" />
-    <ClCompile Include="..\..\src\ecs\Components\EdgeBody.cpp" />
-    <ClCompile Include="..\..\src\ecs\Components\Image.cpp" />
-    <ClCompile Include="..\..\src\ecs\Components\PlatformController.cpp" />
-    <ClCompile Include="..\..\src\ecs\Components\SoundEmitter.cpp" />
     <ClCompile Include="..\..\src\ecs\Components\Transform.cpp" />
-    <ClCompile Include="..\..\src\ecs\ContactListener.cpp" />
     <ClCompile Include="..\..\src\ecs\Entity.cpp" />
-    <ClCompile Include="..\..\src\ecs\Particle.cpp" />
-    <ClCompile Include="..\..\src\ecs\Prefabs\BreakSlice.cpp" />
     <ClCompile Include="..\..\src\ecs\Scene.cpp" />
     <ClCompile Include="..\..\src\ecs\SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\console\Console.vcxproj">
-      <Project>{7ebc9344-46cc-4cc9-a03a-857e87343869}</Project>
+    <ProjectReference Include="..\core\Core\Core.vcxproj">
+      <Project>{fa7aaa47-0886-47d8-8e22-1763e178549d}</Project>
     </ProjectReference>
     <ProjectReference Include="..\input\Input.vcxproj">
       <Project>{0025c5f8-2dd5-440e-9127-f230c1c41788}</Project>
@@ -196,32 +178,11 @@
     <ProjectReference Include="..\sound\sound.vcxproj">
       <Project>{53446c51-c540-4001-ac09-bbd92cc74904}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\Utilities\Utilities.vcxproj">
-      <Project>{713f8aae-1815-4c40-a648-a7a5a664ad9c}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\ecs\Component.h" />
-    <ClInclude Include="..\..\src\ecs\Components\Animation.h" />
-    <ClInclude Include="..\..\src\ecs\Components\AtlasImage.h" />
-    <ClInclude Include="..\..\src\ecs\Components\BoxBody.h" />
-    <ClInclude Include="..\..\src\ecs\Components\Breakable.h" />
-    <ClInclude Include="..\..\src\ecs\Components\CircleBody.h" />
-    <ClInclude Include="..\..\src\ecs\Components\CustomBody.h" />
-    <ClInclude Include="..\..\src\ecs\Components\CustomImage.h" />
-    <ClInclude Include="..\..\src\ecs\Components\EdgeBody.h" />
-    <ClInclude Include="..\..\src\ecs\Components\Image.h" />
-    <ClInclude Include="..\..\src\ecs\Components\MusicEmitter.h" />
-    <ClInclude Include="..\..\src\ecs\Components\ParticleSystem.h" />
-    <ClInclude Include="..\..\src\ecs\Components\PhysicBody.h" />
-    <ClInclude Include="..\..\src\ecs\Components\PlatformController.h" />
-    <ClInclude Include="..\..\src\ecs\Components\SoundEmitter.h" />
-    <ClInclude Include="..\..\src\ecs\Components\TopDownController.h" />
     <ClInclude Include="..\..\src\ecs\Components\Transform.h" />
-    <ClInclude Include="..\..\src\ecs\ContactListener.h" />
     <ClInclude Include="..\..\src\ecs\Entity.h" />
-    <ClInclude Include="..\..\src\ecs\Particle.h" />
-    <ClInclude Include="..\..\src\ecs\Prefabs\BreakSlice.h" />
     <ClInclude Include="..\..\src\ecs\Scene.h" />
     <ClInclude Include="..\..\src\ecs\SceneManager.h" />
   </ItemGroup>

@@ -21,7 +21,7 @@
     <ClInclude Include="..\..\..\src\core\ETypes.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\core\Assert.h">
+    <ClInclude Include="..\..\..\src\core\EAssert.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\core\CheckML.h">
@@ -53,7 +53,7 @@
     <ClCompile Include="..\..\..\src\core\Log.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\core\Assert.cpp">
+    <ClCompile Include="..\..\..\src\core\EAssert.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\core\Color.cpp">

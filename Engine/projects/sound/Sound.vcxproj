@@ -114,15 +114,17 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\SDL2_mixer\include;$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)src\utilities;$(SolutionDir)src\console</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\core</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\SDL2_mixer\lib;$(SolutionDir)dependencies\SDL2\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2_mixer.lib;SDL2.lib;SDL2main.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -134,7 +136,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\SDL2_mixer\include;$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)src\utilities;$(SolutionDir)src\console</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\core</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,26 +145,21 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\SDL2_mixer\lib;$(SolutionDir)dependencies\SDL2\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2_mixer.lib;SDL2.lib;SDL2main.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\sound\Music.h" />
-    <ClInclude Include="..\..\src\sound\SoundEffect.h" />
     <ClInclude Include="..\..\src\sound\SoundManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\sound\Music.cpp" />
-    <ClCompile Include="..\..\src\sound\SoundEffect.cpp" />
     <ClCompile Include="..\..\src\sound\SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\console\Console.vcxproj">
-      <Project>{7ebc9344-46cc-4cc9-a03a-857e87343869}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Utilities\Utilities.vcxproj">
-      <Project>{713f8aae-1815-4c40-a648-a7a5a664ad9c}</Project>
+    <ProjectReference Include="..\core\Core\Core.vcxproj">
+      <Project>{fa7aaa47-0886-47d8-8e22-1763e178549d}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

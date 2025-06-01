@@ -1,7 +1,8 @@
 #include "Assert.h"
 #include "Log.h"
+#include "EAssert.h"
 
-void Utilities::Assert::AssertConditionWithMessage(bool condition, CRefString conditionString, CRefString file, int line, CRefString function, CRefString message)
+void Core::EAssert::AssertConditionWithMessage(bool condition, CRefString conditionString, CRefString file, int line, CRefString function, CRefString message)
 {
 	if (!condition)
 	{

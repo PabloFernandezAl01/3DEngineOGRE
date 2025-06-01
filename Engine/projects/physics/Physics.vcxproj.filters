@@ -18,18 +18,9 @@
     <ClCompile Include="..\..\src\physics\PhysicsManager.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\physics\DebugDraw.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\physics\PhysicsManager.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\physics\DebugDraw.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\physics\RaycastData.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
