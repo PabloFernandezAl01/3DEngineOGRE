@@ -15,54 +15,60 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\utilities\Vector2D.h">
+    <ClInclude Include="..\..\..\src\core\Log.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\utilities\Singleton.h">
+    <ClInclude Include="..\..\..\src\core\ETypes.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\utilities\CheckML.h">
+    <ClInclude Include="..\..\..\src\core\Assert.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\utilities\Color.h">
+    <ClInclude Include="..\..\..\src\core\CheckML.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\utilities\Random.h">
+    <ClInclude Include="..\..\..\src\core\Color.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\utilities\ETime.h">
+    <ClInclude Include="..\..\..\src\core\ConfigManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\utilities\ConfigManager.h">
+    <ClInclude Include="..\..\..\src\core\ETime.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\utilities\StringTrim.h">
+    <ClInclude Include="..\..\..\src\core\Random.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\utilities\ETypes.h">
+    <ClInclude Include="..\..\..\src\core\Singleton.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\utilities\Lerp.h">
+    <ClInclude Include="..\..\..\src\core\Vector2D.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\StringTrim.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\utilities\Vector2D.cpp">
+    <ClCompile Include="..\..\..\src\core\Log.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\utilities\Color.cpp">
+    <ClCompile Include="..\..\..\src\core\Assert.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\utilities\Random.cpp">
+    <ClCompile Include="..\..\..\src\core\Color.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\utilities\ETime.cpp">
+    <ClCompile Include="..\..\..\src\core\ConfigManager.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\utilities\ConfigManager.cpp">
+    <ClCompile Include="..\..\..\src\core\ETime.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\utilities\Lerp.cpp">
+    <ClCompile Include="..\..\..\src\core\Random.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\Vector2D.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

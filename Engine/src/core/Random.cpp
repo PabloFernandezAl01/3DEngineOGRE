@@ -4,7 +4,7 @@
 
 #define PI 3.14159265f
 
-namespace Utilities {
+namespace Core {
 
 	int Random::RandomIntBetween(int min, int max) 
 	{
@@ -29,7 +29,8 @@ namespace Utilities {
 		return degree * PI / 180.0f;
 	}
 
-	Color Random::RandomColor() {
+	Color Random::RandomColor()
+	{
 		Color c{};
 		
 		c.r = RandomIntBetween(0, 255);
@@ -39,7 +40,8 @@ namespace Utilities {
 		return c;
 	}
 
-	Color Random::RandomColorBetween(cColor c1, cColor c2) {
+	Color Random::RandomColorBetween(CRefColor c1, CRefColor c2)
+	{
 		Color c{};
 
 		c.r = RandomIntBetween(c1.r, c2.r);
@@ -49,7 +51,8 @@ namespace Utilities {
 		return c;
 	}
 
-	Vector2D Random::RandomVectorBetween(cVector2D v1, cVector2D v2) {
+	Vector2D Random::RandomVectorBetween(CRefVector2D v1, CRefVector2D v2) 
+	{
 		return { RandomBetween(v1.GetX(), v2.GetX()), RandomBetween(v1.GetY(), v2.GetY()) };
 	}
 }

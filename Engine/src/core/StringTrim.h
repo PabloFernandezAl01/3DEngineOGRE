@@ -5,8 +5,7 @@
 /*
 	Functions to remove spaces from strings
 */
-namespace Utilities {
-
+namespace Core {
 
 	inline std::string static tolower(const std::string& s) {
 

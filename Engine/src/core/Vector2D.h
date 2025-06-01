@@ -11,7 +11,7 @@
  * modify the state are the different setters (and operator=).
  */
 
-namespace Utilities {
+namespace Core {
 
 	class Vector2D {
 
@@ -203,5 +203,3 @@ namespace Utilities {
 	std::ostream& operator<<(std::ostream& os, const Vector2D& v);
 
 }
-
-using cVector2D = Utilities::Vector2D const&;

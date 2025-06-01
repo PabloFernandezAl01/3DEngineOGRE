@@ -15,7 +15,7 @@
  * your design, just define one that throws and exception.
  */
 
-namespace Utilities {
+namespace Core {
 
 	template<typename T>
 	class Singleton {

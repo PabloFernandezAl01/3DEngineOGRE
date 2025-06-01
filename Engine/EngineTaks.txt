@@ -1,4 +1,1 @@
 Tasks
-
-ConsoleManager: 
-  Crear un assert con LINE y FILE inplace

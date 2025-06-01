@@ -1,6 +1,6 @@
 #include "InputManager.h"
-#include <Vector2D.h>
-#include <ConsoleManager.h>
+
+#include <Log.h>
 #include <RendererManager.h>
 
 #define MAX_STICK_VALUE 32767
@@ -36,7 +36,7 @@ namespace Input {
 
 		if (sdlInit_ret < 0)
 		{
-			Console::Output::PrintError("SDL Initialization", SDL_GetError());
+			Log::PrintError("SDL Initialization", SDL_GetError());
 			return false;
 		}
 	}
@@ -95,7 +95,7 @@ namespace Input {
 
 		// Check for SDL_NumJoysticks() error
 		if (numJoysticks < 0) {
-			Console::Output::PrintError("SDL Joystick Query", SDL_GetError());
+			Log::PrintError("SDL Joystick Query", SDL_GetError());
 			return;
 		}
 
@@ -186,7 +186,7 @@ namespace Input {
 
 		if (l >= (int) KB_LETTERS::Count || l < 0) 
 		{
-			Console::Output::PrintError("KeyBoard Input", "The letter with index " + std::to_string(l) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The letter with index " + std::to_string(l) + " does not exist");
 			return false;
 		}
 
@@ -197,7 +197,7 @@ namespace Input {
 	{
 		if (l >= (int)KB_LETTERS::Count || l < 0)
 		{
-			Console::Output::PrintError("KeyBoard Input", "The letter with index " + std::to_string(l) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The letter with index " + std::to_string(l) + " does not exist");
 			return false;
 		}
 
@@ -208,7 +208,7 @@ namespace Input {
 	{
 		if (l >= (int)KB_LETTERS::Count || l < 0) 
 		{
-			Console::Output::PrintError("KeyBoard Input", "The letter with index " + std::to_string(l) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The letter with index " + std::to_string(l) + " does not exist");
 			return false;
 		}
 
@@ -219,7 +219,7 @@ namespace Input {
 	{
 		if (l >= (int)KB_LETTERS::Count || l < 0) 
 		{
-			Console::Output::PrintError("KeyBoard Input", "The letter with index " + std::to_string(l) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The letter with index " + std::to_string(l) + " does not exist");
 			return false;
 		}
 
@@ -231,7 +231,7 @@ namespace Input {
 	{
 		if (n >= (int)KB_NUMBERS::Count || n < 0)
 		{
-			Console::Output::PrintError("KeyBoard Input", "The number with index " + std::to_string(n) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The number with index " + std::to_string(n) + " does not exist");
 			return false;
 		}
 
@@ -243,7 +243,7 @@ namespace Input {
 
 		if (n >= (int)KB_NUMBERS::Count || n < 0) 
 		{
-			Console::Output::PrintError("KeyBoard Input", "The number with index " + std::to_string(n) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The number with index " + std::to_string(n) + " does not exist");
 			return false;
 		}
 
@@ -255,7 +255,7 @@ namespace Input {
 
 		if (n >= (int)KB_NUMBERS::Count || n < 0) 
 		{
-			Console::Output::PrintError("KeyBoard Input", "The number with index " + std::to_string(n) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The number with index " + std::to_string(n) + " does not exist");
 			return false;
 		}
 
@@ -267,7 +267,7 @@ namespace Input {
 
 		if (n >= (int)KB_NUMBERS::Count || n < 0) 
 		{
-			Console::Output::PrintError("KeyBoard Input", "The number with index " + std::to_string(n) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The number with index " + std::to_string(n) + " does not exist");
 			return false;
 		}
 
@@ -280,7 +280,7 @@ namespace Input {
 
 		if (s >= (int)KB_SPECIALKEYS::Count || s < 0)
 		{
-			Console::Output::PrintError("KeyBoard Input", "The special key with index " + std::to_string(s) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The special key with index " + std::to_string(s) + " does not exist");
 			return false;
 		}
 
@@ -292,7 +292,7 @@ namespace Input {
 
 		if (s >= (int)KB_SPECIALKEYS::Count || s < 0) 
 		{
-			Console::Output::PrintError("KeyBoard Input", "The special key with index " + std::to_string(s) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The special key with index " + std::to_string(s) + " does not exist");
 			return false;
 		}
 
@@ -304,7 +304,7 @@ namespace Input {
 
 		if (s >= (int)KB_SPECIALKEYS::Count || s < 0) 
 		{
-			Console::Output::PrintError("KeyBoard Input", "The special key with index " + std::to_string(s) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The special key with index " + std::to_string(s) + " does not exist");
 			return false;
 		}
 
@@ -316,7 +316,7 @@ namespace Input {
 
 		if (s >= (int)KB_SPECIALKEYS::Count || s < 0)
 		{
-			Console::Output::PrintError("KeyBoard Input", "The special key with index " + std::to_string(s) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The special key with index " + std::to_string(s) + " does not exist");
 			return false;
 		}
 
@@ -409,16 +409,16 @@ namespace Input {
 		return isMouseWheelEvent_;
 	}
 
-	cVector2D InputManager::GetAbsoluteMousePosition()
+	CRefVector2D InputManager::GetAbsoluteMousePosition()
 	{
 		return mousePos_;
 	}
 
-	Utilities::Vector2D InputManager::GetMousePositionRelativeToCamera()
+	Core::Vector2D InputManager::GetMousePositionRelativeToCamera()
 	{
 		auto* renderer = Renderer::RendererManager::Instance();
 
-		Utilities::Vector2D position = mousePos_;
+		Core::Vector2D position = mousePos_;
 
 		position.Set(position.GetX() / renderer->GetCameraScale(), position.GetY() / renderer->GetCameraScale());
 
@@ -438,7 +438,7 @@ namespace Input {
 
 		if (b >= (int)MOUSEBUTTON::Count || b < 0)
 		{
-			Console::Output::PrintError("Mouse Input", "The mouse button with index " + std::to_string(b) + " does not exist");
+			Log::PrintError("Mouse Input", "The mouse button with index " + std::to_string(b) + " does not exist");
 			return false;
 		}
 
@@ -450,7 +450,7 @@ namespace Input {
 
 		if (b >= (int)MOUSEBUTTON::Count || b < 0) 
 		{
-			Console::Output::PrintError("Mouse Input", "The mouse button with index " + std::to_string(b) + " does not exist");
+			Log::PrintError("Mouse Input", "The mouse button with index " + std::to_string(b) + " does not exist");
 			return false;
 		}
 
@@ -462,7 +462,7 @@ namespace Input {
 
 		if (b >= (int)MOUSEBUTTON::Count || b < 0)
 		{
-			Console::Output::PrintError("Mouse Input", "The mouse button with index " + std::to_string(b) + " does not exist");
+			Log::PrintError("Mouse Input", "The mouse button with index " + std::to_string(b) + " does not exist");
 			return false;
 		}
 
@@ -474,7 +474,7 @@ namespace Input {
 
 		if (b >= (int)MOUSEBUTTON::Count || b < 0)
 		{
-			Console::Output::PrintError("Mouse Input", "The mouse button with index " + std::to_string(b) + " does not exist");
+			Log::PrintError("Mouse Input", "The mouse button with index " + std::to_string(b) + " does not exist");
 			return false;
 		}
 
@@ -520,7 +520,7 @@ namespace Input {
 		// Check for SDL_JoystickEventState(SDL_ENABLE) error
 		if (SDL_JoystickEventState(SDL_ENABLE) < 0) 
 		{
-			Console::Output::PrintError("SDL GameController Initialisation", SDL_GetError());
+			Log::PrintError("SDL GameController Initialisation", SDL_GetError());
 			return false;
 		}
 
@@ -539,7 +539,7 @@ namespace Input {
 
 		if (sdlController == NULL) 
 		{
-			Console::Output::PrintError("SDL GameController Initialisation", SDL_GetError());
+			Log::PrintError("SDL GameController Initialisation", SDL_GetError());
 			return;
 		}
 
@@ -548,7 +548,7 @@ namespace Input {
 
 		if (joystick == NULL) 
 		{
-			Console::Output::PrintError("SDL GameController Initialisation", SDL_GetError());
+			Log::PrintError("SDL GameController Initialisation", SDL_GetError());
 			return;
 		}
 
@@ -556,7 +556,7 @@ namespace Input {
 		SDL_JoystickID id = SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(sdlController));
 
 		if (id < 0) {
-			Console::Output::PrintError("SDL GameController Initialisation", SDL_GetError());
+			Log::PrintError("SDL GameController Initialisation", SDL_GetError());
 			return;
 		}
 
@@ -573,8 +573,8 @@ namespace Input {
 		data.id = id;
 		data.name = name;
 		data.buttonsStates = std::vector<ButtonState>((int)PS4_CONTROLLER_BUTTONS::Count, ButtonState::None);
-		data.triggers = Utilities::Vector2D();
-		data.joysticks = std::make_pair(Utilities::Vector2D(), Utilities::Vector2D());
+		data.triggers = {};
+		data.joysticks = std::make_pair(Core::Vector2D(), Core::Vector2D());
 
 		controllers.insert(std::make_pair(which, data));
 
@@ -679,27 +679,33 @@ namespace Input {
 		}
 	}
 
-	int InputManager::ConnectedControllersCount() {
+	int InputManager::ConnectedControllersCount() 
+	{
 		return numControllersConnected;
 	}
 
-	bool InputManager::AnyControllerButtonPressed() {
+	bool InputManager::AnyControllerButtonPressed() 
+	{
 		return isControllerButtonDownEvent_;
 	}
 
-	bool InputManager::AnyControllerButtonReleased() {
+	bool InputManager::AnyControllerButtonReleased() 
+	{
 		return isControllerButtonUpEvent_;
 	}
 
-	bool InputManager::AnyControllerAxisMotion() {
+	bool InputManager::AnyControllerAxisMotion() 
+	{
 		return isAxisMotionEvent_;
 	}
 
-	bool InputManager::AnyControllerConnected() {
+	bool InputManager::AnyControllerConnected() 
+	{
 		return controllerConnected_;
 	}
 
-	bool InputManager::AnyControllerDisconnected() {
+	bool InputManager::AnyControllerDisconnected() 
+	{
 		return controllerDisconnected_;
 	}
 
@@ -707,171 +713,200 @@ namespace Input {
 
 	// With ID
 
-	bool InputManager::IsControllerButtonPressedWithId(int button, int id) {
+	bool InputManager::IsControllerButtonPressedWithId(int button, int id) 
+	{
 
 		if (numControllersConnected == 0) return false;
 
-		if (id >= numControllersConnected || id < 0) {
-			Console::Output::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
+		if (id >= numControllersConnected || id < 0) 
+		{
+			Log::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
 			return false;
 		}
 
-		if (button >= (int)PS4_CONTROLLER_BUTTONS::Count || button < 0) {
-			Console::Output::PrintWarning("Controller Input", "There is no controller button with the specified id: " + std::to_string(button));
+		if (button >= (int)PS4_CONTROLLER_BUTTONS::Count || button < 0) 
+		{
+			Log::PrintWarning("Controller Input", "There is no controller button with the specified id: " + std::to_string(button));
 			return false;
 		}
 
 		return controllers[id].buttonsStates[button] == ButtonState::JustDown;
 	}
 
-	bool InputManager::IsControllerButtonDownWithId(int button, int id) {
+	bool InputManager::IsControllerButtonDownWithId(int button, int id) 
+	{
 
 		if (numControllersConnected == 0) return false;
 
-		if (id >= numControllersConnected || id < 0) {
-			Console::Output::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
+		if (id >= numControllersConnected || id < 0) 
+		{
+			Log::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
 			return false;
 		}
 
-		if (button >= (int)PS4_CONTROLLER_BUTTONS::Count || button < 0) {
-			Console::Output::PrintWarning("Controller Input", "There is no controller button with the specified id: " + std::to_string(button));
+		if (button >= (int)PS4_CONTROLLER_BUTTONS::Count || button < 0) 
+		{
+			Log::PrintWarning("Controller Input", "There is no controller button with the specified id: " + std::to_string(button));
 			return false;
 		}
 
 		return controllers[id].buttonsStates[button] == ButtonState::JustDown || controllers[id].buttonsStates[button] == ButtonState::Down;
 	}
 
-	bool InputManager::IsControllerButtonReleasedWithId(int button, int id) {
+	bool InputManager::IsControllerButtonReleasedWithId(int button, int id)
+	{
 
 		if (numControllersConnected == 0) return false;
 
-		if (id >= numControllersConnected || id < 0) {
-			Console::Output::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
+		if (id >= numControllersConnected || id < 0) 
+		{
+			Log::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
 			return false;
 		}
 
-		if (button >= (int)PS4_CONTROLLER_BUTTONS::Count || button < 0) {
-			Console::Output::PrintWarning("Controller Input", "There is no controller button with the specified id: " + std::to_string(button));
+		if (button >= (int)PS4_CONTROLLER_BUTTONS::Count || button < 0)
+		{
+			Log::PrintWarning("Controller Input", "There is no controller button with the specified id: " + std::to_string(button));
 			return false;
 		}
 
 		return controllers[id].buttonsStates[button] == ButtonState::Up;
 	}
 
-	float InputManager::GetLeftTriggerValueWithId(int id) {
+	float InputManager::GetLeftTriggerValueWithId(int id) 
+	{
 
 		if (numControllersConnected == 0) return 0;
 
-		if (id >= numControllersConnected || id < 0) {
-			Console::Output::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
+		if (id >= numControllersConnected || id < 0) 
+		{
+			Log::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
 			return false;
 		}
 
 		return controllers[id].triggers.GetX();
 	}
 
-	float InputManager::GetRightTriggerValueWithId(int id) {
+	float InputManager::GetRightTriggerValueWithId(int id) 
+	{
 
 		if (numControllersConnected == 0) return 0;
 
-		if (id >= numControllersConnected || id < 0) {
-			Console::Output::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
+		if (id >= numControllersConnected || id < 0) 
+		{
+			Log::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
 			return false;
 		}
 
 		return controllers[id].triggers.GetY();
 	}
 
-	bool InputManager::IsLeftTriggerDownWithId(int id) {
+	bool InputManager::IsLeftTriggerDownWithId(int id) 
+	{
 
 		if (numControllersConnected == 0) return false;
 
-		if (id >= numControllersConnected || id < 0) {
-			Console::Output::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
+		if (id >= numControllersConnected || id < 0) 
+		{
+			Log::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
 			return false;
 		}
 
 		return controllers[id].triggers.GetX() > 0;
 	}
 
-	bool InputManager::IsRightTriggerDownWithId(int id) {
+	bool InputManager::IsRightTriggerDownWithId(int id) 
+	{
 
 		if (numControllersConnected == 0) return false;
 
-		if (id >= numControllersConnected || id < 0) {
-			Console::Output::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
+		if (id >= numControllersConnected || id < 0) 
+		{
+			Log::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
 			return false;
 		}
 
 		return controllers[id].triggers.GetY() > 0;
 	}
 
-	float InputManager::GetLeftStickHorizontalValueWithId(int id) {
+	float InputManager::GetLeftStickHorizontalValueWithId(int id) 
+	{
 
 		if (numControllersConnected == 0) return 0;
 
-		if (id >= numControllersConnected || id < 0) {
-			Console::Output::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
+		if (id >= numControllersConnected || id < 0) 
+		{
+			Log::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
 			return false;
 		}
 
 		return controllers[id].joysticks.first.GetX();
 	}
 
-	float InputManager::GetLeftStickVerticalValueWithId(int id) {
+	float InputManager::GetLeftStickVerticalValueWithId(int id) 
+	{
 
 		if (numControllersConnected == 0) return 0;
 
-		if (id >= numControllersConnected || id < 0) {
-			Console::Output::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
+		if (id >= numControllersConnected || id < 0) 
+		{
+			Log::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
 			return false;
 		}
 
 		return controllers[id].joysticks.first.GetY();
 	}
 
-	float InputManager::GetRightStickHorizontalValueWithId(int id) {
+	float InputManager::GetRightStickHorizontalValueWithId(int id) 
+	{
 
 		if (numControllersConnected == 0) return 0;
 
-		if (id >= numControllersConnected || id < 0) {
-			Console::Output::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
+		if (id >= numControllersConnected || id < 0) 
+		{
+			Log::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
 			return false;
 		}
 
 		return controllers[id].joysticks.second.GetX();
 	}
 
-	float InputManager::GetRightStickVerticalValueWithId(int id) {
+	float InputManager::GetRightStickVerticalValueWithId(int id) 
+	{
 
 		if (numControllersConnected == 0) return 0;
 
-		if (id >= numControllersConnected || id < 0) {
-			Console::Output::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
+		if (id >= numControllersConnected || id < 0) 
+		{
+			Log::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
 			return false;
 		}
 
 		return controllers[id].joysticks.second.GetY();
 	}
 
-	bool InputManager::HasLeftStickMovedWithId(int id) {
+	bool InputManager::HasLeftStickMovedWithId(int id)
+	{
 
 		if (numControllersConnected == 0) return false;
 
-		if (id >= numControllersConnected || id < 0) {
-			Console::Output::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
+		if (id >= numControllersConnected || id < 0) 
+		{
+			Log::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
 			return false;
 		}
 
 		return controllers[id].joysticks.first.GetX() > 0 || controllers[id].joysticks.first.GetY() > 0;
 	}
 
-	bool InputManager::HasRightStickMovedWithId(int id) {
+	bool InputManager::HasRightStickMovedWithId(int id) 
+	{
 
 		if (numControllersConnected == 0) return false;
 
-		if (id >= numControllersConnected || id < 0) {
-			Console::Output::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
+		if (id >= numControllersConnected || id < 0) 
+		{
+			Log::PrintWarning("Controller Input", "There is no controller with the specified id: " + std::to_string(id));
 			return false;
 		}
 
@@ -882,47 +917,58 @@ namespace Input {
 
 	// With out ID
 
-	bool InputManager::IsControllerButtonPressed(int button) {
+	bool InputManager::IsControllerButtonPressed(int button) 
+	{
 		return IsControllerButtonPressedWithId(button, lastInputReceivedController);
 	}
 
-	bool InputManager::IsControllerButtonDown(int button) {
+	bool InputManager::IsControllerButtonDown(int button) 
+	{
 		return IsControllerButtonDownWithId(button, lastInputReceivedController);
 	}
 
-	bool InputManager::IsControllerButtonReleased(int button) {
+	bool InputManager::IsControllerButtonReleased(int button) 
+	{
 		return IsControllerButtonReleasedWithId(button, lastInputReceivedController);
 	}
 
-	float InputManager::GetLeftTriggerValue() {
+	float InputManager::GetLeftTriggerValue() 
+	{
 		return GetLeftTriggerValueWithId(lastInputReceivedController);
 	}
 
-	float InputManager::GetRightTriggerValue() {
+	float InputManager::GetRightTriggerValue() 
+	{
 		return GetRightTriggerValueWithId(lastInputReceivedController);
 	}
 
-	bool InputManager::IsLeftTriggerDown() {
+	bool InputManager::IsLeftTriggerDown() 
+	{
 		return IsLeftTriggerDownWithId(lastInputReceivedController);
 	}
 
-	bool InputManager::IsRightTriggerDown() {
+	bool InputManager::IsRightTriggerDown() 
+	{
 		return IsRightTriggerDownWithId(lastInputReceivedController);
 	}
 
-	float InputManager::GetLeftStickHorizontalValue() {
+	float InputManager::GetLeftStickHorizontalValue() 
+	{
 		return GetLeftStickHorizontalValueWithId(lastInputReceivedController);
 	}
 
-	float InputManager::GetLeftStickVerticalValue() {
+	float InputManager::GetLeftStickVerticalValue() 
+	{
 		return GetLeftStickVerticalValueWithId(lastInputReceivedController);
 	}
 
-	float InputManager::GetRightStickHorizontalValue() {
+	float InputManager::GetRightStickHorizontalValue() 
+	{
 		return GetRightStickHorizontalValueWithId(lastInputReceivedController);
 	}
 
-	float InputManager::GetRightStickVerticalValue() {
+	float InputManager::GetRightStickVerticalValue() 
+	{
 		return GetRightStickVerticalValueWithId(lastInputReceivedController);
 	}
 
@@ -930,18 +976,21 @@ namespace Input {
 		return HasLeftStickMovedWithId(lastInputReceivedController);
 	}
 
-	bool InputManager::HasRightStickMoved() {
+	bool InputManager::HasRightStickMoved() 
+	{
 		return HasRightStickMovedWithId(lastInputReceivedController);
 	}
 
 
 	// --------- Enum Conversion Methods -----------
 
-	SDL_Scancode InputManager::ConvertToScancode(const KB_LETTERS& letter) {
+	SDL_Scancode InputManager::ConvertToScancode(const KB_LETTERS& letter) 
+	{
 
 		SDL_Scancode scancode = SDL_SCANCODE_UNKNOWN;
 
-		switch (letter) {
+		switch (letter) 
+		{
 		case KB_LETTERS::A:
 			scancode = SDL_SCANCODE_A;
 			break;
@@ -1028,11 +1077,13 @@ namespace Input {
 
 	}
 
-	SDL_Scancode InputManager::ConvertToScancode(const KB_NUMBERS& number) {
+	SDL_Scancode InputManager::ConvertToScancode(const KB_NUMBERS& number) 
+	{
 
 		SDL_Scancode scancode = SDL_SCANCODE_UNKNOWN;
 
-		switch (number) {
+		switch (number) 
+		{
 		case KB_NUMBERS::Num1:
 			scancode = SDL_SCANCODE_1;
 			break;
@@ -1107,11 +1158,13 @@ namespace Input {
 
 	}
 
-	SDL_Scancode InputManager::ConvertToScancode(const KB_SPECIALKEYS& specialKey) {
+	SDL_Scancode InputManager::ConvertToScancode(const KB_SPECIALKEYS& specialKey) 
+	{
 
 		SDL_Scancode scancode = SDL_SCANCODE_UNKNOWN;
 
-		switch (specialKey) {
+		switch (specialKey) 
+		{
 		case KB_SPECIALKEYS::RETURN:
 			scancode = SDL_SCANCODE_RETURN;
 			break;
@@ -1167,7 +1220,8 @@ namespace Input {
 
 	Input::InputManager::KB_LETTERS Input::InputManager::ConvertToLetter(const SDL_Scancode& scancode)
 	{
-		if (scancode >= SDL_SCANCODE_A && scancode <= SDL_SCANCODE_Z) {
+		if (scancode >= SDL_SCANCODE_A && scancode <= SDL_SCANCODE_Z) 
+		{
 
 			return (KB_LETTERS)(scancode - SDL_SCANCODE_A);
 		}
@@ -1177,13 +1231,13 @@ namespace Input {
 
 	Input::InputManager::KB_NUMBERS Input::InputManager::ConvertToNumbers(const SDL_Scancode& scancode) {
 
-		if (scancode >= SDL_SCANCODE_1 && scancode <= SDL_SCANCODE_0) {
-
+		if (scancode >= SDL_SCANCODE_1 && scancode <= SDL_SCANCODE_0)
+		{
 			return (KB_NUMBERS)(scancode - SDL_SCANCODE_1);
 		}
 
-		if (scancode >= SDL_SCANCODE_F1 && scancode <= SDL_SCANCODE_F12) {
-
+		if (scancode >= SDL_SCANCODE_F1 && scancode <= SDL_SCANCODE_F12) 
+		{
 			return (KB_NUMBERS)((int)KB_NUMBERS::F1 + scancode - SDL_SCANCODE_F1);
 		}
 
@@ -1192,7 +1246,8 @@ namespace Input {
 
 	Input::InputManager::KB_SPECIALKEYS Input::InputManager::ConvertToSpecialKeys(const SDL_Scancode& scancode)
 	{
-		switch (scancode) {
+		switch (scancode) 
+		{
 		case SDL_SCANCODE_RETURN:
 			return KB_SPECIALKEYS::RETURN;
 		case SDL_SCANCODE_ESCAPE:

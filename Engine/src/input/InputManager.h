@@ -2,25 +2,20 @@
 
 #include "SDL.h"
 
+#include <ETypes.h>
 #include <unordered_map>
 #include <Singleton.h>
-#include <Vector2D.h>
 #include <ConfigManager.h>
 #include <vector>
-#include <string>
 #include <array>
 
 /*
 Input Manager. It has support for mouse, keyboard and multiple PS4 or XBOX controllers.
 */
 
-namespace Utilities {
-	class Vector2D;
-}
-
 namespace Input {
 
-	class InputManager : public Utilities::Singleton<InputManager>{
+	class InputManager : public Core::Singleton<InputManager>{
 
 		friend Singleton<InputManager>;
 
@@ -127,9 +122,9 @@ namespace Input {
 
 		bool IsMouseButtonReleased(int b);
 
-		cVector2D GetAbsoluteMousePosition();
+		CRefVector2D GetAbsoluteMousePosition();
 
-		Utilities::Vector2D GetMousePositionRelativeToCamera();
+		Core::Vector2D GetMousePositionRelativeToCamera();
 
 		int GetMouseWheelScroll();
 
@@ -263,7 +258,7 @@ namespace Input {
 			bool isMouseButtonEventUp_{};
 
 
-			Utilities::Vector2D mousePos_{};
+			Vector2D mousePos_{};
 			std::array<bool, 3> mbState_{};
 			int wheelMotionY_{};
 			const Uint8* kbState_{};
@@ -282,8 +277,8 @@ namespace Input {
 				SDL_JoystickID id{};
 				std::string name;
 				std::vector<ButtonState> buttonsStates;
-				Utilities::Vector2D triggers; // X for LEFT trigger, Y for RIGHT trigger
-				std::pair<Utilities::Vector2D, Utilities::Vector2D> joysticks;
+				Vector2D triggers; // X for LEFT trigger, Y for RIGHT trigger
+				std::pair<Vector2D, Vector2D> joysticks;
 			};
 
 			bool InitControllers();

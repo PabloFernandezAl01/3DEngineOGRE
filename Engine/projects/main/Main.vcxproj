@@ -18,9 +18,6 @@
     <ClInclude Include="..\..\src\main\Engine.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\game\TestGame\TestGame.vcxproj">
-      <Project>{1d5b594c-5a6e-4721-947f-0630f4654db3}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\ECS\ECS.vcxproj">
       <Project>{c98d0e6a-a838-4cfd-88aa-cefe6ed55268}</Project>
     </ProjectReference>
@@ -35,9 +32,6 @@
     </ProjectReference>
     <ProjectReference Include="..\sound\sound.vcxproj">
       <Project>{53446c51-c540-4001-ac09-bbd92cc74904}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Utilities\Utilities.vcxproj">
-      <Project>{713f8aae-1815-4c40-a648-a7a5a664ad9c}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

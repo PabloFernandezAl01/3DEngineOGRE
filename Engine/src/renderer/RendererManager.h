@@ -14,7 +14,7 @@ namespace Renderer {
 
 	class DrawUtils;
 
-	class RendererManager : public Utilities::Singleton<RendererManager> {
+	class RendererManager : public Core::Singleton<RendererManager> {
 
 		friend Singleton<RendererManager>;
 

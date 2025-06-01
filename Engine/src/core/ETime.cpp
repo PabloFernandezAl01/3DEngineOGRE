@@ -2,7 +2,7 @@
 #include <sstream>
 #include <iomanip>
 
-namespace Utilities {
+namespace Core {
 
 	ETime::ETime() {
 		deltaTime = 1.0f / 60.0f;

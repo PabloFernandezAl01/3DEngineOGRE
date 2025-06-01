@@ -3,14 +3,13 @@
 #include <ostream>
 #include <string>
 
-namespace Utilities {
+namespace Core {
 
 	class Color {
 
 	public:
 
 		static Color CreateColor(float r, float g, float b);
-		static Color CreateColor(std::string const& str);
 		static Color Lerp(const Color& startColor, const Color& endColor, float t);
 
 		float r, g, b;
@@ -39,5 +38,3 @@ namespace Utilities {
 	Color operator*(const Color& v, int n);
 
 }
-
-using cColor = Utilities::Color const&;

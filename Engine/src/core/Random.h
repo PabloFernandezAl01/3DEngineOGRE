@@ -1,9 +1,8 @@
 #pragma once
 
-#include "Color.h"
-#include "Vector2D.h"
+#include "ETypes.h"
 
-namespace Utilities {
+namespace Core {
 
 	class Random {
 
@@ -22,10 +21,10 @@ namespace Utilities {
 		static Color RandomColor();
 
 		// Generates a random color among the given ones.
-		static Color RandomColorBetween(cColor c1, cColor c2);
+		static Color RandomColorBetween(CRefColor c1, CRefColor c2);
 
 		// Generates a random color among the given ones.
-		static Vector2D RandomVectorBetween(cVector2D v1, cVector2D v2);
+		static Vector2D RandomVectorBetween(CRefVector2D v1, CRefVector2D v2);
 
 	};
 

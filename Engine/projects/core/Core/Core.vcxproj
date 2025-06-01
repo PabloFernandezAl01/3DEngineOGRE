@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
+    <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{713f8aae-1815-4c40-a648-a7a5a664ad9c}</ProjectGuid>
-    <RootNamespace>Utilities</RootNamespace>
+    <ProjectGuid>{fa7aaa47-0886-47d8-8e22-1763e178549d}</ProjectGuid>
+    <RootNamespace>Core</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -113,7 +113,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)dependencies\json-develop\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\json-develop\include;$(SolutionDir)dependencies\SDL2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,7 +129,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)dependencies\json-develop\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\json-develop\include;$(SolutionDir)dependencies\SDL2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,24 +139,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\utilities\CheckML.h" />
-    <ClInclude Include="..\..\src\utilities\Color.h" />
-    <ClInclude Include="..\..\src\utilities\ConfigManager.h" />
-    <ClInclude Include="..\..\src\utilities\ETime.h" />
-    <ClInclude Include="..\..\src\utilities\ETypes.h" />
-    <ClInclude Include="..\..\src\utilities\Lerp.h" />
-    <ClInclude Include="..\..\src\utilities\Singleton.h" />
-    <ClInclude Include="..\..\src\utilities\Random.h" />
-    <ClInclude Include="..\..\src\utilities\StringTrim.h" />
-    <ClInclude Include="..\..\src\utilities\Vector2D.h" />
+    <ClInclude Include="..\..\..\src\core\Assert.h" />
+    <ClInclude Include="..\..\..\src\core\CheckML.h" />
+    <ClInclude Include="..\..\..\src\core\Color.h" />
+    <ClInclude Include="..\..\..\src\core\ConfigManager.h" />
+    <ClInclude Include="..\..\..\src\core\ETime.h" />
+    <ClInclude Include="..\..\..\src\core\ETypes.h" />
+    <ClInclude Include="..\..\..\src\core\Log.h" />
+    <ClInclude Include="..\..\..\src\core\Random.h" />
+    <ClInclude Include="..\..\..\src\core\Singleton.h" />
+    <ClInclude Include="..\..\..\src\core\StringTrim.h" />
+    <ClInclude Include="..\..\..\src\core\Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\utilities\Color.cpp" />
-    <ClCompile Include="..\..\src\utilities\ConfigManager.cpp" />
-    <ClCompile Include="..\..\src\utilities\ETime.cpp" />
-    <ClCompile Include="..\..\src\utilities\Lerp.cpp" />
-    <ClCompile Include="..\..\src\utilities\Random.cpp" />
-    <ClCompile Include="..\..\src\utilities\Vector2D.cpp" />
+    <ClCompile Include="..\..\..\src\core\Assert.cpp" />
+    <ClCompile Include="..\..\..\src\core\Color.cpp" />
+    <ClCompile Include="..\..\..\src\core\ConfigManager.cpp" />
+    <ClCompile Include="..\..\..\src\core\ETime.cpp" />
+    <ClCompile Include="..\..\..\src\core\Log.cpp" />
+    <ClCompile Include="..\..\..\src\core\Random.cpp" />
+    <ClCompile Include="..\..\..\src\core\Vector2D.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

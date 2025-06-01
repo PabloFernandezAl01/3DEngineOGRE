@@ -3,10 +3,9 @@
 #include <cassert>
 #include <string>
 
-
 #define PI 3.14159265358979323846264338327950288f
 
-namespace Utilities {
+namespace Core {
 
 	// Printing a Vector2D
 	std::ostream& operator<<(std::ostream& os, const Vector2D& v) {
@@ -54,7 +53,7 @@ namespace Utilities {
 
 	Vector2D::Vector2D(std::string const& str) {
 
-		std::string trimed = Utilities::trim(str, "([ )]");
+		std::string trimed = Core::trim(str, "([ )]");
 
 		size_t coma = trimed.find(",");
 

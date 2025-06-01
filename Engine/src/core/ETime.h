@@ -3,9 +3,9 @@
 #include "Singleton.h"
 #include <string>
 
-namespace Utilities {
+namespace Core {
 
-	class ETime : public Utilities::Singleton<ETime> {
+	class ETime : public Singleton<ETime> {
 
 		friend Singleton<ETime>;
 
