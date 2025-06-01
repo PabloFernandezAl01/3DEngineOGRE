@@ -13,3 +13,4 @@ void Core::EAssert::AssertConditionWithMessage(bool condition, CRefString condit
 		Log::PrintError("", msg);
 	}
 }
+ 

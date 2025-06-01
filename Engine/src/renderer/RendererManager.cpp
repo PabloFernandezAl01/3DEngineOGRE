@@ -21,9 +21,11 @@ namespace Renderer {
 
 	void RendererManager::ClearRenderer() 
 	{
+
 	}
 
 	void RendererManager::PresentRenderer()
 	{
+
 	}
 }
