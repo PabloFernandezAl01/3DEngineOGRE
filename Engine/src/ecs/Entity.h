@@ -5,6 +5,11 @@
 #include <list>
 #include <set>
 
+namespace Ogre
+{
+	class SceneNode;
+}
+
 using namespace std;
 
 namespace ECS {
@@ -23,25 +28,18 @@ namespace ECS {
 
 	public:
 
-		struct EntityRenderOrderComparator {
-			bool operator()(const Entity* a, const Entity* b) const {
-				return a->renderOrder < b->renderOrder;
-			}
-		};
-
-		Entity(CRefString ent_name, int renderOrder);
+		Entity(CRefString ent_name);
 
 		Entity(CRefString ent_name, Scene* ent_scene);
 
 		virtual ~Entity();
 
-		virtual void Config();
-
 		inline Scene* GetScene() const { return scene; }
 
 		inline CRefString GetName() const { return name; }
 
-		inline int GetRenderOrder() const { return renderOrder; }
+		inline Ogre::SceneNode* GetSceneNode() { return sceneNode; }
+		inline void SetSceneNode(Ogre::SceneNode* node) { sceneNode = node; }
 
 		inline void SetLifeSpan(float lifeSpan) { this->lifeSpan = lifeSpan; lifeSpanActive = true; }
 
@@ -151,8 +149,6 @@ namespace ECS {
 		// Flags to indicate if the entity is active or removed
 		bool active{true}, removed{};
 
-		int renderOrder{};
-
 		// Lifespan
 		bool lifeSpanActive{};
 		float lifeSpan{};
@@ -162,6 +158,9 @@ namespace ECS {
 
 		// List of components associated with this entity
 		list<Component*> components;
+
+		// Ogre Scene Node
+		Ogre::SceneNode* sceneNode{};
 	};
 
 }

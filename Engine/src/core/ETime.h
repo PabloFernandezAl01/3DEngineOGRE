@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Singleton.h"
+#include "ESingleton.h"
 #include <string>
 
 namespace Core {
 
-	class ETime : public Singleton<ETime> {
+	class ETime : public ESingleton<ETime> {
 
-		friend Singleton<ETime>;
+		friend ESingleton<ETime>;
 
 	public:
 

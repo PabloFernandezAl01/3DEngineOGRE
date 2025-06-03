@@ -20,11 +20,6 @@ namespace ECS
 	class SceneManager;
 }
 
-namespace Resources 
-{
-	class ResourcesManager;
-}
-
 namespace Core 
 {
 	class ETime;
@@ -42,7 +37,6 @@ public:
 
 private:
 
-	Resources::ResourcesManager* resourcesManager{};
 	Renderer::RendererManager* rendererManager{};
 	Physics::PhysicsManager* physicsManager{};
 	Input::InputManager* inputManager{};

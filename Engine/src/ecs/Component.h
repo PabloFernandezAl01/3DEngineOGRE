@@ -24,8 +24,6 @@ namespace ECS {
 
 		void SetLifeSpan(float lifespan);
 
-		virtual void Config() {};
-
 		virtual void OnActive() {};
 
 		virtual void OnDeacitve() {};

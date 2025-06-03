@@ -1,4 +1,5 @@
 #include "RendererManager.h"
+#include "OgreRoot.h"
 
 namespace Renderer {
 
@@ -6,7 +7,22 @@ namespace Renderer {
 	{
 		windowTitle = data.windowTitle;
 
+		InitOgre();
+
 		valid = true;
+	}
+
+	void RendererManager::InitOgre()
+	{
+		ctx.initApp();
+
+		root = ctx.getRoot();
+		sceneManager = root->createSceneManager();
+	}
+
+	void RendererManager::CloseOgre()
+	{
+		ctx.closeApp();
 	}
 
 	bool RendererManager::Valid() 
@@ -19,13 +35,8 @@ namespace Renderer {
 		
 	}
 
-	void RendererManager::ClearRenderer() 
-	{
-
-	}
-
 	void RendererManager::PresentRenderer()
 	{
-
+		root->renderOneFrame();
 	}
 }

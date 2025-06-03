@@ -21,10 +21,10 @@ namespace ECS {
 		return new Scene(sce_name);
 	}
 
-	void SceneManager::ChangeScene(Scene* newScene, int m) 
+	void SceneManager::ChangeScene(Scene* newScene, LOAD_MODE m)
 	{
 		this->scene = newScene;
-		mode = (LOAD_MODE) m;
+		mode = m;
 		change = true;
 	}
 

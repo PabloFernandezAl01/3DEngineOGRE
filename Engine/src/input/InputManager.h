@@ -4,7 +4,7 @@
 
 #include <ETypes.h>
 #include <unordered_map>
-#include <Singleton.h>
+#include <ESingleton.h>
 #include <ConfigManager.h>
 #include <vector>
 #include <array>
@@ -15,9 +15,9 @@ Input Manager. It has support for mouse, keyboard and multiple PS4 or XBOX contr
 
 namespace Input {
 
-	class InputManager : public Core::Singleton<InputManager>{
+	class InputManager : public Core::ESingleton<InputManager>{
 
-		friend Singleton<InputManager>;
+		friend ESingleton<InputManager>;
 
 	public:
 

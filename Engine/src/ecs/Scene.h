@@ -27,8 +27,6 @@ namespace ECS {
 
 		~Scene();
 
-		virtual void Config();
-
 		// Returns the name of the scene
 		inline CRefString GetName() { return name; }
 
@@ -100,8 +98,8 @@ namespace ECS {
 
 		string name;
 
-		multiset<Entity*, Entity::EntityRenderOrderComparator> entities;
-		list<multiset<Entity*>::iterator> removedEntities;
+		list<Entity*> entities;
+		list<list<Entity*>::iterator> removedEntities;
 		list<Entity*> instantiatedEntities;
 	};
 }

@@ -4,7 +4,7 @@
 
 namespace ECS {
 
-	Entity::Entity(CRefString name, int renderOrder) : name(name), renderOrder(renderOrder) {}
+	Entity::Entity(CRefString name) : name(name) {}
 
 	Entity::Entity(CRefString ent_name, Scene* scene) : name(ent_name), scene(scene) {}
 
@@ -14,12 +14,6 @@ namespace ECS {
 			delete c;
 
 		components.clear();
-	}
-
-	void Entity::Config()
-	{
-		for (const auto& c : components)
-			c->Config();
 	}
 
 	void Entity::Init() const

@@ -1,21 +1,19 @@
 #pragma once
 
 #include <ConfigManager.h>
-#include <Singleton.h>
+#include <ESingleton.h>
 
 namespace Physics {
 
-	class PhysicsManager : public Core::Singleton<PhysicsManager> {
+	class PhysicsManager : public Core::ESingleton<PhysicsManager> {
 
-		friend Singleton<PhysicsManager>;
+		friend ESingleton<PhysicsManager>;
 
 	public:
 
 		~PhysicsManager();
 
 		void FixedUpdate(float fixedDeltaTime);
-
-		void HandleBodies();
 
 	private:
 		

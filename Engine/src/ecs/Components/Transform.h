@@ -11,30 +11,32 @@ namespace ECS {
 	public:
 
 		Transform() {};
-		Transform(CRefVector2D position, CRefVector2D scale, float rotation);
+		Transform(CRefVector3D position, CRefVector3D scale, CRefQuaternion quaternion);
+
+		void Update(float dt) override;
 
 		// World position
-		inline CRefVector2D GetPosition() { return position; }
-		inline void SetPosition(CRefVector2D position) { this->position = position; }
+		inline CRefVector3D GetPosition() { return position; }
+		inline void SetPosition(CRefVector3D position) { this->position = position; }
 
 		// World rotation
-		inline float GetRotation() { return rotation; }
-		inline void SetRotation(float rotation) { this->rotation = rotation; }
+		inline CRefQuaternion GetRotation() { return rotation; }
+		inline void SetRotation(CRefQuaternion rotation) { this->rotation = rotation; }
 
 		// World scale
-		inline CRefVector2D GetScale() { return scale; }
-		inline void SetScale(CRefVector2D scale) { this->scale = scale; }
+		inline CRefVector3D GetScale() { return scale; }
+		inline void SetScale(CRefVector3D scale) { this->scale = scale; }
 
 		// Modifiers
-		inline void Translate(CRefVector2D distance) { this->position += distance; }
-		inline void Rotate(float rotation) { this->rotation += rotation; }
-		inline void Scale(float scale) { this->scale.x_ += scale; this->scale.y_ += scale; }
+		inline void Translate(CRefVector3D distance) { this->position += distance; }
+		inline void Rotate(CRefVector3D eulerAngles) { this->rotation.Rotate(eulerAngles); }
+		inline void Scale(CRefVector3D scale) { this->scale += scale; }
 
 	private:
 
-		Core::Vector2D position;
-		Core::Vector2D scale{ 1, 1 };
-		double rotation{};
+		Core::Vector3D position;
+		Core::Vector3D scale{ 1, 1, 1 };
+		Core::Quaternion rotation{};
 	};
 
 }

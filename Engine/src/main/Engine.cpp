@@ -1,7 +1,6 @@
 #include "Engine.h"
 
 #include <ConfigManager.h>
-#include <ResourcesManager.h>
 #include <RendererManager.h>
 #include <PhysicsManager.h>
 #include <SoundManager.h>
@@ -12,6 +11,8 @@
 #include <ETime.h>
 #include <chrono>
 #include <Log.h>
+
+#include "Game.h"
 
 using namespace std::chrono;
 
@@ -43,11 +44,14 @@ bool Engine::Init()
 
 	engineTime = Core::ETime::Init();
 
-	resourcesManager = Resources::ResourcesManager::Init();
+	
+	// Game Scene
+	Game g;
+	auto* scene = g.CreateGameScene();
+	scene->Init();
 
-	// Engine Assets Path
-	resourcesManager->SetResourcesPath("assets\\");
-
+	sceneManager->ChangeScene(scene, SceneManager::LOAD_MODE::PUSH);
+	sceneManager->ManageScenes();
 
 	return true;
 }
@@ -86,15 +90,10 @@ void Engine::Update()
 		scene->LateUpdate(engineTime->deltaTime);
 
 		// Render
-		rendererManager->ClearRenderer();
-		scene->Render();
 		rendererManager->PresentRenderer();
 
 		// OnDestroy
 		scene->OnDestroyRemovedEntities();
-
-		// Handling physics bodies
-		physicsManager->HandleBodies();
 
 		// Remove dead entities and components
 		scene->HandleRemovedEntities();
@@ -121,7 +120,6 @@ void Engine::Update()
 
 void Engine::Close() 
 {
-	resourcesManager->Close();
 	inputManager->Close();
 	rendererManager->Close();
 	sceneManager->Close();

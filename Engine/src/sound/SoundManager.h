@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Singleton.h"
+#include "ESingleton.h"
 #include "ConfigManager.h"
 #include <string>
 #include <vector>
@@ -9,9 +9,9 @@ class Engine;
 
 namespace Sound {
 
-	class SoundManager : public Core::Singleton<SoundManager> {
+	class SoundManager : public Core::ESingleton<SoundManager> {
 
-		friend Singleton<SoundManager>;
+		friend ESingleton<SoundManager>;
 		friend Engine;
 
 	public:

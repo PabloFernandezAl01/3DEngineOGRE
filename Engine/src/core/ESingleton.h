@@ -18,18 +18,18 @@
 namespace Core {
 
 	template<typename T>
-	class Singleton {
+	class ESingleton {
 
 	protected:
-		Singleton() {}
+		ESingleton() {}
 
 	public:
 
 		// cannot copy objects of this type
-		Singleton<T>& operator=(const Singleton<T>& o) = delete;
-		Singleton(const Singleton<T>& o) = delete;
+		ESingleton<T>& operator=(const ESingleton<T>& o) = delete;
+		ESingleton(const ESingleton<T>& o) = delete;
 
-		virtual ~Singleton() {}
+		virtual ~ESingleton() {}
 
 		virtual bool Valid() {
 			return true;
@@ -68,6 +68,6 @@ namespace Core {
 	};
 
 	template<typename T>
-	std::unique_ptr<T> Singleton<T>::instance_;
+	std::unique_ptr<T> ESingleton<T>::instance_;
 
 }

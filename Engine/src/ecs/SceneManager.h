@@ -3,7 +3,7 @@
 #include <ETypes.h>
 #include <stack>
 
-#include <Singleton.h>
+#include <ESingleton.h>
 
 /*
 * 
@@ -23,7 +23,7 @@ namespace ECS {
 
 	class Scene;
 
-	class SceneManager : public Core::Singleton<SceneManager> {
+	class SceneManager : public Core::ESingleton<SceneManager> {
 
 	public:
 
@@ -53,7 +53,7 @@ namespace ECS {
 		// Creates, starts and adds a scene to the stack
 		Scene* CreateScene(CRefString sce_name = "New Scene");
 
-		void ChangeScene(Scene* newScene, int pushMode);
+		void ChangeScene(Scene* newScene, LOAD_MODE);
 
 		void ResetScene();
 

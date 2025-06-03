@@ -12,12 +12,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main\Engine.cpp" />
+    <ClCompile Include="..\..\src\main\Game.cpp" />
     <ClCompile Include="..\..\src\main\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\main\Engine.h" />
+    <ClInclude Include="..\..\src\main\Game.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\core\Core.vcxproj">
+      <Project>{fa7aaa47-0886-47d8-8e22-1763e178549d}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\ECS\ECS.vcxproj">
       <Project>{c98d0e6a-a838-4cfd-88aa-cefe6ed55268}</Project>
     </ProjectReference>
@@ -84,15 +89,13 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)src\sound;$(SolutionDir)src\physics;$(SolutionDir)src\renderer;$(SolutionDir)src\input;$(SolutionDir)src\core;$(SolutionDir)src\ecs;$(SolutionDir)src\resources;$(SolutionDir)dependencies\json-develop\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)src\sound;$(SolutionDir)src\physics;$(SolutionDir)src\renderer;$(SolutionDir)src\input;$(SolutionDir)src\core;$(SolutionDir)src\ecs;$(SolutionDir)src\resources;$(SolutionDir)dependencies\json-develop\include;$(SolutionDir)dependencies\ogre-src\OgreMain\include;$(SolutionDir)dependencies\ogre-src\Components\Bites\include;$(SolutionDir)dependencies\ogre-src\Components\RTShaderSystem\include;$(SolutionDir)dependencies\ogre-debug\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\ogre-debug\lib\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain_d.lib;OgreBites_d.lib;OgreRTShaderSystem_d.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -104,17 +107,15 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)src\sound;$(SolutionDir)src\physics;$(SolutionDir)src\renderer;$(SolutionDir)src\input;$(SolutionDir)src\core;$(SolutionDir)src\ecs;$(SolutionDir)src\resources;$(SolutionDir)dependencies\json-develop\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)src\sound;$(SolutionDir)src\physics;$(SolutionDir)src\renderer;$(SolutionDir)src\input;$(SolutionDir)src\core;$(SolutionDir)src\ecs;$(SolutionDir)src\resources;$(SolutionDir)dependencies\json-develop\include;$(SolutionDir)dependencies\ogre-src\OgreMain\include;$(SolutionDir)dependencies\ogre-src\Components\Bites\include;$(SolutionDir)dependencies\ogre-src\Components\RTShaderSystem\include;$(SolutionDir)dependencies\ogre-release\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\ogre-release\lib\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain.lib;OgreBites.lib;OgreRTShaderSystem.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

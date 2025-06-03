@@ -2,6 +2,7 @@
 #include <memory>
 
 #include "Engine.h"
+#include "OgreRoot.h"
 
 /*
 * This is a way to avoid opening the debug console in release mode.

@@ -13,10 +13,7 @@ namespace Physics {
 
 	void PhysicsManager::FixedUpdate(float fixedDeltaTime) 
 	{
-	}
-
-	void PhysicsManager::HandleBodies()
-	{
 
 	}
+
 }

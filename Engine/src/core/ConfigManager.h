@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ETypes.h"
-#include "Singleton.h"
+#include "ESingleton.h"
 #include <vector>
 
 namespace Core
@@ -54,9 +54,9 @@ namespace Core
 
 	};
 
-	class ConfigManager : public Singleton<ConfigManager> {
+	class ConfigManager : public ESingleton<ConfigManager> {
 
-		friend Singleton<ConfigManager>;
+		friend ESingleton<ConfigManager>;
 
 	public:
 

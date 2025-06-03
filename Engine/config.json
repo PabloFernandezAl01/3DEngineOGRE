@@ -1,0 +1,23 @@
+{
+  "game": "Angry Birds",
+  "creator": "Pablo Fernandez",
+  "windowTitle": "Test game",
+  "windowIcon": "Assets\\icon.png",
+  "windowSize": "1920, 1080",
+  "vsync": true,
+  "fullScreen": false,
+  "showCursor": true,
+  "bgColor": "58, 36, 17",
+  "gravity": "0, -9.81",
+  "debugPhysics": true,
+  "debugFrameRate": true,
+  "closeWithEscape": true,
+  "layers": [ "Default", "Birds", "Particles", "Breakable" ],
+  "matrix": [
+    [ true, false, true, true ],
+    [ false, false, false, true ],
+    [ false, false, false, false ],
+    [ true, false, false, true ]
+  ],
+  "KB_movements": [ 0, 3, 22, 18 ]
+}

@@ -4,7 +4,6 @@
 #include "RendererManager.h"
 #include <algorithm>
 
-
 namespace ECS {
 
     Scene::Scene(CRefString name) : name(name) {}
@@ -19,17 +18,6 @@ namespace ECS {
 
     void Scene::Init()  const
     {
-        // In an ECS design the S stands for System. In a game engine a system could be
-        // the physics system, audio system, IO system... etc. Same as components, entities
-        // and scenes, systems should also have their init, update... callbacks so
-        // for example the IO system can clean the data or whatever need that could come up
-
-        // So in this case these two lines of code that reset camera position and scale should
-        // go into Init() callback in Renderer Manager (Renderer System). As this is not frequent
-        // I'll leave this here until I implement a decent System Manager
-        /*Renderer::RendererManager::Instance()->SetCameraPosition(cameraPosition);
-        Renderer::RendererManager::Instance()->SetCameraScale(cameraScale);*/
-
         for (const auto& e : entities)
             e->Init();
     }
@@ -38,12 +26,6 @@ namespace ECS {
     {
         for (const auto& e : entities)
             e->Start();
-    }
-
-    void Scene::Config()
-	{
-		for (const auto& e : entities)
-			e->Config();
     }
 
     void Scene::Update(float deltaTime) const
@@ -100,8 +82,7 @@ namespace ECS {
         {
             e->Init();
             e->Start();
-            e->Config();
-            entities.emplace(e);
+            entities.push_back(e);
         }
 
         instantiatedEntities.clear();
@@ -140,10 +121,9 @@ namespace ECS {
     {
         Entity* e = new Entity(name, this);
 
-        e->renderOrder = renderOrder;
         e->scene = this;
 
-        entities.emplace(e);
+        entities.push_back(e);
 
         return e;
     }

@@ -10,6 +10,32 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\core\CheckML.h" />
+    <ClInclude Include="..\..\src\core\Color.h" />
+    <ClInclude Include="..\..\src\core\ConfigManager.h" />
+    <ClInclude Include="..\..\src\core\EAssert.h" />
+    <ClInclude Include="..\..\src\core\ESingleton.h" />
+    <ClInclude Include="..\..\src\core\ETime.h" />
+    <ClInclude Include="..\..\src\core\ETypes.h" />
+    <ClInclude Include="..\..\src\core\Log.h" />
+    <ClInclude Include="..\..\src\core\Quaternion.h" />
+    <ClInclude Include="..\..\src\core\Random.h" />
+    <ClInclude Include="..\..\src\core\StringTrim.h" />
+    <ClInclude Include="..\..\src\core\Vector2D.h" />
+    <ClInclude Include="..\..\src\core\Vector3D.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\core\Color.cpp" />
+    <ClCompile Include="..\..\src\core\ConfigManager.cpp" />
+    <ClCompile Include="..\..\src\core\EAssert.cpp" />
+    <ClCompile Include="..\..\src\core\ETime.cpp" />
+    <ClCompile Include="..\..\src\core\Log.cpp" />
+    <ClCompile Include="..\..\src\core\Quaternion.cpp" />
+    <ClCompile Include="..\..\src\core\Random.cpp" />
+    <ClCompile Include="..\..\src\core\Vector2D.cpp" />
+    <ClCompile Include="..\..\src\core\Vector3D.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -83,28 +109,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\src\core\EAssert.h" />
-    <ClInclude Include="..\..\..\src\core\CheckML.h" />
-    <ClInclude Include="..\..\..\src\core\Color.h" />
-    <ClInclude Include="..\..\..\src\core\ConfigManager.h" />
-    <ClInclude Include="..\..\..\src\core\ETime.h" />
-    <ClInclude Include="..\..\..\src\core\ETypes.h" />
-    <ClInclude Include="..\..\..\src\core\Log.h" />
-    <ClInclude Include="..\..\..\src\core\Random.h" />
-    <ClInclude Include="..\..\..\src\core\Singleton.h" />
-    <ClInclude Include="..\..\..\src\core\StringTrim.h" />
-    <ClInclude Include="..\..\..\src\core\Vector2D.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\src\core\EAssert.cpp" />
-    <ClCompile Include="..\..\..\src\core\Color.cpp" />
-    <ClCompile Include="..\..\..\src\core\ConfigManager.cpp" />
-    <ClCompile Include="..\..\..\src\core\ETime.cpp" />
-    <ClCompile Include="..\..\..\src\core\Log.cpp" />
-    <ClCompile Include="..\..\..\src\core\Random.cpp" />
-    <ClCompile Include="..\..\..\src\core\Vector2D.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -113,7 +113,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\ecs;$(SolutionDir)src\input;$(SolutionDir)src\renderer;$(SolutionDir)src\core;$(SolutionDir)src\physics;$(SolutionDir)src\resources;$(SolutionDir)src\sound</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\ecs;$(SolutionDir)src\input;$(SolutionDir)src\renderer;$(SolutionDir)src\core;$(SolutionDir)src\physics;$(SolutionDir)src\resources;$(SolutionDir)src\sound;$(SolutionDir)dependencies\ogre-src\OgreMain\include;$(SolutionDir)dependencies\ogre-src\Components\Bites\include;$(SolutionDir)dependencies\ogre-src\Components\RTShaderSystem\include;$(SolutionDir)dependencies\ogre-debug\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -121,10 +121,8 @@
     </Link>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain_d.lib;OgreBites_d.lib;OgreRTShaderSystem_d.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\ogre-debug\lib\$(Configuration)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -136,7 +134,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\ecs;$(SolutionDir)src\input;$(SolutionDir)src\renderer;$(SolutionDir)src\core;$(SolutionDir)src\physics;$(SolutionDir)src\resources;$(SolutionDir)src\sound</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\ecs;$(SolutionDir)src\input;$(SolutionDir)src\renderer;$(SolutionDir)src\core;$(SolutionDir)src\physics;$(SolutionDir)src\resources;$(SolutionDir)src\sound;$(SolutionDir)dependencies\ogre-src\OgreMain\include;$(SolutionDir)dependencies\ogre-src\Components\Bites\include;$(SolutionDir)dependencies\ogre-src\Components\RTShaderSystem\include;$(SolutionDir)dependencies\ogre-release\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,14 +144,13 @@
     </Link>
     <Lib>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain.lib;OgreBites.lib;OgreRTShaderSystem.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\ogre-release\lib\$(Configuration)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\ecs\Component.cpp" />
+    <ClCompile Include="..\..\src\ecs\Components\Mesh.cpp" />
     <ClCompile Include="..\..\src\ecs\Components\Transform.cpp" />
     <ClCompile Include="..\..\src\ecs\Entity.cpp" />
     <ClCompile Include="..\..\src\ecs\Scene.cpp" />
@@ -181,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\ecs\Component.h" />
+    <ClInclude Include="..\..\src\ecs\Components\Mesh.h" />
     <ClInclude Include="..\..\src\ecs\Components\Transform.h" />
     <ClInclude Include="..\..\src\ecs\Entity.h" />
     <ClInclude Include="..\..\src\ecs\Scene.h" />

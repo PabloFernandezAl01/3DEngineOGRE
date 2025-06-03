@@ -35,6 +35,9 @@
     <ClCompile Include="..\..\src\ecs\Components\Transform.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\ecs\Components\Mesh.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\ecs\Component.h">
@@ -52,5 +55,6 @@
     <ClInclude Include="..\..\src\ecs\Components\Transform.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\ecs\Components\Mesh.h" />
   </ItemGroup>
 </Project>
