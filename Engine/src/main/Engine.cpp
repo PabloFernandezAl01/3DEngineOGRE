@@ -47,7 +47,7 @@ bool Engine::Init()
 	
 	// Game Scene
 	Game g;
-	auto* scene = g.CreateGameScene();
+	auto* scene = g.CreateScene();
 	scene->Init();
 
 	sceneManager->ChangeScene(scene, SceneManager::LOAD_MODE::PUSH);

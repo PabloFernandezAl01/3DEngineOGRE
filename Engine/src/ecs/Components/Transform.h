@@ -32,6 +32,8 @@ namespace ECS {
 		inline void Rotate(CRefVector3D eulerAngles) { this->rotation.Rotate(eulerAngles); }
 		inline void Scale(CRefVector3D scale) { this->scale += scale; }
 
+		void LookAt(CRefVector3D direction);
+
 	private:
 
 		Core::Vector3D position;

@@ -1,7 +1,7 @@
 {
-  "game": "Angry Birds",
+  "game": "Ogre Develop",
   "creator": "Pablo Fernandez",
-  "windowTitle": "Test game",
+  "windowTitle": "Ogre Window",
   "windowIcon": "Assets\\icon.png",
   "windowSize": "1920, 1080",
   "vsync": true,

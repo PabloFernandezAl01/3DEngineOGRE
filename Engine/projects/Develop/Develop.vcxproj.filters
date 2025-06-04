@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\src\develop\Game.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\develop\Scenes\MainScene.cpp">
+      <Filter>Archivos de origen\Scenes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\develop\Game.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\develop\ECSDefs.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\develop\Scenes\MainScene.h">
+      <Filter>Archivos de encabezado\Scenes</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Archivos de origen">
+      <UniqueIdentifier>{6a42c5e2-07e0-4441-816a-fe8b486ddc2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado">
+      <UniqueIdentifier>{ea38d8c0-5371-40ff-b6a7-eb0c93d50616}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Scenes">
+      <UniqueIdentifier>{1adf411b-9d65-4041-96ac-0b5a31f57cba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Scenes">
+      <UniqueIdentifier>{e1211275-d64e-4152-b313-18756ba9dbe3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

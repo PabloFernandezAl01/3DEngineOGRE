@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
+    <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{c98d0e6a-a838-4cfd-88aa-cefe6ed55268}</ProjectGuid>
-    <RootNamespace>ECS</RootNamespace>
+    <ProjectGuid>{1d5b594c-5a6e-4721-947f-0630f4654db3}</ProjectGuid>
+    <RootNamespace>Develop</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -73,10 +73,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)libs\$(ProjectName)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)temp\$(ProjectName)\$(Configuration)\</IntDir>
+    <TargetName>Develop</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)libs\$(ProjectName)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)temp\$(ProjectName)\$(Configuration)\</IntDir>
+    <TargetName>Develop</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -113,15 +115,14 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\ecs;$(SolutionDir)src\input;$(SolutionDir)src\renderer;$(SolutionDir)src\core;$(SolutionDir)src\physics;$(SolutionDir)src\resources;$(SolutionDir)src\sound;$(SolutionDir)dependencies\ogre-src\OgreMain\include;$(SolutionDir)dependencies\ogre-src\Components\Bites\include;$(SolutionDir)dependencies\ogre-src\Components\RTShaderSystem\include;$(SolutionDir)dependencies\ogre-debug\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\core;$(SolutionDir)src\input;$(SolutionDir)src\physics;$(SolutionDir)src\renderer;$(SolutionDir)src\sound;$(SolutionDir)src\ECS;$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)dependencies\tileson-1.4.0;$(SolutionDir)dependencies\voronoi-0.9.0\src;$(SolutionDir)dependencies\ogre-src\OgreMain\include;$(SolutionDir)dependencies\ogre-src\Components\Bites\include;$(SolutionDir)dependencies\ogre-src\Components\RTShaderSystem\include;$(SolutionDir)dependencies\ogre-debug\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalDependencies>OgreMain_d.lib;OgreBites_d.lib;OgreRTShaderSystem_d.lib</AdditionalDependencies>
+      <AdditionalDependencies>OgreMain_d.lib;OgreBites_d.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)dependencies\ogre-debug\lib\$(Configuration)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
@@ -134,7 +135,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\ecs;$(SolutionDir)src\input;$(SolutionDir)src\renderer;$(SolutionDir)src\core;$(SolutionDir)src\physics;$(SolutionDir)src\resources;$(SolutionDir)src\sound;$(SolutionDir)dependencies\ogre-src\OgreMain\include;$(SolutionDir)dependencies\ogre-src\Components\Bites\include;$(SolutionDir)dependencies\ogre-src\Components\RTShaderSystem\include;$(SolutionDir)dependencies\ogre-release\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\core;$(SolutionDir)src\input;$(SolutionDir)src\physics;$(SolutionDir)src\renderer;$(SolutionDir)src\sound;$(SolutionDir)src\ECS;$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)dependencies\tileson-1.4.0;$(SolutionDir)dependencies\voronoi-0.9.0\src;$(SolutionDir)dependencies\ogre-src\OgreMain\include;$(SolutionDir)dependencies\ogre-src\Components\Bites\include;$(SolutionDir)dependencies\ogre-src\Components\RTShaderSystem\include;$(SolutionDir)dependencies\ogre-release\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,47 +144,38 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalDependencies>OgreMain.lib;OgreBites.lib;OgreRTShaderSystem.lib</AdditionalDependencies>
+      <AdditionalDependencies>OgreMain.lib;OgreBites.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)dependencies\ogre-release\lib\$(Configuration)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\ecs\Component.cpp" />
-    <ClCompile Include="..\..\src\ecs\Components\Camera.cpp" />
-    <ClCompile Include="..\..\src\ecs\Components\Light.cpp" />
-    <ClCompile Include="..\..\src\ecs\Components\Mesh.cpp" />
-    <ClCompile Include="..\..\src\ecs\Components\Transform.cpp" />
-    <ClCompile Include="..\..\src\ecs\Entity.cpp" />
-    <ClCompile Include="..\..\src\ecs\Scene.cpp" />
-    <ClCompile Include="..\..\src\ecs\SceneManager.cpp" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\..\projects\ECS\ECS.vcxproj">
+      <Project>{c98d0e6a-a838-4cfd-88aa-cefe6ed55268}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\projects\input\Input.vcxproj">
+      <Project>{0025c5f8-2dd5-440e-9127-f230c1c41788}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\projects\physics\Physics.vcxproj">
+      <Project>{ee72aafb-b4aa-4f0c-8e86-3802b8051aa9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\projects\renderer\Renderer.vcxproj">
+      <Project>{dbb8cf48-5ace-435b-85b7-a3606a772488}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\projects\sound\sound.vcxproj">
+      <Project>{53446c51-c540-4001-ac09-bbd92cc74904}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\core\Core.vcxproj">
       <Project>{fa7aaa47-0886-47d8-8e22-1763e178549d}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\input\Input.vcxproj">
-      <Project>{0025c5f8-2dd5-440e-9127-f230c1c41788}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\physics\Physics.vcxproj">
-      <Project>{ee72aafb-b4aa-4f0c-8e86-3802b8051aa9}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\renderer\Renderer.vcxproj">
-      <Project>{dbb8cf48-5ace-435b-85b7-a3606a772488}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\sound\sound.vcxproj">
-      <Project>{53446c51-c540-4001-ac09-bbd92cc74904}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\ecs\Component.h" />
-    <ClInclude Include="..\..\src\ecs\Components\Camera.h" />
-    <ClInclude Include="..\..\src\ecs\Components\Light.h" />
-    <ClInclude Include="..\..\src\ecs\Components\Mesh.h" />
-    <ClInclude Include="..\..\src\ecs\Components\Transform.h" />
-    <ClInclude Include="..\..\src\ecs\Entity.h" />
-    <ClInclude Include="..\..\src\ecs\Scene.h" />
-    <ClInclude Include="..\..\src\ecs\SceneManager.h" />
+    <ClInclude Include="..\..\src\develop\ECSDefs.h" />
+    <ClInclude Include="..\..\src\develop\Game.h" />
+    <ClInclude Include="..\..\src\develop\Scenes\MainScene.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\develop\Game.cpp" />
+    <ClCompile Include="..\..\src\develop\Scenes\MainScene.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -96,7 +96,7 @@ namespace Core {
 	private:
 
 		// Componentes (x, y, z) vectorial, w escalar
-		float x_, y_, z_, w_;
+		float x_{}, y_{}, z_{}, w_{};
 	};
 
 	// Impresión por consola

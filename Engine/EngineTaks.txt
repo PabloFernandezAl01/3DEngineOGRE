@@ -2,4 +2,9 @@ Tasks
 
 InputManager:
   Arreglar cosas comentadas (GetMousePositionRelativeToCamera y coordenadas centradas del mouse al final del update)
- 
+
+Camera Component:
+ Z Order
+
+Transform:
+  Especificiar el TransformSpace

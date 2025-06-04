@@ -20,6 +20,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\ogre\main.cpp" />
+    <ClCompile Include="..\..\src\ogre\RendererManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\core\Core.vcxproj">
+      <Project>{fa7aaa47-0886-47d8-8e22-1763e178549d}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\ogre\RendererManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -118,7 +127,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\ogre-src\OgreMain\include;$(SolutionDir)dependencies\ogre-src\Components\Bites\include;$(SolutionDir)dependencies\ogre-src\Components\RTShaderSystem\include;$(SolutionDir)dependencies\ogre-debug\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\core;$(SolutionDir)dependencies\ogre-src\OgreMain\include;$(SolutionDir)dependencies\ogre-src\Components\Bites\include;$(SolutionDir)dependencies\ogre-src\Components\RTShaderSystem\include;$(SolutionDir)dependencies\ogre-debug\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,7 +145,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\ogre-src\OgreMain\include;$(SolutionDir)dependencies\ogre-src\Components\Bites\include;$(SolutionDir)dependencies\ogre-src\Components\RTShaderSystem\include;$(SolutionDir)dependencies\ogre-release\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\core;$(SolutionDir)dependencies\ogre-src\OgreMain\include;$(SolutionDir)dependencies\ogre-src\Components\Bites\include;$(SolutionDir)dependencies\ogre-src\Components\RTShaderSystem\include;$(SolutionDir)dependencies\ogre-release\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

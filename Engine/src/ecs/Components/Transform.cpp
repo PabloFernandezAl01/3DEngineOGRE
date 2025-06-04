@@ -20,4 +20,8 @@ namespace ECS {
 		// Scale
 		entity->GetSceneNode()->setScale({ scale.GetX(), scale.GetY(), scale.GetZ() });
 	}
+	void Transform::LookAt(CRefVector3D direction)
+	{
+		entity->GetSceneNode()->lookAt({ direction.GetX(), direction.GetY(), direction.GetZ() }, Ogre::Node::TransformSpace::TS_WORLD);
+	}
 }

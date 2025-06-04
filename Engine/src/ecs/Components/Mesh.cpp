@@ -13,4 +13,8 @@ void ECS::Mesh::Init()
 	Ogre::SceneNode* node = rendererManager->CreateNodeFromRoot();
 	node->attachObject(mesh);
 	entity->SetSceneNode(node);
+
+	// Configuration
+	if (!materialName.empty())
+		mesh->setMaterialName(materialName);
 }

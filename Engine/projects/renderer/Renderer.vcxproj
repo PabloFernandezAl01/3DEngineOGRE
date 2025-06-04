@@ -120,8 +120,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>OgreMain_d.lib;OgreBites_d.lib;</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\ogre-debug\lib\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -142,8 +144,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>OgreMain.lib;OgreBites.lib;</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\ogre-release\lib\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -153,7 +157,7 @@
     <ClCompile Include="..\..\src\renderer\RendererManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\core\Core\Core.vcxproj">
+    <ProjectReference Include="..\core\Core.vcxproj">
       <Project>{fa7aaa47-0886-47d8-8e22-1763e178549d}</Project>
     </ProjectReference>
   </ItemGroup>
