@@ -37,7 +37,7 @@ namespace ECS
 		Core::Color specular;
 
 		// Attenuation
-		float range, constant, linear, quadratic;
+		float range{}, constant{}, linear{}, quadratic{};
 	};
 }
 

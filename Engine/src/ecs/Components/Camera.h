@@ -32,7 +32,7 @@ namespace ECS
 			// Positio of the far clip distance
 			inline void SetFarClipDistance(float distance) { farClipDistance = distance; }
 
-			inline void SetProjectType(const ProjectionType& type) { projectionType = type; }
+			inline void SetProjectionType(const ProjectionType& type) { projectionType = type; }
 
 			inline void SetAutoAspectRatio(bool value) { autoAspectRatio = value; }
 
@@ -72,7 +72,7 @@ namespace ECS
 
 		// Viewport
 		Core::Color backgroundColor;
-		float viewportX{}, viewportY{}, viewportW{}, viewportH{};
+		float viewportX{}, viewportY{}, viewportW{1}, viewportH{1};
 		bool overlaysEnabled{ true };
 
 	};

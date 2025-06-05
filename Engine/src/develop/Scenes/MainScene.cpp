@@ -5,10 +5,11 @@
 #include "Components/Mesh.h"
 #include "Components/Camera.h"
 #include "Components/Light.h"
+#include "../Scripts/MyScript.h"
 
 MainScene::MainScene()
 {
-    CreateOgre();
+    //CreateOgre();
     CreateCamera();
     CreateLight();
 }
@@ -18,6 +19,7 @@ void MainScene::CreateOgre()
     Entity* ogre = this->CreateEntity("Ogre");
     auto* tr = ogre->AddComponent<Transform>();
     auto* mesh = ogre->AddComponent<Mesh>();
+    auto* script = ogre->AddComponent<MyScript>();
     mesh->SetMeshName("ogrehead.mesh");
 }
 
@@ -27,9 +29,11 @@ void MainScene::CreateCamera()
     auto* tr = mainCamera->AddComponent<Transform>();
     auto* cam = mainCamera->AddComponent<Camera>();
 
-    tr->SetPosition({ 0, 0, 15 });
-    cam->SetNearClipDistance(5);
+    tr->SetPosition({ 0, 0, 200 });
+    cam->SetNearClipDistance(1);
     cam->SetAutoAspectRatio(true);
+    cam->SetProjectionType(Camera::ProjectionType::PERSPECTIVE);
+    cam->SetPolygonMode(Camera::PolygonMode::SOLID);
 }
 
 void MainScene::CreateLight()
@@ -38,5 +42,5 @@ void MainScene::CreateLight()
     auto* tr = dirLight->AddComponent<Transform>();
     auto* light = dirLight->AddComponent<Light>();
 
-    tr->SetPosition({ 0, 10, 15 });
+    tr->SetPosition({ 20, 80, 50 });
 }

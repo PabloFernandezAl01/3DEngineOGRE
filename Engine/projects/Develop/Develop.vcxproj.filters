@@ -7,6 +7,9 @@
     <ClCompile Include="..\..\src\develop\Scenes\MainScene.cpp">
       <Filter>Archivos de origen\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\develop\Scripts\MyScript.cpp">
+      <Filter>Archivos de origen\Scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\develop\Game.h">
@@ -17,6 +20,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\develop\Scenes\MainScene.h">
       <Filter>Archivos de encabezado\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\develop\Scripts\MyScript.h">
+      <Filter>Archivos de encabezado\Scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -31,6 +37,12 @@
     </Filter>
     <Filter Include="Archivos de encabezado\Scenes">
       <UniqueIdentifier>{e1211275-d64e-4152-b313-18756ba9dbe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Scripts">
+      <UniqueIdentifier>{5f08d05e-02b0-40f7-b413-706b53d98c73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Scripts">
+      <UniqueIdentifier>{dc1adbd6-ffa5-4a82-bd85-5bdabedcd57d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

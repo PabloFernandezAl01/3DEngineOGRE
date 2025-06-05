@@ -58,9 +58,6 @@
     <ClInclude Include="..\..\src\ecs\SceneManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\ecs\Components\Transform.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\ecs\Components\Mesh.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
@@ -68,6 +65,9 @@
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\ecs\Components\Light.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ecs\Components\Transform.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>

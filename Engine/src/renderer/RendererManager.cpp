@@ -1,5 +1,13 @@
 #include "RendererManager.h"
 #include "OgreRenderWindow.h"
+#include "OgreConfigFile.h"
+#include <OgreWindowEventUtilities.h>
+#include <SDL.h>
+#include <Log.h>
+#include <OgreMaterialManager.h>
+#include <OgreTextureManager.h>
+#include <OgreMeshManager.h>
+#include <OgreGpuProgramManager.h>
 
 namespace Renderer {
 	
@@ -12,28 +20,20 @@ namespace Renderer {
 	{
 		root = new Ogre::Root();
 
-		root->loadPlugin("RenderSystem_GL");
-		// o si usas Direct3D:
-		// root->loadPlugin("RenderSystem_Direct3D11");
-
-		// Luego seleccionar uno de los sistemas:
 		auto renderers = root->getAvailableRenderers();
-		root->setRenderSystem(renderers[0]); // o el que desees
-
+		root->setRenderSystem(renderers[0]);
 
 		root->initialise(false);
 
-		renderWindow = root->createRenderWindow(data.windowTitle, data.windowSize.GetX(), data.windowSize.GetY(), data.fullscreen);
-		renderWindow->setVSyncEnabled(data.vsync);
+		LoadResources();
 
-		screenWidth = data.windowSize.GetX();
-		screenHeight = data.windowSize.GetY();
-
-		if (!renderWindow)
+		if (!CreateSDLWindow(data))
 		{
 			delete root;
 			return false;
 		}
+
+		Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 
 		sceneManager = root->createSceneManager();
 
@@ -48,7 +48,61 @@ namespace Renderer {
 
 	void RendererManager::CloseOgre()
 	{
+		Ogre::ResourceGroupManager::getSingleton().clearResourceGroup("General");
+		Ogre::MaterialManager::getSingleton().removeAll();
+		Ogre::TextureManager::getSingleton().removeAll();
+		Ogre::MeshManager::getSingleton().removeAll();
+		Ogre::GpuProgramManager::getSingleton().removeAll();
+		Ogre::HighLevelGpuProgramManager::getSingleton().removeAll();
+
 		delete root;
+	}
+
+	bool RendererManager::CreateSDLWindow(const ConfigData& data)
+	{
+		// Initialize SDL
+		int sdlInit_ret = SDL_Init(SDL_INIT_VIDEO);
+
+		if (sdlInit_ret < 0)
+		{
+			Log::PrintError("SDL Initialization", SDL_GetError());
+			return false;
+		}
+
+		renderWindow = root->createRenderWindow(data.windowTitle, data.windowSize.GetX(), data.windowSize.GetY(), data.fullscreen);
+		renderWindow->setVSyncEnabled(data.vsync);
+		size_t hwnd = 0;
+		renderWindow->getCustomAttribute("WINDOW", &hwnd);
+		sdlWindow = SDL_CreateWindowFrom((void*)hwnd);
+
+		if (!sdlWindow)
+		{
+			SDL_Quit();
+
+			Log::PrintError("SDL Create Window From", SDL_GetError());
+			return false;
+		}
+
+		winWidth = data.windowSize.GetX();
+		winHeight = data.windowSize.GetY();
+
+		return true;
+	}
+
+	void RendererManager::LoadResources()
+	{
+		Ogre::ConfigFile cf;
+		cf.load("resources.cfg");
+
+		auto settingsBySection = cf.getSettingsBySection(); // Devuelve std::map
+
+		for (const auto& [sectionName, settings] : settingsBySection)
+		{
+			for (const auto& [type, path] : settings)
+			{
+				Ogre::ResourceGroupManager::getSingleton().addResourceLocation(path, type, sectionName);
+			}
+		}
 	}
 
 	bool RendererManager::Valid() 
@@ -58,7 +112,8 @@ namespace Renderer {
 
 	RendererManager::~RendererManager()
 	{
-		delete root;
+		CloseOgre();
+		SDL_Quit();
 	}
 
 	Ogre::SceneNode* RendererManager::CreateNodeFromRoot()
@@ -78,10 +133,12 @@ namespace Renderer {
 
 	void RendererManager::SetShadowTechnique()
 	{
+
 	}
 
 	void RendererManager::SetFog()
 	{
+
 	}
 
 	void RendererManager::SetDisplaySceneNodes(bool display)
@@ -96,12 +153,16 @@ namespace Renderer {
 
 	void RendererManager::SetFullscreen(bool fullscreen)
 	{
-		renderWindow->setFullscreen(fullscreen, screenWidth, screenHeight);
-	}
+		auto flags = SDL_GetWindowFlags(sdlWindow);
 
-	void RendererManager::SetVSync(bool active)
-	{
-		renderWindow->setVSyncEnabled(active);
+		if (flags & SDL_WINDOW_FULLSCREEN)
+		{
+			if (SDL_SetWindowFullscreen(sdlWindow, 0) < 0)
+				Log::PrintError("Window FullScreen Error", SDL_GetError());
+		}
+		else
+			if (SDL_SetWindowFullscreen(sdlWindow, SDL_WINDOW_FULLSCREEN_DESKTOP) < 0)
+				Log::PrintError("Window FullScreen Error", SDL_GetError());
 	}
 
 	void RendererManager::PresentRenderer()

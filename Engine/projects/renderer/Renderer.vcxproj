@@ -113,17 +113,15 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\core;$(SolutionDir)dependencies\ogre-src\OgreMain\include;$(SolutionDir)dependencies\ogre-src\Components\Bites\include;$(SolutionDir)dependencies\ogre-src\Components\RTShaderSystem\include;$(SolutionDir)dependencies\ogre-debug\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)src\core;$(SolutionDir)dependencies\ogre-src\OgreMain\include;$(SolutionDir)dependencies\ogre-src\Components\Bites\include;$(SolutionDir)dependencies\ogre-src\Components\RTShaderSystem\include;$(SolutionDir)dependencies\ogre-debug\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;Shell32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\SDL2\lib</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -135,7 +133,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)src\core;$(SolutionDir)dependencies\ogre-src\OgreMain\include;$(SolutionDir)dependencies\ogre-src\Components\Bites\include;$(SolutionDir)dependencies\ogre-src\Components\RTShaderSystem\include;$(SolutionDir)dependencies\ogre-release\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\SDL2\include;$(SolutionDir)src\core;$(SolutionDir)dependencies\ogre-src\OgreMain\include;$(SolutionDir)dependencies\ogre-src\Components\Bites\include;$(SolutionDir)dependencies\ogre-src\Components\RTShaderSystem\include;$(SolutionDir)dependencies\ogre-release\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,10 +142,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;Shell32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\SDL2\lib</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -4,6 +4,9 @@
 #include <ESingleton.h>
 #include <ETypes.h>
 #include "OgreRoot.h"
+#include "OgreApplicationContext.h"
+
+class SDL_Window;
 
 namespace Renderer {
 
@@ -46,10 +49,8 @@ namespace Renderer {
 
 			void SetFullscreen(bool fullscreen);
 
-			inline int GetWindowWidth() { return screenWidth; }
-			inline int GetWindowHeight() { return screenHeight; }
-
-			void SetVSync(bool active);
+			inline int GetWindowWidth() const { return winWidth; }
+			inline int GetWindowHeight() const { return winHeight; }
 
 	private:
 
@@ -59,11 +60,19 @@ namespace Renderer {
 		bool InitOgre(const ConfigData& data);
 		void CloseOgre();
 
+		bool CreateSDLWindow(const ConfigData& data);
+
+		void LoadResources();
+
 		bool valid{};
 
-		int screenWidth{}, screenHeight{};
+		int winWidth{}, winHeight{};
+
+		// SDL
+		SDL_Window* sdlWindow{};
 
 		// OGRE
+		OgreBites::ApplicationContext ctx{ "OGREApp" };
 		Ogre::Root* root{};
 		Ogre::SceneManager* sceneManager{};
 		Ogre::RenderWindow* renderWindow{};
