@@ -1,12 +1,21 @@
 #include "Entity.h"
 #include "Component.h"
 #include "Scene.h"
+#include "OgreSceneNode.h"
+#include "SceneManager.h"
+#include "RendererManager.h"
 
 namespace ECS {
 
-	Entity::Entity(CRefString name) : name(name) {}
+	Entity::Entity(CRefString ent_name) : name(name)
+	{
+		sceneNode = Renderer::RendererManager::Instance()->CreateNodeFromRoot();
+	}
 
-	Entity::Entity(CRefString ent_name, Scene* scene) : name(ent_name), scene(scene) {}
+	Entity::Entity(CRefString name, Entity* parent) : name(name), parent(parent) 
+	{
+		sceneNode = parent->GetSceneNode()->createChildSceneNode();
+	}
 
 	Entity::~Entity() 
 	{
@@ -14,6 +23,11 @@ namespace ECS {
 			delete c;
 
 		components.clear();
+	}
+
+	Scene* Entity::GetScene() const
+	{
+		return SceneManager::Instance()->GetCurrentScene();
 	}
 
 	void Entity::Init() const
@@ -40,7 +54,7 @@ namespace ECS {
 			lifeSpan -= deltaTime;
 
 			if (lifeSpan <= 0)
-				scene->RemoveEntity(this);
+				GetScene()->RemoveEntity(this);
 		}
 	}
 
@@ -142,6 +156,17 @@ namespace ECS {
 	{
 		for (const auto& c : components)
 			c->OnDestroy();
+	}
+
+	void Entity::SetParent(Entity* e)
+	{
+		parent->GetSceneNode()->removeChild(sceneNode);
+		e->GetSceneNode()->addChild(sceneNode);
+	}
+
+	Entity* Entity::GetParent() const
+	{
+		return parent;
 	}
 
 	void Entity::SetActive(bool ent_active) {

@@ -5,7 +5,7 @@ namespace ECS {
 
 	Scene* Component::GetScene() const
 	{
-		return entity->scene;
+		return entity->GetScene();
 	}
 
 	void Component::SetActive(bool active)

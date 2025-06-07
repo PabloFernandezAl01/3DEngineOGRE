@@ -122,11 +122,11 @@ namespace Input {
 
 		bool IsMouseButtonReleased(int b);
 
-		CRefVector2D GetAbsoluteMousePosition();
+		CRefVector2D GetAbsoluteMousePosition() const;
 
-		Core::Vector2D GetMousePositionRelativeToCamera();
+		CRefVector2D GetMousePositionDelta() const;
 
-		int GetMouseWheelScroll();
+		int GetMouseWheelScroll() const;
 
 
 		// Controller
@@ -259,6 +259,7 @@ namespace Input {
 
 
 			Vector2D mousePos_{};
+			Vector2D mousePosDelta_{};
 			std::array<bool, 3> mbState_{};
 			int wheelMotionY_{};
 			const Uint8* kbState_{};

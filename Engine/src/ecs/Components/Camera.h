@@ -2,6 +2,7 @@
 
 #include "Component.h"
 #include "ETypes.h"
+#include <numbers>
 
 namespace Ogre
 {
@@ -24,7 +25,7 @@ namespace ECS
 		// Camera
 
 			// Fov value is recommended to be between 45 and 60 degrees
-			inline void SetFovY(float radian) { fovY = radian; }
+			inline void SetFovY(float degrees) { fovY = degrees * (std::numbers::pi / 180.0); }
 
 			// Position of the near clipping plane
 			inline void SetNearClipDistance(float distance) { nearClipDistance = distance; }
@@ -60,13 +61,13 @@ namespace ECS
 		Ogre::Viewport* viewport{};
 		
 		// Camera
-		float fovY{60};
+		float fovY{ 1.0472f };
 		float nearClipDistance{0.1f};
 		float farClipDistance{1000.f};
-		ProjectionType projectionType;
+		ProjectionType projectionType{ ProjectionType::PERSPECTIVE };
 		bool autoAspectRatio{ true };
 		float aspectRatio{};
-		PolygonMode polygonMode;
+		PolygonMode polygonMode{ PolygonMode::SOLID};
 		bool useRenderingDistance{};
 		float renderingDistance{1000.f};
 

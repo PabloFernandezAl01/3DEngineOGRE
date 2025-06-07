@@ -7,7 +7,6 @@
 #include <OgreMaterialManager.h>
 #include <OgreTextureManager.h>
 #include <OgreMeshManager.h>
-#include <OgreGpuProgramManager.h>
 
 namespace Renderer {
 	
@@ -20,14 +19,14 @@ namespace Renderer {
 	{
 		root = new Ogre::Root();
 
-		auto renderers = root->getAvailableRenderers();
-		root->setRenderSystem(renderers[0]);
+		auto& renderers = root->getAvailableRenderers();
+		root->setRenderSystem(renderers[1]);
 
 		root->initialise(false);
 
 		LoadResources();
 
-		if (!CreateSDLWindow(data))
+		if (!CreateSDLWindowFromOgre(data))
 		{
 			delete root;
 			return false;
@@ -48,17 +47,11 @@ namespace Renderer {
 
 	void RendererManager::CloseOgre()
 	{
-		Ogre::ResourceGroupManager::getSingleton().clearResourceGroup("General");
-		Ogre::MaterialManager::getSingleton().removeAll();
-		Ogre::TextureManager::getSingleton().removeAll();
-		Ogre::MeshManager::getSingleton().removeAll();
-		Ogre::GpuProgramManager::getSingleton().removeAll();
-		Ogre::HighLevelGpuProgramManager::getSingleton().removeAll();
-
 		delete root;
+		root = nullptr;
 	}
 
-	bool RendererManager::CreateSDLWindow(const ConfigData& data)
+	bool RendererManager::CreateSDLWindowFromOgre(const ConfigData& data)
 	{
 		// Initialize SDL
 		int sdlInit_ret = SDL_Init(SDL_INIT_VIDEO);
@@ -73,18 +66,16 @@ namespace Renderer {
 		renderWindow->setVSyncEnabled(data.vsync);
 		size_t hwnd = 0;
 		renderWindow->getCustomAttribute("WINDOW", &hwnd);
+
 		sdlWindow = SDL_CreateWindowFrom((void*)hwnd);
 
 		if (!sdlWindow)
 		{
 			SDL_Quit();
 
-			Log::PrintError("SDL Create Window From", SDL_GetError());
+			Log::PrintError("SDL Create Window From failed", SDL_GetError());
 			return false;
 		}
-
-		winWidth = data.windowSize.GetX();
-		winHeight = data.windowSize.GetY();
 
 		return true;
 	}
@@ -94,7 +85,7 @@ namespace Renderer {
 		Ogre::ConfigFile cf;
 		cf.load("resources.cfg");
 
-		auto settingsBySection = cf.getSettingsBySection(); // Devuelve std::map
+		auto settingsBySection = cf.getSettingsBySection();
 
 		for (const auto& [sectionName, settings] : settingsBySection)
 		{

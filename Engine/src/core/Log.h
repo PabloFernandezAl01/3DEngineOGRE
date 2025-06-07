@@ -7,7 +7,7 @@ namespace Core
 	class Log
 	{
 
-	enum class LogColor { LightBlue, Yellow, Aqua, LightRed, White };
+	enum class LogColor { Black, DeepBlue, DarkGreen, LightBlue, Red, Purple, Yellow, LightGrey, Grey, Blue, Green, Aqua, LightRed, LightPurple, LightYellow, White };
 
 	public:
 

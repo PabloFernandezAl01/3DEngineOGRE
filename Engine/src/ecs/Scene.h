@@ -34,7 +34,10 @@ namespace ECS {
 		inline void SetName(CRefString sce_name) { name = sce_name; }
 
 		// Creates an entity on the scene and returns the pointer
-		Entity* CreateEntity(CRefString name, int renderOrder = 0);
+		Entity* CreateEntity(CRefString name);
+
+		// Creates an entity on the scene and returns the pointer
+		Entity* CreateEntity(CRefString name, Entity* parent);
 
 		// Adds a T entity to the scene
 		template <typename T, typename ...Ts>

@@ -90,6 +90,10 @@ namespace Core {
 			return x_ * v.x_ + y_ * v.y_ + z_ * v.z_;
 		}
 
+		inline float Dot(const Vector3D& v) const {
+			return x_ * v.x_ + y_ * v.y_ + z_ * v.z_;
+		}
+
 		inline Vector3D Mult(const Vector3D& v) const {
 			return Vector3D(x_ * v.x_, y_ * v.y_, z_ * v.z_);
 		}

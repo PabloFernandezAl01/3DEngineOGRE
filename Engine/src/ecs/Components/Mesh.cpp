@@ -10,9 +10,8 @@ void ECS::Mesh::Init()
 	auto rendererManager = Renderer::RendererManager::Instance();
 
 	mesh = rendererManager->GetOgreSceneManager()->createEntity(meshName);
-	Ogre::SceneNode* node = rendererManager->CreateNodeFromRoot();
+	Ogre::SceneNode* node = entity->GetSceneNode();
 	node->attachObject(mesh);
-	entity->SetSceneNode(node);
 
 	// Configuration
 	if (!materialName.empty())

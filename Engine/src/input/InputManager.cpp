@@ -85,6 +85,8 @@ namespace Input {
 			UpdateKeyState(specialKeys[i]);
 
 		UpdateControllersButtons();
+
+		mousePosDelta_.Set(0, 0);
 	}
 
 	void InputManager::Update(const SDL_Event& event) 
@@ -150,10 +152,10 @@ namespace Input {
 		int mouse_x, mouse_y;
 		SDL_GetMouseState(&mouse_x, &mouse_y);
 
-		/*auto* renderer = Renderer::RendererManager::Instance();
+		mousePosDelta_.Set(mousePos_.GetX() - mouse_x, mousePos_.GetY() -  (-mouse_y));
 
-		mousePos_.SetX(mouse_x - renderer->GetWidth() / 2.f);
-		mousePos_.SetY(-(mouse_y - renderer->GetHeight() / 2.f));*/
+		mousePos_.SetX(mouse_x);
+		mousePos_.SetY(-(mouse_y));
 	}
 
 	// --------- KB ------------
@@ -407,28 +409,17 @@ namespace Input {
 		return isMouseWheelEvent_;
 	}
 
-	CRefVector2D InputManager::GetAbsoluteMousePosition()
+	CRefVector2D InputManager::GetAbsoluteMousePosition() const
 	{
 		return mousePos_;
 	}
 
-	Core::Vector2D InputManager::GetMousePositionRelativeToCamera()
+	CRefVector2D InputManager::GetMousePositionDelta() const
 	{
-		/*auto* renderer = Renderer::RendererManager::Instance();
-
-		Core::Vector2D position = mousePos_;
-
-		position.Set(position.GetX() / renderer->GetCameraScale(), position.GetY() / renderer->GetCameraScale());
-
-		position.SetX(position.GetX() + renderer->GetCameraPosition().GetX());
-		position.SetY(position.GetY() + renderer->GetCameraPosition().GetY());
-
-		return position;*/
-
-		return mousePos_;
+		return mousePosDelta_;
 	}
 
-	int InputManager::GetMouseWheelScroll() 
+	int InputManager::GetMouseWheelScroll() const
 	{
 		return wheelMotionY_;
 	}

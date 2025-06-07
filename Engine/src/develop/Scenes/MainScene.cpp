@@ -5,11 +5,11 @@
 #include "Components/Mesh.h"
 #include "Components/Camera.h"
 #include "Components/Light.h"
-#include "../Scripts/MyScript.h"
+#include "../Scripts/CameraController.h"
 
 MainScene::MainScene()
 {
-    //CreateOgre();
+    CreateOgre();
     CreateCamera();
     CreateLight();
 }
@@ -19,21 +19,25 @@ void MainScene::CreateOgre()
     Entity* ogre = this->CreateEntity("Ogre");
     auto* tr = ogre->AddComponent<Transform>();
     auto* mesh = ogre->AddComponent<Mesh>();
-    auto* script = ogre->AddComponent<MyScript>();
-    mesh->SetMeshName("ogrehead.mesh");
+    mesh->SetMeshName("WoodPallet.mesh");
+
+    tr->SetPosition({ 0, 0, 0 });
 }
 
 void MainScene::CreateCamera()
 {
-    Entity* mainCamera = this->CreateEntity("MainCamera");
-    auto* tr = mainCamera->AddComponent<Transform>();
-    auto* cam = mainCamera->AddComponent<Camera>();
-
+    Entity* cameraRoot = this->CreateEntity("CameraRoot"); // Yaw rotation
+    auto* tr = cameraRoot->AddComponent<Transform>();
     tr->SetPosition({ 0, 0, 200 });
+
+    Entity* mainCamera = this->CreateEntity("MainCamera", cameraRoot); // Pitch rotation
+
+    mainCamera->AddComponent<Transform>();
+    auto* cam = mainCamera->AddComponent<Camera>();
+    mainCamera->AddComponent<CameraController>();
+
     cam->SetNearClipDistance(1);
     cam->SetAutoAspectRatio(true);
-    cam->SetProjectionType(Camera::ProjectionType::PERSPECTIVE);
-    cam->SetPolygonMode(Camera::PolygonMode::SOLID);
 }
 
 void MainScene::CreateLight()
@@ -42,5 +46,8 @@ void MainScene::CreateLight()
     auto* tr = dirLight->AddComponent<Transform>();
     auto* light = dirLight->AddComponent<Light>();
 
-    tr->SetPosition({ 20, 80, 50 });
+    light->SetType(Light::LightType::DIRECTIONAL);
+    light->SetDiffuse({ 1, 1, 0 });
+
+    tr->SetPosition({ 0, 0, 50 });
 }

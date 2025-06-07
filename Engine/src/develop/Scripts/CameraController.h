@@ -3,7 +3,7 @@
 #include <Component.h>
 #include "../ECSDefs.h"
 
-class MyScript : public Component
+class CameraController : public Component
 {
 public:
 
@@ -13,9 +13,11 @@ public:
 
 private:
 
-	Transform* tr{};
+	Transform* yawTr{};
+	Transform* pitchTr{};
 
-	float vel{ 500.f };
+	float sensitivity{ 10 };
+	float movementVel{ 400.f };
 
 };
 

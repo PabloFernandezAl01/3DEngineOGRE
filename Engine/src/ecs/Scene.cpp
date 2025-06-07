@@ -16,7 +16,7 @@ namespace ECS {
         entities.clear();
     }
 
-    void Scene::Init()  const
+    void Scene::Init() const
     {
         for (const auto& e : entities)
             e->Init();
@@ -117,14 +117,17 @@ namespace ECS {
                 e->OnSceneDown();
     }
 
-    Entity* Scene::CreateEntity(CRefString name, int renderOrder)
+    Entity* Scene::CreateEntity(CRefString name)
     {
-        Entity* e = new Entity(name, this);
-
-        e->scene = this;
-
+        Entity* e = new Entity(name);
         entities.push_back(e);
+        return e;
+    }
 
+    Entity* Scene::CreateEntity(CRefString name, Entity* parent)
+    {
+        Entity* e = new Entity(name, parent);
+        entities.push_back(e);
         return e;
     }
 

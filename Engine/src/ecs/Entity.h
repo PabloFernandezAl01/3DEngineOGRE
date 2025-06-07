@@ -29,17 +29,19 @@ namespace ECS {
 	public:
 
 		Entity(CRefString ent_name);
-
-		Entity(CRefString ent_name, Scene* ent_scene);
+		Entity(CRefString ent_name, Entity* parent);
 
 		virtual ~Entity();
 
-		inline Scene* GetScene() const { return scene; }
+		Scene* GetScene() const;
 
 		inline CRefString GetName() const { return name; }
 
 		inline Ogre::SceneNode* GetSceneNode() { return sceneNode; }
 		inline void SetSceneNode(Ogre::SceneNode* node) { sceneNode = node; }
+
+		void SetParent(Entity* e);
+		Entity* GetParent() const;
 
 		inline void SetLifeSpan(float lifeSpan) { this->lifeSpan = lifeSpan; lifeSpanActive = true; }
 
@@ -153,14 +155,13 @@ namespace ECS {
 		bool lifeSpanActive{};
 		float lifeSpan{};
 
-		// Pointer to the scene where this entity is located
-		Scene* scene{};
-
 		// List of components associated with this entity
 		list<Component*> components;
 
-		// Ogre Scene Node
+		// OGRE
 		Ogre::SceneNode* sceneNode{};
+
+		Entity* parent{};
 	};
 
 }

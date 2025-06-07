@@ -32,12 +32,12 @@ namespace ECS
 		Ogre::Light* light{};
 
 		// Configuration
-		LightType lightType{};
-		Core::Color diffuse;
-		Core::Color specular;
+		LightType lightType{ LightType::DIRECTIONAL };
+		Core::Color diffuse{ 1.0f, 1.0f, 1.0f};
+		Core::Color specular{ 1.0f, 1.0f, 1.0f };
 
 		// Attenuation
-		float range{}, constant{}, linear{}, quadratic{};
+		float range{ 100000 }, constant{ 1.0 }, linear{}, quadratic{};
 	};
 }
 

@@ -4,7 +4,6 @@
 #include <ESingleton.h>
 #include <ETypes.h>
 #include "OgreRoot.h"
-#include "OgreApplicationContext.h"
 
 class SDL_Window;
 
@@ -32,25 +31,14 @@ namespace Renderer {
 		Ogre::Viewport* CreateViewport(Ogre::Camera* cam);
 
 		// Scene Manager
-
-			void SetAmbientLight(CRefColor color);
-
-			// TODO
-			void SetShadowTechnique();
-
-			// TODO
-			void SetFog();
-
-			void SetDisplaySceneNodes(bool display);
-
-			void SetSkyBox(bool active, CRefString name);
+		void SetAmbientLight(CRefColor color);
+		void SetShadowTechnique(); // TODO
+		void SetFog(); // TODO
+		void SetDisplaySceneNodes(bool display);
+		void SetSkyBox(bool active, CRefString name);
 
 		// Window
-
-			void SetFullscreen(bool fullscreen);
-
-			inline int GetWindowWidth() const { return winWidth; }
-			inline int GetWindowHeight() const { return winHeight; }
+		void SetFullscreen(bool fullscreen);
 
 	private:
 
@@ -60,22 +48,18 @@ namespace Renderer {
 		bool InitOgre(const ConfigData& data);
 		void CloseOgre();
 
-		bool CreateSDLWindow(const ConfigData& data);
+		bool CreateSDLWindowFromOgre(const ConfigData& data);
 
 		void LoadResources();
 
 		bool valid{};
 
-		int winWidth{}, winHeight{};
-
 		// SDL
 		SDL_Window* sdlWindow{};
 
 		// OGRE
-		OgreBites::ApplicationContext ctx{ "OGREApp" };
 		Ogre::Root* root{};
 		Ogre::SceneManager* sceneManager{};
 		Ogre::RenderWindow* renderWindow{};
-
 	};
 }
