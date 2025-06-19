@@ -5,43 +5,57 @@
 #include "Entity.h"
 #include "Components/Transform.h"
 
+using namespace Input;
+
 void MyScript::Init()
 {
-	Renderer::RendererManager::Instance()->SetAmbientLight({ 0.5f, 0.5f, 0.5f });
-	Renderer::RendererManager::Instance()->SetDisplaySceneNodes(true);
-
 	tr = entity->GetComponent<Transform>();
+	parentTr = entity->GetParent()->GetComponent<Transform>();
+
+	originalPosition = tr->GetPosition();
 }
 
 void MyScript::Update(float dt)
 {
-	if (Input::InputManager::Instance()->IsKeyDown(SDL_SCANCODE_A))
+	// Rotate parent
+	if (InputManager::Instance()->IsKeyDown(SDL_SCANCODE_U))
 	{
-		tr->Translate({-vel * dt, 0, 0});
+		parentTr->Rotate({ angularvel * dt * rotDir, 0, 0 }, Transform::TransformSpace::LOCAL);
 	}
 
-	if (Input::InputManager::Instance()->IsKeyDown(SDL_SCANCODE_D))
+	if (InputManager::Instance()->IsKeyDown(SDL_SCANCODE_I))
 	{
-		tr->Translate({ vel * dt, 0, 0 });
+		parentTr->Rotate({ 0, angularvel * dt * rotDir, 0 }, Transform::TransformSpace::LOCAL);
 	}
 
-	if (Input::InputManager::Instance()->IsKeyDown(SDL_SCANCODE_W))
+	if (InputManager::Instance()->IsKeyDown(SDL_SCANCODE_O))
 	{
-		tr->Translate({ 0, 0, -vel * dt });
+		parentTr->Rotate({ 0, 0, angularvel * dt * rotDir }, Transform::TransformSpace::LOCAL);
 	}
 
-	if (Input::InputManager::Instance()->IsKeyDown(SDL_SCANCODE_S))
+	if (InputManager::Instance()->IsLetterPressed(int(InputManager::KB_LETTERS::P)))
 	{
-		tr->Translate({ 0, 0, vel * dt });
+		rotDir *= -1;
 	}
 
-	if (Input::InputManager::Instance()->IsKeyDown(SDL_SCANCODE_E))
+	if (InputManager::Instance()->IsLetterPressed(int(InputManager::KB_LETTERS::R)))
 	{
-		tr->Translate({ 0, vel * dt, 0 });
+		parentTr->SetOrientation(Quaternion::FromEulerAngles({ 0,0,0 }));
+		parentTr->SetPosition({0,0,0});
+		tr->SetOrientation(Quaternion::FromEulerAngles({ 0,0,0 }));
+		tr->SetPosition(originalPosition);
 	}
 
-	if (Input::InputManager::Instance()->IsKeyDown(SDL_SCANCODE_Q))
+	// Move child
+	if (InputManager::Instance()->IsKeyDown(SDL_SCANCODE_T))
 	{
-		tr->Translate({ 0, -vel * dt, 0 });
+		tr->Scale(Vector3D::Forward() * scaleVel * dt, Transform::TransformSpace::WORLD);
 	}
+
+	if (InputManager::Instance()->IsKeyDown(SDL_SCANCODE_G))
+	{
+		tr->Scale(Vector3D::Forward() * -scaleVel * dt, Transform::TransformSpace::WORLD);
+	}
+
+
 }

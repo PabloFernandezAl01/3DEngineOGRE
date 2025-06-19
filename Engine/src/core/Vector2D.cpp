@@ -2,8 +2,7 @@
 #include "StringTrim.h"
 #include <cassert>
 #include <string>
-
-#define PI 3.14159265358979323846264338327950288f
+#include <numbers>
 
 namespace Core {
 
@@ -24,7 +23,7 @@ namespace Core {
 			degrees = 360.0f + degrees;
 		}
 
-		float angle = degrees * PI / 180.0f;
+		float angle = degrees * std::numbers::pi / 180.0f;
 		float sine = sin(angle);
 		float cosine = cos(angle);
 
@@ -44,12 +43,10 @@ namespace Core {
 		float a2 = atan2(v.GetX(), v.GetY());
 		float a1 = atan2(x_, y_);
 		float angle = a1 - a2;
-		float K = a1 > a2 ? -2.0f * PI : 2.0f * PI;
+		float K = a1 > a2 ? -2.0f * std::numbers::pi : 2.0f * std::numbers::pi;
 		angle = (abs(K + angle) < abs(angle)) ? K + angle : angle;
-		return angle * 180.0f / PI;
+		return angle * 180.0f / std::numbers::pi;
 	}
-
-	Vector2D::Vector2D(const char* str) : Vector2D(std::string(str)) {}
 
 	Vector2D::Vector2D(std::string const& str) {
 

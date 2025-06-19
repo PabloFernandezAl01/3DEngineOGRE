@@ -6,22 +6,30 @@
 #include "Components/Camera.h"
 #include "Components/Light.h"
 #include "../Scripts/CameraController.h"
+#include "../Scripts/MyScript.h"
 
 MainScene::MainScene()
 {
-    CreateOgre();
+    CreateObjects();
     CreateCamera();
     CreateLight();
 }
 
-void MainScene::CreateOgre()
+void MainScene::CreateObjects()
 {
-    Entity* ogre = this->CreateEntity("Ogre");
-    auto* tr = ogre->AddComponent<Transform>();
-    auto* mesh = ogre->AddComponent<Mesh>();
-    mesh->SetMeshName("WoodPallet.mesh");
+    Entity* face = this->CreateEntity("Ogre");
+    face->AddComponent<Transform>();
+    auto* mesh = face->AddComponent<Mesh>();
+    mesh->SetMeshName("facial.mesh");
 
-    tr->SetPosition({ 0, 0, 0 });
+    Entity* cube = this->CreateEntity("Cube", face);
+    auto* tr = cube->AddComponent<Transform>();
+    cube->AddComponent<MyScript>();
+    tr->SetPosition({ 0, -50, 0 });
+    tr->SetScale({ 0.3f, 0.3f, 0.3f });
+    //tr->SetOrientation(Quaternion::FromEulerAngles({ 0, 45, 0 }));
+    auto* mesh2 = cube->AddComponent<Mesh>();
+    mesh2->SetMeshName("cube.mesh");
 }
 
 void MainScene::CreateCamera()
@@ -38,6 +46,7 @@ void MainScene::CreateCamera()
 
     cam->SetNearClipDistance(1);
     cam->SetAutoAspectRatio(true);
+    cam->SetFarClipDistance(10000);
 }
 
 void MainScene::CreateLight()
@@ -47,7 +56,7 @@ void MainScene::CreateLight()
     auto* light = dirLight->AddComponent<Light>();
 
     light->SetType(Light::LightType::DIRECTIONAL);
-    light->SetDiffuse({ 1, 1, 0 });
+    light->SetDiffuse({ 1, 1, 1 });
 
     tr->SetPosition({ 0, 0, 50 });
 }

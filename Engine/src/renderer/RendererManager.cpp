@@ -122,14 +122,14 @@ namespace Renderer {
 		sceneManager->setAmbientLight(Ogre::ColourValue{ color.r, color.g, color.b });
 	}
 
-	void RendererManager::SetShadowTechnique()
+	void RendererManager::SetShadowTechnique(const ShadowTechnique& technique)
 	{
-
+		sceneManager->setShadowTechnique(Ogre::ShadowTechnique(technique));
 	}
 
-	void RendererManager::SetFog()
+	void RendererManager::SetFog(const FogMode& mode, CRefColor color, float expDensity, float linearStart, float linearEnd)
 	{
-
+		sceneManager->setFog(Ogre::FogMode(mode), Ogre::ColourValue(color.r, color.g, color.b), expDensity, linearStart, linearEnd);
 	}
 
 	void RendererManager::SetDisplaySceneNodes(bool display)
@@ -156,8 +156,35 @@ namespace Renderer {
 				Log::PrintError("Window FullScreen Error", SDL_GetError());
 	}
 
+	void RendererManager::ShowCursor(bool show)
+	{
+		if (SDL_ShowCursor(show) < 0)
+			Log::PrintError("Show cursor error", SDL_GetError());
+	}
+
 	void RendererManager::PresentRenderer()
 	{
 		root->renderOneFrame();
+	}
+
+	void RendererManager::RenameWindow(CRefString name)
+	{
+		SDL_SetWindowTitle(sdlWindow, name.c_str());
+	}
+
+	void RendererManager::SetWindowBordered(bool border)
+	{
+		SDL_SetWindowBordered(sdlWindow, (SDL_bool)border);
+	}
+
+	void RendererManager::ResizeWindow(int w, int h)
+	{
+		if (w <= 0 || h <= 0)
+		{
+			Log::PrintError("Invalid size parameters", "The provided height and width must be greater than zero.");
+			return;
+		}
+
+		SDL_SetWindowSize(sdlWindow, w, h);
 	}
 }

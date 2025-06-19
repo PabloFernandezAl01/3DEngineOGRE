@@ -12,7 +12,7 @@ public:
 
 private:
 
-	void CreateOgre();
+	void CreateObjects();
 	void CreateCamera();
 	void CreateLight();
 

@@ -16,8 +16,8 @@ private:
 	Transform* yawTr{};
 	Transform* pitchTr{};
 
-	float sensitivity{ 10 };
-	float movementVel{ 400.f };
+	float sensitivity{ 50 };
+	float movementVel{ 1000.f };
 
 };
 

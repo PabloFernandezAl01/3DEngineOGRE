@@ -7,7 +7,7 @@
 
 namespace ECS {
 
-	Entity::Entity(CRefString ent_name) : name(name)
+	Entity::Entity(CRefString ent_name) : name(ent_name)
 	{
 		sceneNode = Renderer::RendererManager::Instance()->CreateNodeFromRoot();
 	}

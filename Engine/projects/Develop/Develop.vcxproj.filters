@@ -10,7 +10,9 @@
     <ClCompile Include="..\..\src\develop\Scripts\MyScript.cpp">
       <Filter>Archivos de origen\Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\develop\Scripts\CameraController.cpp" />
+    <ClCompile Include="..\..\src\develop\Scripts\CameraController.cpp">
+      <Filter>Archivos de origen\Scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\develop\Game.h">
@@ -25,7 +27,9 @@
     <ClInclude Include="..\..\src\develop\Scripts\MyScript.h">
       <Filter>Archivos de encabezado\Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\develop\Scripts\CameraController.h" />
+    <ClInclude Include="..\..\src\develop\Scripts\CameraController.h">
+      <Filter>Archivos de encabezado\Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Archivos de origen">

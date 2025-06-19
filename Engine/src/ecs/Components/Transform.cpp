@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "OgreSceneNode.h"
 #include <numbers>
+#include <iostream>
 
 namespace ECS {
 
@@ -11,6 +12,9 @@ namespace ECS {
 	void Transform::Init()
 	{
 		entityNode = entity->GetSceneNode();
+		
+		if (entity->GetParent())
+			parentTr = entity->GetParent()->GetComponent<Transform>();
 	}
 
 	void Transform::Update(float dt)
@@ -27,23 +31,137 @@ namespace ECS {
 		entityNode->setScale({ scale.GetX(), scale.GetY(), scale.GetZ() });
 	}
 
+	inline Vector3D Transform::GetWorldPosition()
+	{
+		if (parentTr)
+		{
+			Vector3D parentWorldPos = parentTr->GetWorldPosition();
+			Quaternion parentWorldOri = parentTr->GetWorldOrientation();
+			return parentWorldPos + parentWorldOri * position;
+		}
+		else
+		{
+			return position;
+		}
+	}
+
+	inline Quaternion Transform::GetWorldOrientation()
+	{
+		if (parentTr)
+		{
+			return parentTr->GetWorldOrientation() * orientation;
+		}
+		else
+		{
+			return orientation;
+		}
+	}
+
+	void Transform::Translate(CRefVector3D distance, const TransformSpace& ts)
+	{
+		switch (ts)
+		{
+		case TransformSpace::LOCAL:
+			// Move in local axis (affected by the current orientation)
+			position += orientation * distance;
+			break;
+		case TransformSpace::PARENT:
+			position += distance;
+			break;
+		case TransformSpace::WORLD:
+			Quaternion parentWorldOri = Quaternion::Identity();
+
+			if (parentTr)
+			{
+				parentWorldOri = parentTr->GetWorldOrientation();
+			}
+
+			position += parentWorldOri.Inverse() * distance;
+			break;
+		}
+	}
+
+	void Transform::Rotate(CRefVector3D eulerAngles, const TransformSpace& ts)
+	{
+		// Crear cuaternión de rotación desde ángulos de Euler
+		Quaternion deltaRotation = Quaternion::FromEulerAngles(eulerAngles);
+
+		switch (ts)
+		{
+		case TransformSpace::LOCAL:
+			orientation = orientation * deltaRotation;
+			break;
+
+		case TransformSpace::PARENT:
+			orientation = deltaRotation * orientation;
+			break;
+
+		case TransformSpace::WORLD:
+			if (parentTr)
+			{
+				Quaternion parentWorldRot = parentTr->GetOrientation();
+				Quaternion localDelta = parentWorldRot.Inverse() * deltaRotation * parentWorldRot;
+				orientation = localDelta * orientation;
+			}
+			else
+			{
+				orientation = deltaRotation * orientation;
+			}
+			break;
+		}
+	}
+
+	void Transform::Scale(CRefVector3D deltaScale, const TransformSpace& ts)
+	{
+		switch (ts)
+		{
+		case TransformSpace::LOCAL:
+			scale += deltaScale;
+			break;
+
+		case TransformSpace::PARENT:
+			scale += orientation.Inverse() * deltaScale;
+			break;
+
+		case TransformSpace::WORLD:
+			Quaternion parentWorldOri = Quaternion::Identity();
+			if (parentTr)
+			{
+				parentWorldOri = parentTr->GetWorldOrientation();
+			}
+
+			scale += parentWorldOri.Inverse() * deltaScale;
+			break;
+		}
+	}
+
 	void Transform::Yaw(float degrees, const TransformSpace& ts)
 	{
-		entityNode->yaw(Ogre::Radian(degrees * (std::numbers::pi / 180.0f)), Ogre::Node::TransformSpace(ts));
+		Rotate({ 0, degrees, 0}, ts);
 	}
 
 	void Transform::Pitch(float degrees, const TransformSpace& ts)
 	{
-		entityNode->pitch(Ogre::Radian(degrees * (std::numbers::pi / 180.0f)), Ogre::Node::TransformSpace(ts));
+		Rotate({ degrees, 0, 0 }, ts);
 	}
 
 	void Transform::Roll(float degrees, const TransformSpace& ts)
 	{
-		entityNode->roll(Ogre::Radian(degrees * (std::numbers::pi / 180.0f)), Ogre::Node::TransformSpace(ts));
+		Rotate({ 0, 0, degrees }, ts);
 	}
 
-	void Transform::LookAt(CRefVector3D direction)
+	Core::Vector3D Transform::Forward()
 	{
-		entity->GetSceneNode()->lookAt({ direction.GetX(), direction.GetY(), direction.GetZ() }, Ogre::Node::TransformSpace::TS_WORLD);
+		return orientation * Vector3D::Forward();
+	}
+
+	Core::Vector3D Transform::Right()
+	{
+		return orientation * Vector3D::Right();
+	}
+
+	Core::Vector3D Transform::Up()
+	{
+		return orientation * Vector3D::Up();
 	}
 }

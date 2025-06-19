@@ -15,17 +15,7 @@ namespace Core {
 
 		Vector3D(const Vector3D& v) : x_(v.GetX()), y_(v.GetY()), z_(v.GetZ()) {}
 
-		Vector3D(const Vector3D* v) : x_(v->GetX()), y_(v->GetY()), z_(v->GetZ()) {}
-
 		Vector3D(float x, float y, float z) : x_(x), y_(y), z_(z) {}
-
-		Vector3D(const std::string& str) {
-			std::stringstream ss(str);
-			char discard;
-			ss >> discard >> x_ >> discard >> y_ >> discard >> z_ >> discard;
-		}
-
-		Vector3D(const char* charArray) : Vector3D(std::string(charArray)) {}
 
 		~Vector3D() {}
 
@@ -39,6 +29,11 @@ namespace Core {
 		inline void SetY(float y) { y_ = y; }
 		inline void SetZ(float z) { z_ = z; }
 
+		// This is OGRE-dependent
+		static inline Vector3D Forward() { return { 0, 0, -1 }; }
+		static inline Vector3D Up() { return { 0, 1, 0 }; }
+		static inline Vector3D Right() { return { 1, 0, 0 }; }
+
 		inline void Set(float x, float y, float z) {
 			x_ = x;
 			y_ = y;
@@ -51,17 +46,74 @@ namespace Core {
 			z_ = v.z_;
 		}
 
-		inline void Set(const Vector3D* v) {
-			x_ = v->x_;
-			y_ = v->y_;
-			z_ = v->z_;
-		}
-
 		inline Vector3D& operator=(const Vector3D& v) {
 			x_ = v.x_;
 			y_ = v.y_;
 			z_ = v.z_;
 			return *this;
+		}
+
+		// Multiply by a scalar
+		inline Vector3D operator*(float scalar) const 
+		{
+			return { x_ * scalar, y_ * scalar, z_ * scalar };
+		}
+
+		inline Vector3D& operator*=(float scalar) 
+		{
+			x_ *= scalar;
+			y_ *= scalar;
+			z_ *= scalar;
+			return *this;
+		}
+
+		// Division by  a scalar
+		inline Vector3D operator/(float scalar) const 
+		{
+			return { x_ / scalar, y_ / scalar, z_ / scalar };
+		}
+
+		inline Vector3D& operator/=(float scalar)
+		{
+			x_ /= scalar;
+			y_ /= scalar;
+			z_ /= scalar;
+			return *this;
+		}
+
+		// Addition
+		inline Vector3D operator+(const Vector3D& v) const {
+			return { x_ + v.x_, y_ + v.y_, z_ + v.z_ };
+		}
+
+		inline Vector3D& operator+=(const Vector3D& v) {
+			x_ += v.x_;
+			y_ += v.y_;
+			z_ += v.z_;
+			return *this;
+		}
+
+		// Subtraction
+		inline Vector3D operator-(const Vector3D& v) const 
+		{
+			return { x_ - v.x_, y_ - v.y_, z_ - v.z_ };
+		}
+
+		inline Vector3D& operator-=(const Vector3D& v) 
+		{
+			x_ -= v.x_;
+			y_ -= v.y_;
+			z_ -= v.z_;
+			return *this;
+		}
+
+		// Comparison operators
+		inline bool operator==(const Vector3D& v) const {
+			return x_ == v.x_ && y_ == v.y_ && z_ == v.z_;
+		}
+
+		inline bool operator!=(const Vector3D& v) const {
+			return !(*this == v);
 		}
 
 		inline float Magnitude() const {
@@ -78,73 +130,26 @@ namespace Core {
 			return *this / m;
 		}
 
+		inline float Dot(const Vector3D& v) const 
+		{
+			return x_ * v.x_ + y_ * v.y_ + z_ * v.z_;
+		}
+
 		inline Vector3D Cross(const Vector3D& v) const {
-			return Vector3D(
+			return {
 				y_ * v.z_ - z_ * v.y_,
 				z_ * v.x_ - x_ * v.z_,
 				x_ * v.y_ - y_ * v.x_
-			);
+			};
 		}
 
-		inline float operator*(const Vector3D& v) const {
-			return x_ * v.x_ + y_ * v.y_ + z_ * v.z_;
-		}
-
-		inline float Dot(const Vector3D& v) const {
-			return x_ * v.x_ + y_ * v.y_ + z_ * v.z_;
-		}
-
-		inline Vector3D Mult(const Vector3D& v) const {
-			return Vector3D(x_ * v.x_, y_ * v.y_, z_ * v.z_);
-		}
-
-		inline Vector3D operator+(const Vector3D& v) const {
-			return Vector3D(x_ + v.x_, y_ + v.y_, z_ + v.z_);
-		}
-
-		inline Vector3D& operator+=(const Vector3D& v) {
-			x_ += v.x_;
-			y_ += v.y_;
-			z_ += v.z_;
-			return *this;
-		}
-
-		inline Vector3D operator-(const Vector3D& v) const {
-			return Vector3D(x_ - v.x_, y_ - v.y_, z_ - v.z_);
-		}
-
-		inline Vector3D& operator-=(const Vector3D& v) {
-			x_ -= v.x_;
-			y_ -= v.y_;
-			z_ -= v.z_;
-			return *this;
-		}
-
-		inline Vector3D operator*(float scalar) const {
-			return Vector3D(x_ * scalar, y_ * scalar, z_ * scalar);
-		}
-
-		inline Vector3D& operator*=(float scalar) {
-			x_ *= scalar;
-			y_ *= scalar;
-			z_ *= scalar;
-			return *this;
-		}
-
-		inline Vector3D operator/(float scalar) const {
-			return Vector3D(x_ / scalar, y_ / scalar, z_ / scalar);
-		}
-
-		inline bool operator==(const Vector3D& v) const {
-			return x_ == v.x_ && y_ == v.y_ && z_ == v.z_;
-		}
-
-		inline bool operator!=(const Vector3D& v) const {
-			return !(*this == v);
-		}
-
-		inline float Volume() const {
-			return x_ * y_ * z_;
+		inline Vector3D Lerp(const Vector3D& v, float p)
+		{
+			return { 
+				(1 - p) * x_ + p * v.x_, 
+				(1 - p) * y_ + p * v.y_, 
+				(1 - p) * z_ + p * v.z_ 
+			};
 		}
 
 		inline operator std::string() const {
