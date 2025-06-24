@@ -6,9 +6,11 @@
 #include "Components/Camera.h"
 #include "Components/Light.h"
 #include "Components/PlaneMesh.h"
+#include "Components/Animator.h"
 #include "../Scripts/CameraController.h"
 #include "../Scripts/MyScript.h"
 #include "../Scripts/ConfigScene.h"
+#include "../Scripts/CharacterController.h"
 
 MainScene::MainScene()
 {
@@ -25,15 +27,17 @@ void MainScene::CreateObjects()
     configSceneEnt->AddComponent<ConfigScene>();
 
     // SIMBAD
-    Entity* ninjaEnt = this->CreateEntity("Simbad");
-    auto* ninjaEntTr = ninjaEnt->AddComponent<Transform>();
-    auto* ninjaMesh = ninjaEnt->AddComponent<Mesh>();
+    Entity* sinbadEnt = this->CreateEntity("Simbad");
+    auto* sinnbadEntTr = sinbadEnt->AddComponent<Transform>();
+    auto* sinbadMesh = sinbadEnt->AddComponent<Mesh>();
+    auto* sinbadAnimator = sinbadEnt->AddComponent<Animator>();
+    auto* characterController = sinbadEnt->AddComponent<CharacterController>();
 
-    ninjaMesh->SetMeshName("Sinbad.mesh");
-    ninjaMesh->SetCastShadows(true);
+    sinbadMesh->SetMeshName("Sinbad.mesh");
+    sinbadMesh->SetCastShadows(true);
 
-    ninjaEntTr->SetScale({ 2, 2, 2 });
-    ninjaEntTr->SetPosition({0, 150, 0});
+    sinnbadEntTr->SetScale({ 1, 1, 1 });
+    sinnbadEntTr->SetPosition({0, 5, 0});
 
     // PLANE
     Entity* planeEnt = this->CreateEntity("MeshPlane");
@@ -43,7 +47,7 @@ void MainScene::CreateObjects()
     planeMesh->SetName("ground");
     planeMesh->SetNormal({ 0, 1, 0 });
     planeMesh->SetDistanceFromOrigin({});
-    planeMesh->SetSize({ 1500, 1500 });
+    planeMesh->SetSize({ 150, 150 });
     planeMesh->SetSegments({ 20, 20 });
     planeMesh->SetUTile(5);
     planeMesh->SetVTile(5);
@@ -56,7 +60,7 @@ void MainScene::CreateCamera()
 {
     Entity* cameraRoot = this->CreateEntity("CameraRoot"); // Yaw rotation
     auto* cameraRootTr = cameraRoot->AddComponent<Transform>();
-    cameraRootTr->SetPosition({ 0, 200, 200 });
+    cameraRootTr->SetPosition({ 0, 20, 20 });
 
     Entity* mainCamera = this->CreateEntity("MainCamera", cameraRoot); // Pitch rotation
 

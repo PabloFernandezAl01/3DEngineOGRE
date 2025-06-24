@@ -6,10 +6,12 @@ class CharacterController : public Component
 {
 public:
 
-
+	void Start() override;
 
 private:
 
+	Transform* transform;
+	Animator* animator;
 
 };
 

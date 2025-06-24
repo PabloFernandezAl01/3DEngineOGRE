@@ -15,106 +15,138 @@ void ECS::Animator::Init()
 		Log::PrintError("Animator component", "To add an Animator component the entity must have a Mesh component");
 		this->active = false;
 	}
-
-	// Configuration
-	mesh->GetOgreEntity()->getSkeleton()->setBlendMode(Ogre::SkeletonAnimationBlendMode(blendMode));
 }
 
 void ECS::Animator::Update(float dt)
 {
-	for (auto& animation : states)
+	for (auto& animation : animations)
 	{
-		string animationName = animation.first;
-		Ogre::AnimationState* animationState = animation.second;
+		AnimData& animData = animation.second;
 
-		if (fadingIn[animationName])
+		if (animData.state->getEnabled())
 		{
-			float newWeight = states[animationName]->getWeight() + dt * fadeSpeed[animationName];
-
-			states[animationName]->setWeight(clamp(newWeight, 0.f, 1.f));
-
-			if (newWeight >= 1) fadingIn[animationName] = false;
+			// Update de animaciones
+			animData.state->addTime(dt * animData.speed);
 		}
 
-		if (fadingOut[animationName])
+		if (animData.fadingIn)
 		{
-			float newWeight = states[animationName]->getWeight() - dt * fadeSpeed[animationName];
+			float newWeight = animData.state->getWeight() + dt * animData.fadeInSpeed;
+			animData.state->setWeight(clamp(newWeight, 0.f, 1.f));
 
-			states[animationName]->setWeight(clamp(newWeight, 0.f, 1.f));
+			if (newWeight >= 1) animData.fadingIn = false;
+		}
+		
+		if (animData.fadingOut)
+		{
+			float newWeight = animData.state->getWeight() + dt * animData.fadeOutSpeed;
+			animData.state->setWeight(clamp(newWeight, 0.f, 1.f));
 
 			if (newWeight <= 0)
 			{
-				animationState->setEnabled(false);
-				fadingOut[animationName] = false;
+				animData.state->setEnabled(false);
+				animData.fadingOut = false;
 			}
 		}
 	}
 }
 
-void ECS::Animator::SetAnimations(const vector<string>& animations)
+vector<string> ECS::Animator::GetAnimationsNames()
 {
-	for (const auto& anim : animations)
-	{
-		Ogre::AnimationState* state =  mesh->GetOgreEntity()->getAnimationState(anim);
-		states[anim] = mesh->GetOgreEntity()->getAnimationState(anim);
-		states[anim]->setLoop(true);
+	vector<string> names;
+	Ogre::AnimationStateSet* animsSet = mesh->GetOgreEntity()->getAllAnimationStates();
 
-		fadingIn[anim] = false;
-		fadingOut[anim] = false;
+	if (animsSet)
+	{
+		Ogre::AnimationStateIterator it = animsSet->getAnimationStateIterator();
+		while (it.hasMoreElements())
+		{
+			Ogre::AnimationState* animState = it.getNext();
+			names.push_back(animState->getAnimationName());
+		}
 	}
+
+	return names;
+}
+
+
+void ECS::Animator::SetAnimations(const vector<string>& animationsNames)
+{
+	for (const auto& animName : animationsNames)
+	{
+		Ogre::AnimationState* state =  mesh->GetOgreEntity()->getAnimationState(animName);
+		animations[animName] = AnimData();
+		animations[animName].state = state;
+	}
+}
+
+void ECS::Animator::SetBlendMode(const BlendMode& blendMode)
+{
+	mesh->GetOgreEntity()->getSkeleton()->setBlendMode(Ogre::SkeletonAnimationBlendMode(blendMode));
 }
 
 void ECS::Animator::SetAnimationEnabled(CRefString animation, bool enabled)
 {
-	if (!states.contains(animation))
+	if (!animations.contains(animation))
 	{
 		Log::PrintError("Animator component", "Animation with name " + animation + " does not exist!");
 		return;
 	}
 
-	states[animation]->setEnabled(enabled);
+	animations[animation].state->setEnabled(enabled);
 }
 
 void ECS::Animator::SetAnimationLoop(CRefString animation, bool loop)
 {
-	if (!states.contains(animation))
+	if (!animations.contains(animation))
 	{
 		Log::PrintError("Animator component", "Animation with name " + animation + " does not exist!");
 		return;
 	}
 
-	states[animation]->setLoop(loop);
+	animations[animation].state->setLoop(loop);
 }
 
 void ECS::Animator::SetAnimationLenght(CRefString animation, float lenght)
 {
-	if (!states.contains(animation))
+	if (!animations.contains(animation))
 	{
 		Log::PrintError("Animator component", "Animation with name " + animation + " does not exist!");
 		return;
 	}
 
-	states[animation]->setLength(lenght);
+	animations[animation].state->setLength(lenght);
 }
 
 void ECS::Animator::SetAnimationTimePosition(CRefString animation, float position)
 {
-	if (!states.contains(animation))
+	if (!animations.contains(animation))
 	{
 		Log::PrintError("Animator component", "Animation with name " + animation + " does not exist!");
 		return;
 	}
 
-	states[animation]->setTimePosition(position);
+	animations[animation].state->setTimePosition(position);
 }
 
-void ECS::Animator::SetAnimationFadeSpeed(CRefString animation, float fadeSpeed)
+void ECS::Animator::SetAnimationFadeInSpeed(CRefString animation, float fadeInSpeed)
 {
-	if (!states.contains(animation))
+	if (!animations.contains(animation))
 	{
 		Log::PrintError("Animator component", "Animation with name " + animation + " does not exist!");
 		return;
 	}
 
-	this->fadeSpeed[animation] = fadeSpeed;
+	animations[animation].fadeInSpeed = fadeInSpeed;
+}
+
+void ECS::Animator::SetAnimationFadeOutSpeed(CRefString animation, float fadeOutSpeed)
+{
+	if (!animations.contains(animation))
+	{
+		Log::PrintError("Animator component", "Animation with name " + animation + " does not exist!");
+		return;
+	}
+
+	animations[animation].fadeInSpeed = fadeOutSpeed;
 }

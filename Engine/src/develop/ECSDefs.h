@@ -12,6 +12,8 @@ namespace ECS
 	class Mesh;
 	class Camera;
 	class Light;
+	class PlaneMesh;
+	class Animator;
 }
 
 using namespace ECS;
