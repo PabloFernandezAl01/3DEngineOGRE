@@ -14,6 +14,9 @@ void ECS::Mesh::Init()
 	node->attachObject(mesh);
 
 	// Configuration
+	mesh->setCastShadows(castShadows);
+
 	if (!materialName.empty())
 		mesh->setMaterialName(materialName);
+
 }

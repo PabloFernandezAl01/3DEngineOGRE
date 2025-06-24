@@ -18,27 +18,27 @@ void MyScript::Init()
 void MyScript::Update(float dt)
 {
 	// Rotate parent
-	if (InputManager::Instance()->IsKeyDown(SDL_SCANCODE_U))
+	if (InputManager::Instance()->IsLetterDown(InputManager::KB_LETTERS::U))
 	{
 		parentTr->Rotate({ angularvel * dt * rotDir, 0, 0 }, Transform::TransformSpace::LOCAL);
 	}
 
-	if (InputManager::Instance()->IsKeyDown(SDL_SCANCODE_I))
+	if (InputManager::Instance()->IsLetterDown(InputManager::KB_LETTERS::I))
 	{
 		parentTr->Rotate({ 0, angularvel * dt * rotDir, 0 }, Transform::TransformSpace::LOCAL);
 	}
 
-	if (InputManager::Instance()->IsKeyDown(SDL_SCANCODE_O))
+	if (InputManager::Instance()->IsLetterDown(InputManager::KB_LETTERS::O))
 	{
 		parentTr->Rotate({ 0, 0, angularvel * dt * rotDir }, Transform::TransformSpace::LOCAL);
 	}
 
-	if (InputManager::Instance()->IsLetterPressed(int(InputManager::KB_LETTERS::P)))
+	if (InputManager::Instance()->IsLetterPressed(InputManager::KB_LETTERS::P))
 	{
 		rotDir *= -1;
 	}
 
-	if (InputManager::Instance()->IsLetterPressed(int(InputManager::KB_LETTERS::R)))
+	if (InputManager::Instance()->IsLetterPressed(InputManager::KB_LETTERS::R))
 	{
 		parentTr->SetOrientation(Quaternion::FromEulerAngles({ 0,0,0 }));
 		parentTr->SetPosition({0,0,0});
@@ -47,15 +47,13 @@ void MyScript::Update(float dt)
 	}
 
 	// Move child
-	if (InputManager::Instance()->IsKeyDown(SDL_SCANCODE_T))
+	if (InputManager::Instance()->IsLetterDown(InputManager::KB_LETTERS::T))
 	{
 		tr->Scale(Vector3D::Forward() * scaleVel * dt, Transform::TransformSpace::WORLD);
 	}
 
-	if (InputManager::Instance()->IsKeyDown(SDL_SCANCODE_G))
+	if (InputManager::Instance()->IsLetterDown(InputManager::KB_LETTERS::G))
 	{
 		tr->Scale(Vector3D::Forward() * -scaleVel * dt, Transform::TransformSpace::WORLD);
 	}
-
-
 }

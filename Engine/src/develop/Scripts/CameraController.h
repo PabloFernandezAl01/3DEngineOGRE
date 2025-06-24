@@ -7,7 +7,7 @@ class CameraController : public Component
 {
 public:
 
-	void Init() override;
+	void Start() override;
 
 	void Update(float dt) override;
 
@@ -17,7 +17,7 @@ private:
 	Transform* pitchTr{};
 
 	float sensitivity{ 50 };
-	float movementVel{ 1000.f };
+	float movementVel{ 500.f };
 
 };
 

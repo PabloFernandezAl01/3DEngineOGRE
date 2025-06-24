@@ -150,9 +150,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\ecs\Component.cpp" />
+    <ClCompile Include="..\..\src\ecs\Components\Animator.cpp" />
     <ClCompile Include="..\..\src\ecs\Components\Camera.cpp" />
     <ClCompile Include="..\..\src\ecs\Components\Light.cpp" />
     <ClCompile Include="..\..\src\ecs\Components\Mesh.cpp" />
+    <ClCompile Include="..\..\src\ecs\Components\PlaneMesh.cpp" />
     <ClCompile Include="..\..\src\ecs\Components\Transform.cpp" />
     <ClCompile Include="..\..\src\ecs\Entity.cpp" />
     <ClCompile Include="..\..\src\ecs\Scene.cpp" />
@@ -177,9 +179,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\ecs\Component.h" />
+    <ClInclude Include="..\..\src\ecs\Components\Animator.h" />
     <ClInclude Include="..\..\src\ecs\Components\Camera.h" />
     <ClInclude Include="..\..\src\ecs\Components\Light.h" />
     <ClInclude Include="..\..\src\ecs\Components\Mesh.h" />
+    <ClInclude Include="..\..\src\ecs\Components\PlaneMesh.h" />
     <ClInclude Include="..\..\src\ecs\Components\Transform.h" />
     <ClInclude Include="..\..\src\ecs\Entity.h" />
     <ClInclude Include="..\..\src\ecs\Scene.h" />

@@ -15,8 +15,11 @@ namespace ECS
 
 		void Init() override;
 
+		Ogre::Entity* GetOgreEntity() { return mesh; }
+
 		inline void SetMeshName(CRefString name) { meshName = name; }
 		inline void SetMaterial(CRefString name) { materialName = name; }
+		inline void SetCastShadows(bool cast) { castShadows = cast; }
 
 	private:
 
@@ -24,6 +27,8 @@ namespace ECS
 
 		std::string meshName;
 		std::string materialName;
+
+		bool castShadows{};
 
 	};
 }

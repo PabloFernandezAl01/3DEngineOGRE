@@ -38,10 +38,15 @@ namespace ECS {
 		inline CRefVector3D GetScale() { return scale; }
 		inline void SetScale(CRefVector3D scale) { this->scale = scale; }
 
+		void SetInheritOrientation(bool inherit);
+		void SetInheritScale(bool inherit);
+
 		// Modifiers
 		void Translate(CRefVector3D distance, const TransformSpace& ts);
 		void Rotate(CRefVector3D eulerAngles, const TransformSpace& ts);
 		void Scale(CRefVector3D scale, const TransformSpace& ts);
+
+		void LookAt(CRefVector3D point);
 
 		// In degrees
 		void Yaw(float degrees, const TransformSpace& ts);

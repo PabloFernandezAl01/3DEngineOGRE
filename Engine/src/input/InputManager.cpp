@@ -62,7 +62,7 @@ namespace Input {
 		while (SDL_PollEvent(&e)) {
 			Update(e);
 
-			if ((closeWithEscape && IsKeyDown(SDL_SCANCODE_ESCAPE)) || e.type == SDL_QUIT) return false;
+			if ((closeWithEscape && IsSpecialKeyPressed(KB_SPECIALKEYS::ESCAPE)) || e.type == SDL_QUIT) return false;
 		}
 
 		return true;
@@ -99,21 +99,23 @@ namespace Input {
 			return;
 		}
 
+		SDL_Scancode scancode = event.key.keysym.scancode;
+
 		switch (event.type) {
 		case SDL_KEYDOWN:
 			OnKeyDown();
 
-			LetterPressed(ConvertToLetter(event.key.keysym.scancode));
-			NumberPressed(ConvertToNumbers(event.key.keysym.scancode));
-			SpecialKeyPressed(ConvertToSpecialKeys(event.key.keysym.scancode));
+			LetterPressed(ConvertToLetter(scancode));
+			NumberPressed(ConvertToNumbers(scancode));
+			SpecialKeyPressed(ConvertToSpecialKeys(scancode));
 
 			break;
 		case SDL_KEYUP:
 			OnKeyUp();
 
-			LetterReleased(ConvertToLetter(event.key.keysym.scancode));
-			NumberReleased(ConvertToNumbers(event.key.keysym.scancode));
-			SpecialKeyReleased(ConvertToSpecialKeys(event.key.keysym.scancode));
+			LetterReleased(ConvertToLetter(scancode));
+			NumberReleased(ConvertToNumbers(scancode));
+			SpecialKeyReleased(ConvertToSpecialKeys(scancode));
 
 			break;
 		case SDL_MOUSEWHEEL:
@@ -181,162 +183,149 @@ namespace Input {
 	}
 
 	// Letter
-	bool InputManager::IsLetterPressed(int l) 
+	bool InputManager::IsLetterPressed(const KB_LETTERS& l)
 	{
 
-		if (l >= (int) KB_LETTERS::Count || l < 0) 
+		if (l >= KB_LETTERS::Count || l < KB_LETTERS::A)
 		{
-			Log::PrintError("KeyBoard Input", "The letter with index " + std::to_string(l) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The letter with index " + std::to_string((int)l) + " does not exist");
 			return false;
 		}
 
-		return letters[l] == ButtonState::JustDown;
+		return letters[(int)l] == ButtonState::JustDown;
 	}
 
-	bool InputManager::IsLetterDown(int l) 
+	bool InputManager::IsLetterDown(const KB_LETTERS& l)
 	{
-		if (l >= (int)KB_LETTERS::Count || l < 0)
+		if (l >= KB_LETTERS::Count || l < KB_LETTERS::A)
 		{
-			Log::PrintError("KeyBoard Input", "The letter with index " + std::to_string(l) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The letter with index " + std::to_string((int)l) + " does not exist");
 			return false;
 		}
 
-		return letters[l] == ButtonState::JustDown || letters[l] == ButtonState::Down;
+		return letters[(int)l] == ButtonState::JustDown || letters[(int)l] == ButtonState::Down;
 	}
 
-	bool InputManager::IsLetterUp(int l) 
+	bool InputManager::IsLetterUp(const KB_LETTERS& l)
 	{
-		if (l >= (int)KB_LETTERS::Count || l < 0) 
+		if (l >= KB_LETTERS::Count || l < KB_LETTERS::A)
 		{
-			Log::PrintError("KeyBoard Input", "The letter with index " + std::to_string(l) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The letter with index " + std::to_string((int)l) + " does not exist");
 			return false;
 		}
 
-		return letters[l] == ButtonState::Up || letters[l] == ButtonState::None;
+		return letters[(int)l] == ButtonState::Up || letters[(int)l] == ButtonState::None;
 	}
 
-	bool InputManager::IsLetterReleased(int l) 
+	bool InputManager::IsLetterReleased(const KB_LETTERS& l)
 	{
-		if (l >= (int)KB_LETTERS::Count || l < 0) 
+		if (l >= KB_LETTERS::Count || l < KB_LETTERS::A)
 		{
-			Log::PrintError("KeyBoard Input", "The letter with index " + std::to_string(l) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The letter with index " + std::to_string((int)l) + " does not exist");
 			return false;
 		}
 
-		return letters[l] == ButtonState::Up;
+		return letters[(int)l] == ButtonState::Up;
 	}
 
 	// Number
-	bool InputManager::IsNumberPressed(int n) 
+	bool InputManager::IsNumberPressed(const KB_NUMBERS& n)
 	{
-		if (n >= (int)KB_NUMBERS::Count || n < 0)
+		if (n >= KB_NUMBERS::Count || n < KB_NUMBERS::Num1)
 		{
-			Log::PrintError("KeyBoard Input", "The number with index " + std::to_string(n) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The number with index " + std::to_string((int)n) + " does not exist");
 			return false;
 		}
 
-		return numbers[n] == ButtonState::JustDown;
+		return numbers[(int)n] == ButtonState::JustDown;
 	}
 
-	bool InputManager::IsNumberDown(int n) 
+	bool InputManager::IsNumberDown(const KB_NUMBERS& n)
 	{
 
-		if (n >= (int)KB_NUMBERS::Count || n < 0) 
+		if (n >= KB_NUMBERS::Count || n < KB_NUMBERS::Num1)
 		{
-			Log::PrintError("KeyBoard Input", "The number with index " + std::to_string(n) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The number with index " + std::to_string((int)n) + " does not exist");
 			return false;
 		}
 
-		return numbers[n] == ButtonState::JustDown || numbers[n] == ButtonState::Down;
+		return numbers[(int)n] == ButtonState::JustDown || numbers[(int)n] == ButtonState::Down;
 	}
 
-	bool InputManager::IsNumberUp(int n) 
+	bool InputManager::IsNumberUp(const KB_NUMBERS& n)
 	{
 
-		if (n >= (int)KB_NUMBERS::Count || n < 0) 
+		if (n >= KB_NUMBERS::Count || n < KB_NUMBERS::Num1)
 		{
-			Log::PrintError("KeyBoard Input", "The number with index " + std::to_string(n) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The number with index " + std::to_string((int)n) + " does not exist");
 			return false;
 		}
 
-		return numbers[n] == ButtonState::Up || numbers[n] == ButtonState::None;
+		return numbers[(int)n] == ButtonState::Up || numbers[(int)n] == ButtonState::None;
 	}
 
-	bool InputManager::IsNumberReleased(int n) 
+	bool InputManager::IsNumberReleased(const KB_NUMBERS& n)
 	{
 
-		if (n >= (int)KB_NUMBERS::Count || n < 0) 
+		if (n >= KB_NUMBERS::Count || n < KB_NUMBERS::Num1)
 		{
-			Log::PrintError("KeyBoard Input", "The number with index " + std::to_string(n) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The number with index " + std::to_string((int)n) + " does not exist");
 			return false;
 		}
 
-		return numbers[n] == ButtonState::Up;
+		return numbers[(int)n] == ButtonState::Up;
 	}
 
 	// Special Key
-	bool InputManager::IsSpecialKeyPressed(int s)
+	bool InputManager::IsSpecialKeyPressed(const KB_SPECIALKEYS& s)
 	{
 
-		if (s >= (int)KB_SPECIALKEYS::Count || s < 0)
+		if (s >= KB_SPECIALKEYS::Count || s < KB_SPECIALKEYS::RETURN)
 		{
-			Log::PrintError("KeyBoard Input", "The special key with index " + std::to_string(s) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The special key with index " + std::to_string((int)s) + " does not exist");
 			return false;
 		}
 
-		return specialKeys[s] == ButtonState::JustDown;
+		return specialKeys[(int)s] == ButtonState::JustDown;
 	}
 
-	bool InputManager::IsSpecialKeyDown(int s) 
+	bool InputManager::IsSpecialKeyDown(const KB_SPECIALKEYS& s)
 	{
 
-		if (s >= (int)KB_SPECIALKEYS::Count || s < 0) 
+		if (s >= KB_SPECIALKEYS::Count || s < KB_SPECIALKEYS::RETURN)
 		{
-			Log::PrintError("KeyBoard Input", "The special key with index " + std::to_string(s) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The special key with index " + std::to_string((int)s) + " does not exist");
 			return false;
 		}
 
-		return specialKeys[s] == ButtonState::JustDown || specialKeys[s] == ButtonState::Down;
+		return specialKeys[(int)s] == ButtonState::JustDown || specialKeys[(int)s] == ButtonState::Down;
 	}
 
-	bool InputManager::IsSpecialKeyUp(int s) 
+	bool InputManager::IsSpecialKeyUp(const KB_SPECIALKEYS& s)
 	{
 
-		if (s >= (int)KB_SPECIALKEYS::Count || s < 0) 
+		if (s >= KB_SPECIALKEYS::Count || s < KB_SPECIALKEYS::RETURN)
 		{
-			Log::PrintError("KeyBoard Input", "The special key with index " + std::to_string(s) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The special key with index " + std::to_string((int)s) + " does not exist");
 			return false;
 		}
 
-		return specialKeys[s] == ButtonState::Up || specialKeys[s] == ButtonState::None;
+		return specialKeys[(int)s] == ButtonState::Up || specialKeys[(int)s] == ButtonState::None;
 	}
 
-	bool InputManager::IsSpecialKeyReleased(int s)
+	bool InputManager::IsSpecialKeyReleased(const KB_SPECIALKEYS& s)
 	{
 
-		if (s >= (int)KB_SPECIALKEYS::Count || s < 0)
+		if (s >= KB_SPECIALKEYS::Count || s < KB_SPECIALKEYS::RETURN)
 		{
-			Log::PrintError("KeyBoard Input", "The special key with index " + std::to_string(s) + " does not exist");
+			Log::PrintError("KeyBoard Input", "The special key with index " + std::to_string((int)s) + " does not exist");
 			return false;
 		}
 
-		return specialKeys[s] == ButtonState::Up;
+		return specialKeys[(int)s] == ButtonState::Up;
 	}
 
-	// With SDL Scancode enum
-	bool InputManager::IsKeyDown(SDL_Scancode key)
-	{
-		return AnyKeyPressed() && kbState_[key] == 1;
-	}
-
-	bool InputManager::IsKeyUp(SDL_Scancode key)
-	{
-		return AnyKeyReleased() && kbState_[key] == 0;
-	}
-
-
-
-	void InputManager::LetterPressed(KB_LETTERS letter)
+	void InputManager::LetterPressed(const KB_LETTERS& letter)
 	{
 		if (letter == KB_LETTERS::Count) return;
 		if (letters[(int)letter] == ButtonState::Down) return;
@@ -344,7 +333,7 @@ namespace Input {
 		letters[(int)letter] = ButtonState::JustDown;
 	}
 
-	void InputManager::NumberPressed(KB_NUMBERS number)
+	void InputManager::NumberPressed(const KB_NUMBERS& number)
 	{
 		if (number == KB_NUMBERS::Count) return;
 		if (numbers[(int)number] == ButtonState::Down) return;
@@ -352,7 +341,7 @@ namespace Input {
 		numbers[(int)number] = ButtonState::JustDown;
 	}
 
-	void InputManager::SpecialKeyPressed(KB_SPECIALKEYS specialKey)
+	void InputManager::SpecialKeyPressed(const KB_SPECIALKEYS& specialKey)
 	{
 		if (specialKey == KB_SPECIALKEYS::Count) return;
 		if (specialKeys[(int)specialKey] == ButtonState::Down) return;
@@ -360,19 +349,19 @@ namespace Input {
 		specialKeys[(int)specialKey] = ButtonState::JustDown;
 	}
 
-	void InputManager::LetterReleased(KB_LETTERS letter)
+	void InputManager::LetterReleased(const KB_LETTERS& letter)
 	{
 		if (letter == KB_LETTERS::Count) return;
 		letters[(int)letter] = ButtonState::Up;
 	}
 
-	void InputManager::NumberReleased(KB_NUMBERS number)
+	void InputManager::NumberReleased(const KB_NUMBERS& number)
 	{
 		if (number == KB_NUMBERS::Count) return;
 		numbers[(int)number] = ButtonState::Up;
 	}
 
-	void InputManager::SpecialKeyReleased(KB_SPECIALKEYS specialKey)
+	void InputManager::SpecialKeyReleased(const KB_SPECIALKEYS& specialKey)
 	{
 		if (specialKey == KB_SPECIALKEYS::Count) return;
 		specialKeys[(int)specialKey] = ButtonState::Up;
@@ -387,15 +376,6 @@ namespace Input {
 		if (key == ButtonState::Up)
 			key = ButtonState::None;
 	}
-
-	bool InputManager::Jump() {
-		return IsSpecialKeyPressed(KB_Jump) || IsControllerButtonPressed(CT_Jump);
-	}
-
-	bool InputManager::Action() {
-		return IsLetterPressed(KB_Action) || IsControllerButtonPressed(CT_Action);
-	}
-
 
 	// ----------- MOUSE -----------------
 
@@ -424,52 +404,52 @@ namespace Input {
 		return wheelMotionY_;
 	}
 
-	bool InputManager::IsMouseButtonDown(int b)
+	bool InputManager::IsMouseButtonDown(const MOUSEBUTTON& b)
 	{
 
-		if (b >= (int)MOUSEBUTTON::Count || b < 0)
+		if (b >= MOUSEBUTTON::Count || b < MOUSEBUTTON::LEFT)
 		{
-			Log::PrintError("Mouse Input", "The mouse button with index " + std::to_string(b) + " does not exist");
+			Log::PrintError("Mouse Input", "The mouse button with index " + std::to_string((int)b) + " does not exist");
 			return false;
 		}
 
-		return mbState_[b];
+		return mbState_[(int)b];
 	}
 
-	bool InputManager::IsMouseButtonUp(int b) 
+	bool InputManager::IsMouseButtonUp(const MOUSEBUTTON& b)
 	{
 
-		if (b >= (int)MOUSEBUTTON::Count || b < 0) 
+		if (b >= MOUSEBUTTON::Count || b < MOUSEBUTTON::LEFT)
 		{
-			Log::PrintError("Mouse Input", "The mouse button with index " + std::to_string(b) + " does not exist");
+			Log::PrintError("Mouse Input", "The mouse button with index " + std::to_string((int)b) + " does not exist");
 			return false;
 		}
 
-		return !mbState_[b];
+		return !mbState_[(int)b];
 	}
 
-	bool InputManager::IsMouseButtonPressed(int b)
+	bool InputManager::IsMouseButtonPressed(const MOUSEBUTTON& b)
 	{
 
-		if (b >= (int)MOUSEBUTTON::Count || b < 0)
+		if (b >= MOUSEBUTTON::Count || b < MOUSEBUTTON::LEFT)
 		{
-			Log::PrintError("Mouse Input", "The mouse button with index " + std::to_string(b) + " does not exist");
+			Log::PrintError("Mouse Input", "The mouse button with index " + std::to_string((int)b) + " does not exist");
 			return false;
 		}
 
-		return isMouseButtonEventDown_ && mbState_[b];
+		return isMouseButtonEventDown_ && mbState_[(int)b];
 	}
 
-	bool InputManager::IsMouseButtonReleased(int b)
+	bool InputManager::IsMouseButtonReleased(const MOUSEBUTTON& b)
 	{
 
-		if (b >= (int)MOUSEBUTTON::Count || b < 0)
+		if (b >= MOUSEBUTTON::Count || b < MOUSEBUTTON::LEFT)
 		{
-			Log::PrintError("Mouse Input", "The mouse button with index " + std::to_string(b) + " does not exist");
+			Log::PrintError("Mouse Input", "The mouse button with index " + std::to_string((int)b) + " does not exist");
 			return false;
 		}
 
-		return isMouseButtonEventUp_ && !mbState_[b];
+		return isMouseButtonEventUp_ && !mbState_[(int)b];
 	}
 
 	void InputManager::OnMouseMotion(const SDL_Event& event)
@@ -704,7 +684,7 @@ namespace Input {
 
 	// With ID
 
-	bool InputManager::IsControllerButtonPressedWithId(int button, int id) 
+	bool InputManager::IsControllerButtonPressedWithId(const PS4_CONTROLLER_BUTTONS& button, int id)
 	{
 
 		if (numControllersConnected == 0) return false;
@@ -715,16 +695,16 @@ namespace Input {
 			return false;
 		}
 
-		if (button >= (int)PS4_CONTROLLER_BUTTONS::Count || button < 0) 
+		if (button >= PS4_CONTROLLER_BUTTONS::Count || button < PS4_CONTROLLER_BUTTONS::X)
 		{
-			Log::PrintWarning("Controller Input", "There is no controller button with the specified id: " + std::to_string(button));
+			Log::PrintWarning("Controller Input", "There is no controller button with the specified id: " + std::to_string((int)button));
 			return false;
 		}
 
-		return controllers[id].buttonsStates[button] == ButtonState::JustDown;
+		return controllers[id].buttonsStates[(int)button] == ButtonState::JustDown;
 	}
 
-	bool InputManager::IsControllerButtonDownWithId(int button, int id) 
+	bool InputManager::IsControllerButtonDownWithId(const PS4_CONTROLLER_BUTTONS& button, int id)
 	{
 
 		if (numControllersConnected == 0) return false;
@@ -735,16 +715,16 @@ namespace Input {
 			return false;
 		}
 
-		if (button >= (int)PS4_CONTROLLER_BUTTONS::Count || button < 0) 
+		if (button >= PS4_CONTROLLER_BUTTONS::Count || button < PS4_CONTROLLER_BUTTONS::X)
 		{
-			Log::PrintWarning("Controller Input", "There is no controller button with the specified id: " + std::to_string(button));
+			Log::PrintWarning("Controller Input", "There is no controller button with the specified id: " + std::to_string((int)button));
 			return false;
 		}
 
-		return controllers[id].buttonsStates[button] == ButtonState::JustDown || controllers[id].buttonsStates[button] == ButtonState::Down;
+		return controllers[id].buttonsStates[(int)button] == ButtonState::JustDown || controllers[id].buttonsStates[(int)button] == ButtonState::Down;
 	}
 
-	bool InputManager::IsControllerButtonReleasedWithId(int button, int id)
+	bool InputManager::IsControllerButtonReleasedWithId(const PS4_CONTROLLER_BUTTONS& button, int id)
 	{
 
 		if (numControllersConnected == 0) return false;
@@ -755,13 +735,13 @@ namespace Input {
 			return false;
 		}
 
-		if (button >= (int)PS4_CONTROLLER_BUTTONS::Count || button < 0)
+		if (button >= PS4_CONTROLLER_BUTTONS::Count || button < PS4_CONTROLLER_BUTTONS::X)
 		{
-			Log::PrintWarning("Controller Input", "There is no controller button with the specified id: " + std::to_string(button));
+			Log::PrintWarning("Controller Input", "There is no controller button with the specified id: " + std::to_string((int)button));
 			return false;
 		}
 
-		return controllers[id].buttonsStates[button] == ButtonState::Up;
+		return controllers[id].buttonsStates[(int)button] == ButtonState::Up;
 	}
 
 	float InputManager::GetLeftTriggerValueWithId(int id) 
@@ -908,17 +888,17 @@ namespace Input {
 
 	// With out ID
 
-	bool InputManager::IsControllerButtonPressed(int button) 
+	bool InputManager::IsControllerButtonPressed(const PS4_CONTROLLER_BUTTONS& button)
 	{
 		return IsControllerButtonPressedWithId(button, lastInputReceivedController);
 	}
 
-	bool InputManager::IsControllerButtonDown(int button) 
+	bool InputManager::IsControllerButtonDown(const PS4_CONTROLLER_BUTTONS& button)
 	{
 		return IsControllerButtonDownWithId(button, lastInputReceivedController);
 	}
 
-	bool InputManager::IsControllerButtonReleased(int button) 
+	bool InputManager::IsControllerButtonReleased(const PS4_CONTROLLER_BUTTONS& button)
 	{
 		return IsControllerButtonReleasedWithId(button, lastInputReceivedController);
 	}

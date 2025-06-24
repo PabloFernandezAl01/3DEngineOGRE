@@ -14,6 +14,6 @@ private:
 
 	void CreateObjects();
 	void CreateCamera();
-	void CreateLight();
+	void CreateLights();
 
 };

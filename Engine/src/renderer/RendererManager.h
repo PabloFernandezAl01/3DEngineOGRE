@@ -48,10 +48,17 @@ namespace Renderer {
 
 		// Scene Manager
 		void SetAmbientLight(CRefColor color);
-		void SetShadowTechnique(const ShadowTechnique& technique); // TODO
-		void SetFog(const FogMode& mode = FogMode::FOG_NONE, CRefColor color = {0,0,0}, float expDensity = 0.001f, float linearStart = 0.f, float linearEnd = 1.f); // TODO
+		void SetShadowTechnique(const ShadowTechnique& technique);
+		void SetFog(const FogMode& mode = FogMode::FOG_NONE, CRefColor color = {0,0,0}, float expDensity = 0.001f, float linearStart = 0.f, float linearEnd = 1.f);
 		void SetDisplaySceneNodes(bool display);
-		void SetSkyBox(bool active, CRefString name);
+		void SetSkyBox(bool active, CRefString materialName, float distance = 5000.f, bool drawFirst = true, CRefQuaternion orientation = Quaternion::Identity());
+
+		/*
+		* Curvature: Suggested to use values between 2 and 65
+		*/
+		void SetSkyDome(bool active, CRefString materialName, float curvature = 10.f, float tiling = 8.f, float distance = 4000.f, bool drawFirst = true, CRefQuaternion orientation = Quaternion::Identity());
+		void SetSkyPlane(float distanceToOrigin, CRefVector3D normal, bool active, CRefString materialName, float scale = 1000.f, float tiling = 10.f, bool drawFirst = true, float bow = 0.f,
+						 int xSegments = 1, int ySegments = 1);
 
 		// Window
 		void SetFullscreen(bool fullscreen);

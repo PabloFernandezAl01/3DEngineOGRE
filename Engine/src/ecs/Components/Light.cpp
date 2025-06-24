@@ -15,7 +15,17 @@ void ECS::Light::Init()
 
 	// Configuration
 	light->setType(Ogre::Light::LightTypes(lightType));
+
+	switch (lightType)
+	{
+	case LightType::SPOTLIGHT:
+		//light->setSpotlightFalloff(spotLightFallOff);
+		light->setSpotlightRange(Ogre::Degree(spotLightInnerAngle), Ogre::Degree(spotLightOuterAngle));
+		break;
+	}
+
 	light->setDiffuseColour(Ogre::ColourValue{ diffuse.r, diffuse.g, diffuse.b });
 	light->setSpecularColour(Ogre::ColourValue{ specular.r, specular.g, specular.b });
 	light->setAttenuation(range, constant, linear, quadratic);
+	
 }

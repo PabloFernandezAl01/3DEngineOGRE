@@ -137,9 +137,23 @@ namespace Renderer {
 		sceneManager->setDisplaySceneNodes(display);
 	}
 
-	void RendererManager::SetSkyBox(bool active, CRefString name)
+	void RendererManager::SetSkyBox(bool active, CRefString materialName, float distance, bool drawFirst, CRefQuaternion orientation)
 	{
-		sceneManager->setSkyBox(active, name);
+		sceneManager->setSkyBox(active, materialName, distance, drawFirst, Ogre::Quaternion({orientation.GetW(), orientation.GetX(), orientation.GetY(), orientation.GetZ()}));
+	}
+
+	void RendererManager::SetSkyDome(bool active, CRefString materialName, float curvature, float tiling, float distance, bool drawFirst, CRefQuaternion orientation)
+	{
+		sceneManager->setSkyDome(active, materialName, curvature, tiling, distance, drawFirst, Ogre::Quaternion({ orientation.GetW(), orientation.GetX(), orientation.GetY(), orientation.GetZ() }));
+	}
+
+	void RendererManager::SetSkyPlane(float distanceToOrigin, CRefVector3D normal, bool active, CRefString materialName, float scale, float tiling, bool drawFirst, float bow, int xSegments, int ySegments)
+	{
+		Ogre::Plane plane;
+		plane.d = distanceToOrigin;
+		plane.normal = Ogre::Vector3(normal.GetX(), normal.GetY(), normal.GetZ());
+
+		sceneManager->setSkyPlane(active, plane, materialName, scale, tiling, drawFirst, bow, xSegments, ySegments);
 	}
 
 	void RendererManager::SetFullscreen(bool fullscreen)

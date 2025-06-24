@@ -27,6 +27,12 @@ namespace ECS
 		void SetAttenuation(float range, float constant, float linear, float quadratic) 
 		{ this->range = range; this->constant = constant; this->linear = linear; this->quadratic = quadratic; }
 
+		void SetSpotLightFallOff(float fallOff) { spotLightFallOff = fallOff; }
+
+		void SetSpotLightInnerAngle(float angle) { spotLightInnerAngle = angle; }
+
+		void SetSpotLightOuterAngle(float angle) { spotLightOuterAngle = angle; }
+
 	private:
 
 		Ogre::Light* light{};
@@ -38,6 +44,10 @@ namespace ECS
 
 		// Attenuation
 		float range{ 100000 }, constant{ 1.0 }, linear{}, quadratic{};
+
+		float spotLightFallOff{};
+		float spotLightInnerAngle{};
+		float spotLightOuterAngle{};
 	};
 }
 

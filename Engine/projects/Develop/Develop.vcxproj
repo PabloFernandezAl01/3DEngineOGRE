@@ -173,12 +173,16 @@
     <ClInclude Include="..\..\src\develop\Game.h" />
     <ClInclude Include="..\..\src\develop\Scenes\MainScene.h" />
     <ClInclude Include="..\..\src\develop\Scripts\CameraController.h" />
+    <ClInclude Include="..\..\src\develop\Scripts\CharacterController.h" />
+    <ClInclude Include="..\..\src\develop\Scripts\ConfigScene.h" />
     <ClInclude Include="..\..\src\develop\Scripts\MyScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\develop\Game.cpp" />
     <ClCompile Include="..\..\src\develop\Scenes\MainScene.cpp" />
     <ClCompile Include="..\..\src\develop\Scripts\CameraController.cpp" />
+    <ClCompile Include="..\..\src\develop\Scripts\CharacterController.cpp" />
+    <ClCompile Include="..\..\src\develop\Scripts\ConfigScene.cpp" />
     <ClCompile Include="..\..\src\develop\Scripts\MyScript.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

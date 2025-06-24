@@ -7,20 +7,19 @@
 
 using namespace Input;
 
-void CameraController::Init()
+void CameraController::Start()
 {
-	Renderer::RendererManager::Instance()->SetAmbientLight({ 0.5f, 0.5f, 0.5f });
-	Renderer::RendererManager::Instance()->SetDisplaySceneNodes(true);
-
 	yawTr = entity->GetParent()->GetComponent<Transform>();
 	pitchTr = entity->GetComponent<Transform>();
+
+	pitchTr->LookAt({ 0, 200, 0 });
 }
 
 void CameraController::Update(float dt)
 {
 	auto& delta = InputManager::Instance()->GetMousePositionDelta();
 
-	if (InputManager::Instance()->IsMouseButtonDown((int)InputManager::MOUSEBUTTON::RIGHT))
+	if (InputManager::Instance()->IsMouseButtonDown(InputManager::MOUSEBUTTON::RIGHT))
 	{
 		yawTr->Yaw(delta.GetX() * dt * sensitivity, Transform::TransformSpace::WORLD);
 		pitchTr->Pitch(-delta.GetY() * dt * sensitivity, Transform::TransformSpace::LOCAL);
@@ -28,24 +27,27 @@ void CameraController::Update(float dt)
 
 	Vector3D direction{};
 
-	if (InputManager::Instance()->IsKeyDown(SDL_SCANCODE_A))
+	if (InputManager::Instance()->IsLetterDown(InputManager::KB_LETTERS::A))
 		direction -= pitchTr->Right();
 
-	if (InputManager::Instance()->IsKeyDown(SDL_SCANCODE_D))
+	if (InputManager::Instance()->IsLetterDown(InputManager::KB_LETTERS::D))
 		direction += pitchTr->Right();
 
-	if (InputManager::Instance()->IsKeyDown(SDL_SCANCODE_E))
+	if (InputManager::Instance()->IsLetterDown(InputManager::KB_LETTERS::E))
 		direction += pitchTr->Up();
 
-	if (InputManager::Instance()->IsKeyDown(SDL_SCANCODE_Q))
+	if (InputManager::Instance()->IsLetterDown(InputManager::KB_LETTERS::Q))
 		direction -= pitchTr->Up();
 
-	if (InputManager::Instance()->IsKeyDown(SDL_SCANCODE_W))
+	if (InputManager::Instance()->IsLetterDown(InputManager::KB_LETTERS::W))
 		direction += pitchTr->Forward();
 
-	if (InputManager::Instance()->IsKeyDown(SDL_SCANCODE_S))
+	if (InputManager::Instance()->IsLetterDown(InputManager::KB_LETTERS::S))
 		direction -= pitchTr->Forward();
 
-	yawTr->Translate(direction * dt * movementVel, Transform::TransformSpace::LOCAL);
+	if (InputManager::Instance()->IsLetterPressed(InputManager::KB_LETTERS::R))
+		yawTr->SetPosition({0, 200, 200});
+
+	yawTr->Translate(direction.Normalize() * dt * movementVel, Transform::TransformSpace::LOCAL);
 
 }

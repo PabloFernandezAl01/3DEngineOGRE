@@ -1,0 +1,15 @@
+material BaseRed
+{
+    technique
+    {
+        pass
+        {
+            ambient 0.42 0.204 0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.0 0.0 0.0 1.0
+            emissive 0.0 0.0 0.0
+
+            lighting on
+        }
+    }
+}

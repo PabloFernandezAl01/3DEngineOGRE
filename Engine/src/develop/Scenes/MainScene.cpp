@@ -5,58 +5,107 @@
 #include "Components/Mesh.h"
 #include "Components/Camera.h"
 #include "Components/Light.h"
+#include "Components/PlaneMesh.h"
 #include "../Scripts/CameraController.h"
 #include "../Scripts/MyScript.h"
+#include "../Scripts/ConfigScene.h"
 
 MainScene::MainScene()
 {
     CreateObjects();
     CreateCamera();
-    CreateLight();
+    CreateLights();
 }
 
 void MainScene::CreateObjects()
 {
-    Entity* face = this->CreateEntity("Ogre");
-    face->AddComponent<Transform>();
-    auto* mesh = face->AddComponent<Mesh>();
-    mesh->SetMeshName("facial.mesh");
+    // CONFIG SCENE
+    Entity* configSceneEnt = this->CreateEntity("ConfigScene");
+    configSceneEnt->AddComponent<Transform>();
+    configSceneEnt->AddComponent<ConfigScene>();
 
-    Entity* cube = this->CreateEntity("Cube", face);
-    auto* tr = cube->AddComponent<Transform>();
-    cube->AddComponent<MyScript>();
-    tr->SetPosition({ 0, -50, 0 });
-    tr->SetScale({ 0.3f, 0.3f, 0.3f });
-    //tr->SetOrientation(Quaternion::FromEulerAngles({ 0, 45, 0 }));
-    auto* mesh2 = cube->AddComponent<Mesh>();
-    mesh2->SetMeshName("cube.mesh");
+    // SIMBAD
+    Entity* ninjaEnt = this->CreateEntity("Simbad");
+    auto* ninjaEntTr = ninjaEnt->AddComponent<Transform>();
+    auto* ninjaMesh = ninjaEnt->AddComponent<Mesh>();
+
+    ninjaMesh->SetMeshName("Sinbad.mesh");
+    ninjaMesh->SetCastShadows(true);
+
+    ninjaEntTr->SetScale({ 2, 2, 2 });
+    ninjaEntTr->SetPosition({0, 150, 0});
+
+    // PLANE
+    Entity* planeEnt = this->CreateEntity("MeshPlane");
+    auto* planeTr = planeEnt->AddComponent<Transform>();
+    auto* planeMesh = planeEnt->AddComponent<PlaneMesh>();
+
+    planeMesh->SetName("ground");
+    planeMesh->SetNormal({ 0, 1, 0 });
+    planeMesh->SetDistanceFromOrigin({});
+    planeMesh->SetSize({ 1500, 1500 });
+    planeMesh->SetSegments({ 20, 20 });
+    planeMesh->SetUTile(5);
+    planeMesh->SetVTile(5);
+    planeMesh->SetUpVector({ 0, 0, 1 });
+
+    planeMesh->SetMaterial("Examples/Rockwall");
 }
 
 void MainScene::CreateCamera()
 {
     Entity* cameraRoot = this->CreateEntity("CameraRoot"); // Yaw rotation
-    auto* tr = cameraRoot->AddComponent<Transform>();
-    tr->SetPosition({ 0, 0, 200 });
+    auto* cameraRootTr = cameraRoot->AddComponent<Transform>();
+    cameraRootTr->SetPosition({ 0, 200, 200 });
 
     Entity* mainCamera = this->CreateEntity("MainCamera", cameraRoot); // Pitch rotation
 
-    mainCamera->AddComponent<Transform>();
+    auto* mainCameraTr = mainCamera->AddComponent<Transform>();
     auto* cam = mainCamera->AddComponent<Camera>();
     mainCamera->AddComponent<CameraController>();
 
     cam->SetNearClipDistance(1);
     cam->SetAutoAspectRatio(true);
-    cam->SetFarClipDistance(10000);
+    cam->SetFarClipDistance(0);
+    cam->SetBackgroundColor({ 0.9, 0.9, 0.9 });
 }
 
-void MainScene::CreateLight()
+void MainScene::CreateLights()
 {
-    Entity* dirLight = this->CreateEntity("Light");
-    auto* tr = dirLight->AddComponent<Transform>();
-    auto* light = dirLight->AddComponent<Light>();
+    // DIRECTIONAL
+    Entity* lightEnt = this->CreateEntity("DirLight");
+    auto* lightEntTr = lightEnt->AddComponent<Transform>();
+    auto* dirLight = lightEnt->AddComponent<Light>();
 
-    light->SetType(Light::LightType::DIRECTIONAL);
-    light->SetDiffuse({ 1, 1, 1 });
+    lightEntTr->SetOrientation(Quaternion::FromEulerAngles({ 315, 0, 0 }));
+    lightEntTr->SetPosition({ 0, 200, 100 });
 
-    tr->SetPosition({ 0, 0, 50 });
+    dirLight->SetType(Light::LightType::DIRECTIONAL);
+    dirLight->SetDiffuse({ 1.0, 1.0, 1.0 });
+    dirLight->SetSpecular({ 1.0, 1.0, 1.0 });
+
+    // POINT
+    /*Entity* pointLightEnt = this->CreateEntity("Point");
+    auto* pointLightEntTr = pointLightEnt->AddComponent<Transform>();
+    auto* pointlight = pointLightEnt->AddComponent<Light>();
+
+    pointLightEntTr->SetPosition({100, 200, 0});
+
+    pointlight->SetType(Light::LightType::POINT);
+    pointlight->SetDiffuse({ 1.0, 0, 0 });
+    pointlight->SetSpecular({ 1.0, 0, 0 });*/
+
+    // SPOTLIGHT
+    /*Entity* spotLightEnt = this->CreateEntity("Spot");
+    auto* spotLightEntTr = spotLightEnt->AddComponent<Transform>();
+    auto* spotlight = spotLightEnt->AddComponent<Light>();
+
+    spotLightEntTr->SetPosition({ -200, 200, 0 });
+    spotLightEntTr->SetOrientation(Quaternion::FromEulerAngles({315, -90, 0}));
+
+    spotlight->SetType(Light::LightType::SPOTLIGHT);
+    spotlight->SetDiffuse({ 0, 1.0, 0 });
+    spotlight->SetSpecular({ 0, 1.0, 0 });
+    spotlight->SetSpotLightInnerAngle(35);
+    spotlight->SetSpotLightOuterAngle(50);*/
 }

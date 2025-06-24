@@ -57,6 +57,16 @@ namespace ECS {
 		}
 	}
 
+	void Transform::SetInheritOrientation(bool inherit)
+	{
+		entityNode->setInheritOrientation(inherit);
+	}
+
+	void Transform::SetInheritScale(bool inherit)
+	{
+		entityNode->setInheritScale(inherit);
+	}
+
 	void Transform::Translate(CRefVector3D distance, const TransformSpace& ts)
 	{
 		switch (ts)
@@ -83,7 +93,6 @@ namespace ECS {
 
 	void Transform::Rotate(CRefVector3D eulerAngles, const TransformSpace& ts)
 	{
-		// Crear cuaternión de rotación desde ángulos de Euler
 		Quaternion deltaRotation = Quaternion::FromEulerAngles(eulerAngles);
 
 		switch (ts)
@@ -133,6 +142,25 @@ namespace ECS {
 			scale += parentWorldOri.Inverse() * deltaScale;
 			break;
 		}
+	}
+
+	void Transform::LookAt(CRefVector3D point)
+	{
+		Vector3D currentPos = GetWorldPosition();
+		Vector3D toTarget = (point - currentPos).Normalize();
+
+		Vector3D currentForward = Forward();
+
+		Vector3D rotAxis = currentForward.Cross(toTarget);
+
+		float dot = currentForward.Dot(toTarget);
+
+		float angleRad = std::acos(std::clamp(dot, -1.0f, 1.0f));
+
+		rotAxis.Normalize();
+
+		Quaternion lookRot = Quaternion(rotAxis, angleRad * (180.0f / std::numbers::pi));
+		orientation = lookRot;
 	}
 
 	void Transform::Yaw(float degrees, const TransformSpace& ts)

@@ -72,10 +72,6 @@ namespace Input {
 		// Called in the main loop to check is window is closed
 		bool HandleInput(SDL_Event& e);
 
-		bool IsKeyDown(SDL_Scancode key);
-
-		bool IsKeyUp(SDL_Scancode key);
-
 		void UpdateKeyState(ButtonState& key);
 
 		/*
@@ -91,36 +87,33 @@ namespace Input {
 		bool AnyKeyPressed();
 		bool AnyKeyReleased();
 
-		bool IsLetterPressed(int l);
-		bool IsLetterDown(int l);
-		bool IsLetterUp(int l);
-		bool IsLetterReleased(int l);
+		bool IsLetterPressed(const KB_LETTERS& l);
+		bool IsLetterDown(const KB_LETTERS& l);
+		bool IsLetterUp(const KB_LETTERS& l);
+		bool IsLetterReleased(const KB_LETTERS& l);
 
-		bool IsNumberPressed(int n);
-		bool IsNumberDown(int n);
-		bool IsNumberUp(int n);
-		bool IsNumberReleased(int n);
+		bool IsNumberPressed(const KB_NUMBERS& n);
+		bool IsNumberDown(const KB_NUMBERS& n);
+		bool IsNumberUp(const KB_NUMBERS& n);
+		bool IsNumberReleased(const KB_NUMBERS& n);
 
-		bool IsSpecialKeyPressed(int s);
-		bool IsSpecialKeyDown(int s);
-		bool IsSpecialKeyUp(int s);
-		bool IsSpecialKeyReleased(int s);
-
-		bool Jump();
-		bool Action();
+		bool IsSpecialKeyPressed(const KB_SPECIALKEYS& s);
+		bool IsSpecialKeyDown(const KB_SPECIALKEYS& s);
+		bool IsSpecialKeyUp(const KB_SPECIALKEYS& s);
+		bool IsSpecialKeyReleased(const KB_SPECIALKEYS& s);
 
 		// Mouse
 		bool HasMouseMoved();
 
 		bool HasMouseWheelMoved();
 
-		bool IsMouseButtonDown(int b);
+		bool IsMouseButtonDown(const MOUSEBUTTON& b);
 
-		bool IsMouseButtonUp(int b);
+		bool IsMouseButtonUp(const MOUSEBUTTON& b);
 
-		bool IsMouseButtonPressed(int b);
+		bool IsMouseButtonPressed(const MOUSEBUTTON& b);
 
-		bool IsMouseButtonReleased(int b);
+		bool IsMouseButtonReleased(const MOUSEBUTTON& b);
 
 		CRefVector2D GetAbsoluteMousePosition() const;
 
@@ -144,11 +137,11 @@ namespace Input {
 
 		// With id
 
-			bool IsControllerButtonPressedWithId(int button, int id);
+			bool IsControllerButtonPressedWithId(const PS4_CONTROLLER_BUTTONS& button, int id);
 
-			bool IsControllerButtonDownWithId(int button, int id);
+			bool IsControllerButtonDownWithId(const PS4_CONTROLLER_BUTTONS& button, int id);
 
-			bool IsControllerButtonReleasedWithId(int button, int id);
+			bool IsControllerButtonReleasedWithId(const PS4_CONTROLLER_BUTTONS& button, int id);
 
 			float GetLeftTriggerValueWithId(int id);
 
@@ -173,11 +166,11 @@ namespace Input {
 
 			// Without id
 
-				bool IsControllerButtonPressed(int button);
+				bool IsControllerButtonPressed(const PS4_CONTROLLER_BUTTONS& button);
 
-				bool IsControllerButtonDown(int button);
+				bool IsControllerButtonDown(const PS4_CONTROLLER_BUTTONS& button);
 
-				bool IsControllerButtonReleased(int button);
+				bool IsControllerButtonReleased(const PS4_CONTROLLER_BUTTONS& button);
 
 				float GetLeftTriggerValue();
 
@@ -227,13 +220,13 @@ namespace Input {
 
 			// --------- MOUSE & KB ------------
 
-			void LetterPressed(KB_LETTERS letter);
-			void NumberPressed(KB_NUMBERS letter);
-			void SpecialKeyPressed(KB_SPECIALKEYS letter);
+			void LetterPressed(const KB_LETTERS& letter);
+			void NumberPressed(const KB_NUMBERS& number);
+			void SpecialKeyPressed(const KB_SPECIALKEYS& specialkey);
 
-			void LetterReleased(KB_LETTERS letter);
-			void NumberReleased(KB_NUMBERS letter);
-			void SpecialKeyReleased(KB_SPECIALKEYS letter);
+			void LetterReleased(const KB_LETTERS& letter);
+			void NumberReleased(const KB_NUMBERS& number);
+			void SpecialKeyReleased(const KB_SPECIALKEYS& specialkey);
 
 			void OnKeyDown();
 
